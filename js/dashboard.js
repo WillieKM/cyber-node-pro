@@ -1,32 +1,16 @@
-firebase.auth().onAuthStateChanged(user=>{
-
-if(!user){
-
-window.location="login.html"
-
-}
-
-})
-
-function logout(){
-
-firebase.auth().signOut().then(()=>{
-
-window.location="index.html"
-
-})
-
-}
-function saveScan(domain,score){
-
 let scans = JSON.parse(localStorage.getItem("scans") || "[]")
 
-scans.push({
-domain:domain,
-score:score,
-date:new Date().toLocaleDateString()
+scans.forEach(scan=>{
+
+let row = document.createElement("tr")
+
+row.innerHTML=`
+<td>${scan.domain}</td>
+<td>${scan.score}</td>
+<td>${scan.score>85?"Low":"Moderate"}</td>
+<td>${scan.date}</td>
+`
+
+document.querySelector("table").appendChild(row)
+
 })
-
-localStorage.setItem("scans",JSON.stringify(scans))
-
-}
