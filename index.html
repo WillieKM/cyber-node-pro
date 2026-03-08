@@ -13,21 +13,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
 </head>
-<div id="chatbot">
 
-<div id="chat-header">
-Cyber-Node AI Security Assistant
-</div>
-
-<div id="chat-body">
-
-<p>Hello! Ask about cybersecurity risks or automation.</p>
-
-</div>
-
-<input id="chat-input" placeholder="Ask a question...">
-
-</div>
 <body>
 
 <header class="navbar">
@@ -37,14 +23,12 @@ Cyber-Node AI Security Assistant
 <h1 class="logo">Cyber-Node</h1>
 
 <nav>
-
 <a href="#">Home</a>
 <a href="#">Cybersecurity</a>
 <a href="#">Automation</a>
 <a href="#">Platform</a>
-<a href="#">Security Scan</a>
-<a class="nav-btn" href="#">Contact</a>
-
+<a href="tools/security-scan.html">Security Scan</a>
+<a class="nav-btn" href="contact.html">Contact</a>
 </nav>
 
 </div>
@@ -55,25 +39,27 @@ Cyber-Node AI Security Assistant
 
 <section class="hero">
 
-<div class="cyber-grid"></div>
+<canvas id="network"></canvas>
 
 <div class="hero-content">
 
 <h2>Secure. Automate. Scale.</h2>
 
 <p>
-
-Cyber-Node builds cybersecurity protection, workflow automation,
-and compliance systems for healthcare organizations and modern businesses.
-
+Cyber-Node provides cybersecurity protection,
+workflow automation systems and compliance monitoring
+for modern organizations.
 </p>
 
 <div class="hero-buttons">
 
 <a class="btn-primary" href="tools/security-scan.html">
-Run Security Assessment
+Run Security Scan
 </a>
-<a class="btn-secondary">Explore Platform</a>
+
+<a class="btn-secondary">
+Explore Platform
+</a>
 
 </div>
 
@@ -85,32 +71,24 @@ Run Security Assessment
 
 <section class="stats">
 
-<div class="stat-box">
-
+<div class="stat">
 <h3>95%</h3>
 <p>Threat Detection Accuracy</p>
-
 </div>
 
-<div class="stat-box">
-
+<div class="stat">
 <h3>70%</h3>
 <p>Workflow Time Reduction</p>
-
 </div>
 
-<div class="stat-box">
-
+<div class="stat">
 <h3>24/7</h3>
 <p>Security Monitoring</p>
-
 </div>
 
-<div class="stat-box">
-
+<div class="stat">
 <h3>100+</h3>
 <p>Automation Workflows</p>
-
 </div>
 
 </section>
@@ -124,58 +102,27 @@ Run Security Assessment
 <div class="grid">
 
 <div class="card">
-
 <i class="fa-solid fa-shield-halved"></i>
-
 <h3>Cybersecurity Protection</h3>
-
-<p>
-Security assessments, vulnerability scanning,
-and system hardening.
-</p>
-
+<p>Security assessments and vulnerability detection.</p>
 </div>
 
-
 <div class="card">
-
 <i class="fa-solid fa-gear"></i>
-
 <h3>Workflow Automation</h3>
-
-<p>
-Automate documentation, reports,
-and business operations.
-</p>
-
+<p>Automated systems that streamline business operations.</p>
 </div>
 
-
 <div class="card">
-
 <i class="fa-solid fa-chart-line"></i>
-
 <h3>Compliance Monitoring</h3>
-
-<p>
-Track licenses, compliance,
-and documentation automatically.
-</p>
-
+<p>Track licensing and regulatory requirements automatically.</p>
 </div>
 
-
 <div class="card">
-
 <i class="fa-solid fa-cloud"></i>
-
 <h3>Secure Cloud Systems</h3>
-
-<p>
-Encrypted storage and access control
-for sensitive business data.
-</p>
-
+<p>Encrypted cloud storage with role-based access control.</p>
 </div>
 
 </div>
@@ -184,21 +131,6 @@ for sensitive business data.
 
 
 
-<section class="platform">
-
-<h2>Cyber-Node Platform Dashboard</h2>
-
-<p>Manage cybersecurity alerts and automation workflows in one platform.</p>
-
-<div class="dashboard">
-
-<div class="dash">Threat Alerts</div>
-<div class="dash">Compliance Status</div>
-<div class="dash">Automation Logs</div>
-<div class="dash">Security Reports</div>
-
-</div>
-<section class="threat-map">
 <section class="soc-dashboard">
 
 <h2>Security Operations Dashboard</h2>
@@ -206,40 +138,38 @@ for sensitive business data.
 <div class="soc-grid">
 
 <div class="soc-card">
-<h3>Threat Alerts</h3>
-<p>24 active alerts detected</p>
+Threat Alerts<br>24 Active
 </div>
 
 <div class="soc-card">
-<h3>System Status</h3>
-<p>All systems operational</p>
+System Status<br>Operational
 </div>
 
 <div class="soc-card">
-<h3>Compliance Score</h3>
-<p>92%</p>
+Compliance Score<br>92%
 </div>
 
 <div class="soc-card">
-<h3>Automation Workflows</h3>
-<p>14 active processes</p>
+Automation Workflows<br>14 Running
 </div>
 
 </div>
 
 </section>
-<h2>Global Cyber Threat Activity</h2>
 
-<p>Real-time visualization of global cyber attack activity.</p>
 
-<iframe 
+
+<section class="threat-map">
+
+<h2>Global Cyber Threat Map</h2>
+
+<iframe
 src="https://cybermap.kaspersky.com"
 width="100%"
 height="500"
 style="border:none;border-radius:10px">
 </iframe>
 
-</section>
 </section>
 
 
@@ -249,13 +179,13 @@ style="border:none;border-radius:10px">
 <h2>Secure Your Infrastructure Today</h2>
 
 <p>
-
 Cyber-Node helps organizations strengthen cybersecurity
 and automate operations.
-
 </p>
 
-<a class="btn-primary">Request Consultation</a>
+<a class="btn-primary" href="contact.html">
+Request Consultation
+</a>
 
 </section>
 
@@ -266,6 +196,25 @@ and automate operations.
 <p>Cyber-Node © 2026</p>
 
 </footer>
+
+
+
+<div id="chatbot">
+
+<div id="chat-header">Cyber-Node AI Assistant</div>
+
+<div id="chat-body">
+<p>Hello! Ask about cybersecurity or automation.</p>
+</div>
+
+<input id="chat-input" placeholder="Ask a question...">
+
+</div>
+
+
+
+<script src="js/network.js"></script>
+<script src="js/chatbot.js"></script>
 
 </body>
 </html>
