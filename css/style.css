@@ -342,3 +342,12 @@ background:#111827;
 padding:30px;
 border-radius:10px;
 }
+#results ul{
+text-align:left;
+margin-top:15px;
+}
+
+#results h4{
+margin-top:20px;
+color:#3b82f6;
+}
