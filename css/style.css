@@ -87,3 +87,27 @@ opacity:0.2;
 } 
 text-align:center;
 }
+.dashboard{
+
+padding:100px 20px;
+text-align:center;
+
+}
+
+.dashboard-preview{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+margin-top:40px;
+
+}
+
+.dash-card{
+
+background:#111827;
+padding:40px;
+border-radius:10px;
+font-weight:bold;
+
+}
