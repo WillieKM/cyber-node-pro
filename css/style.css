@@ -184,3 +184,22 @@ padding:8px;
 border:none;
 border-radius:6px;
 }
+.scan-section{
+text-align:center;
+padding:80px 20px;
+}
+
+.scan-section input{
+padding:14px;
+width:260px;
+border-radius:6px;
+border:none;
+margin-right:10px;
+}
+
+#results{
+margin-top:40px;
+background:#111827;
+padding:30px;
+border-radius:10px;
+}
