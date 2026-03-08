@@ -26,3 +26,21 @@ alert("Message sent. We will contact you soon.");
 });
 
 });
+const cards = document.querySelectorAll(".card");
+
+window.addEventListener("scroll", () => {
+
+cards.forEach(card => {
+
+let top = card.getBoundingClientRect().top;
+
+if(top < window.innerHeight){
+
+card.style.transform="translateY(0)";
+card.style.opacity="1";
+
+}
+
+});
+
+});
