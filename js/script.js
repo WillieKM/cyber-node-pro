@@ -94,3 +94,28 @@ alert("Security report will be sent to: "+email);
 }
 
 });
+const input = document.getElementById("chat-input");
+
+if(input){
+
+input.addEventListener("keypress",function(e){
+
+if(e.key==="Enter"){
+
+let question=input.value;
+
+let response="Cyber-Node recommends performing regular security scans and enabling MFA.";
+
+let p=document.createElement("p");
+
+p.innerText=response;
+
+document.getElementById("chat-body").appendChild(p);
+
+input.value="";
+
+}
+
+});
+
+}
