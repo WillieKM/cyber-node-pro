@@ -246,3 +246,11 @@ background:#020617;
 padding:100px 20px;
 text-align:center;
 }
+.case-studies{
+padding:100px 20px;
+text-align:center;
+}
+
+.case-studies .card{
+text-align:left;
+}
