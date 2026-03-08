@@ -1,8 +1,8 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -16,18 +16,13 @@
 
 <header class="navbar">
 
-<div class="nav-container">
+<div class="container">
 
-<h1 class="logo">Cyber-Node</h1>
+<div class="logo">Cyber-Node</div>
 
 <nav>
 
-<a href="../index.html">Home</a>
-<a href="#">Cybersecurity</a>
-<a href="#">Automation</a>
-<a href="#">Platform</a>
-<a href="#">Security Scan</a>
-<a class="nav-btn" href="../contact.html">Contact</a>
+<a href="../index.html">Home</a> <a href="#">Cybersecurity</a> <a href="#">Automation</a> <a href="#">Platform</a> <a href="#">Security Scan</a> <a class="contact-btn" href="../contact.html">Contact</a>
 
 </nav>
 
@@ -35,43 +30,33 @@
 
 </header>
 
-
-
 <section class="hero">
 
 <div class="hero-content">
 
-<h2>Cyber Security Scan</h2>
+<h1>Cyber Security Scanner</h1>
 
-<p>
-
-Enter a domain to check for basic security risks.
-
-</p>
+<p>Enter a domain to run a basic security analysis.</p>
 
 </div>
 
 </section>
 
+<section class="scan-section">
 
+<input id="domainInput" placeholder="example.com">
 
-<section class="scan-tool">
+<button onclick="scanDomain()" class="btn-primary">
 
-<input id="domain" type="text" placeholder="Enter domain (example.com)">
-
-<button onclick="runScan()" class="btn-primary">
-
-Run Security Scan
+Run Scan
 
 </button>
 
-<div id="scanResults"></div>
+<div id="results"></div>
 
 </section>
 
-
-
-<script src="../js/scan.js"></script>
+<script src="../js/security-scan.js"></script>
 
 </body>
 </html>
