@@ -323,3 +323,22 @@ padding:100px 20px;
 text-align:center;
 background:#020617;
 }
+.scan-section{
+padding:80px 20px;
+text-align:center;
+}
+
+.scan-section input{
+padding:14px;
+width:260px;
+border-radius:6px;
+border:none;
+margin-right:10px;
+}
+
+#results{
+margin-top:40px;
+background:#111827;
+padding:30px;
+border-radius:10px;
+}
