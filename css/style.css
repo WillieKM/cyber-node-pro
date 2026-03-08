@@ -111,3 +111,13 @@ border-radius:10px;
 font-weight:bold;
 
 }
+.card{
+
+background:#1e293b;
+padding:30px;
+border-radius:8px;
+opacity:0;
+transform:translateY(30px);
+transition:0.5s;
+
+}
