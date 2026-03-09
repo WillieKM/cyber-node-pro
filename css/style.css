@@ -304,11 +304,21 @@ border-radius:10px;
 }
 
 .stats{
+.dashboard-charts{
+
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-padding:70px 20px;
-background:#020617;
-text-align:center;
+grid-template-columns:1fr 1fr;
+gap:30px;
+padding:60px;
+
+}
+
+.chart-box{
+
+background:#111827;
+padding:30px;
+border-radius:12px;
+
 }
 
 .platform{
@@ -386,16 +396,18 @@ padding:60px 20px;
 
 background:#111827;
 padding:30px;
-border-radius:10px;
+border-radius:12px;
 text-align:center;
+border:1px solid rgba(255,255,255,0.05);
 
 }
 
 .metric-card p{
 
-font-size:28px;
+font-size:32px;
 color:#3b82f6;
 
+}
 }
 .threat-feed{
 
@@ -452,4 +464,21 @@ opacity:0.8;
 
 .hero-buttons{
 margin-top:30px;
+}
+.btn-primary{
+
+background:#3b82f6;
+padding:14px 26px;
+border-radius:6px;
+text-decoration:none;
+color:white;
+transition:0.3s;
+
+}
+
+.btn-primary:hover{
+
+background:#2563eb;
+box-shadow:0 0 12px rgba(59,130,246,0.6);
+
 }
