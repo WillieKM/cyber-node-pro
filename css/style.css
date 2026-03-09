@@ -116,10 +116,21 @@ margin-top:40px;
 }
 
 .card{
-background:#111827;
-padding:35px;
-border-radius:10px;
-transition:0.3s;
+
+background:rgba(17,24,39,0.7);
+backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,0.05);
+padding:30px;
+border-radius:12px;
+transition:all 0.3s;
+
+}
+
+.card:hover{
+
+transform:translateY(-6px);
+border-color:#3b82f6;
+
 }
 
 .card i{
@@ -404,4 +415,41 @@ border-radius:10px;
 
 margin-bottom:10px;
 
+}
+body{
+background:#020617;
+color:white;
+font-family:Inter,Arial;
+}
+
+.hero{
+position:relative;
+height:80vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+overflow:hidden;
+}
+
+#cyberGrid{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:0;
+}
+
+.hero h1{
+font-size:52px;
+font-weight:700;
+}
+
+.hero p{
+opacity:0.8;
+}
+
+.hero-buttons{
+margin-top:30px;
 }
