@@ -351,3 +351,14 @@ margin-top:15px;
 margin-top:20px;
 color:#3b82f6;
 }
+#discoveryResults{
+margin-top:40px;
+background:#111827;
+padding:30px;
+border-radius:10px;
+}
+
+#discoveryResults ul{
+text-align:left;
+margin-top:10px;
+}
