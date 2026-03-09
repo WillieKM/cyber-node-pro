@@ -1,6 +1,6 @@
-let labels=["Subdomains","Open Ports","DNS Records"]
+let labels=["Subdomains","Open Ports","DNS Records","Services"]
 
-let data=[4,4,3]
+let data=[4,3,5,2]
 
 new Chart(document.getElementById("surfaceChart"),{
 
