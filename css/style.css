@@ -386,3 +386,22 @@ font-size:28px;
 color:#3b82f6;
 
 }
+.threat-feed{
+
+padding:80px 20px;
+
+}
+
+.threat-feed ul{
+
+background:#111827;
+padding:30px;
+border-radius:10px;
+
+}
+
+.threat-feed li{
+
+margin-bottom:10px;
+
+}
