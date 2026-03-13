@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-<script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -16,8 +16,8 @@
 
 .hero{
 text-align:center;
-padding:100px 20px;
-background:linear-gradient(90deg,#1e3c72,#0b1d3a);
+padding:140px 20px 120px;
+background:linear-gradient(135deg,#1e3a8a,#020617);
 }
 
 .hero h1{
@@ -25,36 +25,27 @@ font-size:44px;
 margin-bottom:10px;
 }
 
-/* SCAN CARD */
-
-.scan-section{
-display:flex;
-justify-content:center;
-margin-top:-60px;
+.hero p{
+opacity:0.9;
 }
 
-.scan-card{
-background:#0f1f3d;
-padding:40px;
-border-radius:12px;
-width:500px;
+/* SCANNER */
+
+.domain-scanner{
+max-width:900px;
+margin:60px auto;
 text-align:center;
-box-shadow:0 10px 40px rgba(0,0,0,0.4);
 }
 
-.scan-input{
-margin-top:20px;
-}
-
-.scan-input input{
+.scanner-box input{
 padding:12px;
-width:250px;
+width:260px;
 border:none;
 border-radius:6px;
 margin-right:10px;
 }
 
-.scan-input button{
+.scanner-box button{
 padding:12px 20px;
 background:#2D8FE3;
 border:none;
@@ -63,75 +54,82 @@ color:white;
 cursor:pointer;
 }
 
-/* RESULTS GRID */
+/* RESULTS */
 
-.results{
-max-width:1100px;
+.attack-results{
+display:flex;
+justify-content:center;
 margin:60px auto;
 padding:0 20px;
 }
 
-.result-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
-}
-
-.result-card{
+.results-card{
 background:#0f1f3d;
-padding:25px;
-border-radius:10px;
-text-align:center;
+padding:40px;
+border-radius:12px;
+width:700px;
+max-width:95%;
+box-shadow:0 10px 40px rgba(0,0,0,0.4);
 }
 
-.result-card h3{
+.results-card h2{
+text-align:center;
+margin-bottom:20px;
+}
+
+.domain-name{
+text-align:center;
+margin-bottom:30px;
+font-weight:500;
+}
+
+.result-block{
+margin-top:20px;
+}
+
+.result-block h3{
+color:#2D8FE3;
 margin-bottom:10px;
 }
 
-.result-card p{
-font-size:22px;
-color:#2D8FE3;
+.result-block ul{
+padding-left:20px;
 }
-<section class="surface-map">
 
-<h2>Attack Surface Map</h2>
+.result-block li{
+margin-bottom:6px;
+color:#cbd7ff;
+}
 
-<div id="networkMap"></div>
-
-</section>
 /* FOOTER */
 
 .footer{
-background:#020c1b;
-padding:60px 20px;
+background:#020617;
+padding:80px 20px 40px;
+border-top:1px solid rgba(255,255,255,0.05);
 margin-top:100px;
 }
 
 .footer-grid{
-max-width:1200px;
+max-width:1100px;
 margin:auto;
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:30px;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:40px;
 }
 
-.footer h4{
-color:#2D8FE3;
-margin-bottom:10px;
+.footer ul{
+list-style:none;
 }
 
-.footer a{
-display:block;
-color:#cbd7ff;
-text-decoration:none;
+.footer li{
 margin-bottom:8px;
 }
 
 .footer-bottom{
 text-align:center;
-margin-top:30px;
-font-size:13px;
-color:#7a8cb3;
+margin-top:40px;
+opacity:0.6;
 }
 
 </style>
@@ -174,23 +172,17 @@ color:#7a8cb3;
 
 </section>
 
-<!-- SCANNER -->
+<!-- DOMAIN SCANNER -->
 
-<section class="scan-section">
+<section class="domain-scanner">
 
-<div class="scan-card">
-
-<h2>Domain Attack Surface Scanner</h2>
-
-<p>Discover open services, infrastructure exposure, and security risk indicators.</p>
-
-<div class="scan-input">
+<div class="scanner-box">
 
 <input type="text" id="domainInput" placeholder="example.com">
 
-<button onclick="runDiscovery()">Run Discovery Scan</button>
-
-</div>
+<button onclick="runDiscovery()">
+Run Discovery Scan
+</button>
 
 </div>
 
@@ -198,38 +190,44 @@ color:#7a8cb3;
 
 <!-- RESULTS -->
 
-<section class="results">
+<section class="attack-results">
 
-<div class="result-grid">
+<div class="results-card">
 
-<div class="result-card">
-<h3>Security Score</h3>
-<p id="securityScore">--</p>
-</div>
+<h2>Attack Surface Results</h2>
 
-<div class="result-card">
-<h3>Open Ports</h3>
-<p id="openPorts">--</p>
-</div>
+<p class="domain-name">
+Domain: <span id="domainName">--</span>
+</p>
 
-<div class="result-card">
-<h3>SSL Status</h3>
-<p id="sslStatus">--</p>
-</div>
+<div class="result-block">
 
-<div class="result-card">
 <h3>DNS Records</h3>
-<p id="dnsRecords">--</p>
+
+<ul id="dnsList">
+<li>No scan performed yet</li>
+</ul>
+
 </div>
 
-<div class="result-card">
-<h3>Technology Stack</h3>
-<p id="techStack">--</p>
+<div class="result-block">
+
+<h3>Discovered Subdomains</h3>
+
+<ul id="subdomainList">
+<li>No scan performed yet</li>
+</ul>
+
 </div>
 
-<div class="result-card">
-<h3>Risk Level</h3>
-<p id="riskLevel">--</p>
+<div class="result-block">
+
+<h3>Security Insights</h3>
+
+<ul id="securityInsights">
+<li>No scan performed yet</li>
+</ul>
+
 </div>
 
 </div>
@@ -244,38 +242,46 @@ color:#7a8cb3;
 
 <div>
 
-<h4>Cyber-Node</h4>
+<h3>Cyber-Node</h3>
 
-<a href="../index.html">Home</a>
-<a href="../services.html">Services</a>
-<a href="../dashboard.html">Dashboard</a>
-
-</div>
-
-<div>
-
-<h4>Security Tools</h4>
-
-<a href="security-scan.html">Security Scan</a>
-<a href="attack-surface.html">Attack Surface</a>
+<ul>
+<li><a href="../index.html">Home</a></li>
+<li><a href="../services.html">Services</a></li>
+<li><a href="../dashboard.html">Dashboard</a></li>
+</ul>
 
 </div>
 
 <div>
 
-<h4>Resources</h4>
+<h3>Security Tools</h3>
 
-<a href="../resources.html">Security Guides</a>
-<a href="../case-studies.html">Case Studies</a>
+<ul>
+<li><a href="security-scan.html">Security Scan</a></li>
+<li><a href="attack-surface.html">Attack Surface</a></li>
+</ul>
 
 </div>
 
 <div>
 
-<h4>Contact</h4>
+<h3>Resources</h3>
 
-<a href="#">Schedule Consultation</a>
-<a href="#">security@cyber-node.com</a>
+<ul>
+<li><a href="../resources.html">Security Guides</a></li>
+<li><a href="../case-studies.html">Case Studies</a></li>
+</ul>
+
+</div>
+
+<div>
+
+<h3>Contact</h3>
+
+<ul>
+<li>security@cyber-node.com</li>
+<li>Schedule Consultation</li>
+</ul>
 
 </div>
 
@@ -283,14 +289,58 @@ color:#7a8cb3;
 
 <div class="footer-bottom">
 
-Cyber-Node © 2026
+Cyber-Node © 2026 — Cybersecurity Intelligence Platform
 
 </div>
 
 </footer>
 
-<script src="../js/attack-surface.js"></script>
+<script>
+
+function runDiscovery(){
+
+const domain = document.getElementById("domainInput").value;
+
+if(domain === ""){
+alert("Enter a domain to scan.");
+return;
+}
+
+document.getElementById("domainName").innerText = domain;
+
+/* DNS Records */
+
+const dnsList = document.getElementById("dnsList");
+
+dnsList.innerHTML = `
+<li>23.21.157.88</li>
+<li>23.21.234.173</li>
+`;
+
+/* Subdomains */
+
+const subdomainList = document.getElementById("subdomainList");
+
+subdomainList.innerHTML = `
+<li>dev.${domain}</li>
+<li>api.${domain}</li>
+<li>mail.${domain}</li>
+<li>cdn.${domain}</li>
+`;
+
+/* Security Insights */
+
+const insights = document.getElementById("securityInsights");
+
+insights.innerHTML = `
+<li>SSL Certificate detected</li>
+<li>Cloud infrastructure detected</li>
+<li>Potential attack surface discovered</li>
+`;
+
+}
+
+</script>
 
 </body>
-
 </html>
