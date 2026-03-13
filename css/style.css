@@ -1,7 +1,31 @@
 /* =========================
    GLOBAL
 ========================= */
+/* =========================
+SECTION SYSTEM
+========================= */
 
+.section{
+padding:100px 20px;
+}
+
+.section-sm{
+padding:70px 20px;
+}
+
+.section-lg{
+padding:140px 20px;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:0 20px;
+}
+
+.section-alt{
+background:#0f172a;
+}
 *{
 margin:0;
 padding:0;
