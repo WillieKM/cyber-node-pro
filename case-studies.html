@@ -1,191 +1,376 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Case Studies | Cyber-Node</title>
+<title>Cybersecurity Case Studies | Cyber-Node</title>
 
-<link rel="stylesheet" href="css/style.css">
+<style>
+
+/* GLOBAL */
+
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#081224;
+color:white;
+}
+
+/* NAVBAR */
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 60px;
+background:#020c1b;
+position:sticky;
+top:0;
+z-index:100;
+}
+
+.logo{
+font-size:20px;
+font-weight:bold;
+}
+
+.nav-links a{
+color:white;
+margin-left:25px;
+text-decoration:none;
+font-size:14px;
+}
+
+.nav-links a:hover{
+color:#2D8FE3;
+}
+
+/* HERO */
+
+.hero{
+text-align:center;
+padding:80px 20px;
+background:linear-gradient(90deg,#182848,#0c1b3a);
+}
+
+.hero h1{
+font-size:40px;
+margin-bottom:10px;
+}
+
+.hero p{
+color:#c6d2ff;
+}
+
+/* CASE STUDY GRID */
+
+.case-section{
+max-width:1200px;
+margin:auto;
+padding:60px 20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+}
+
+.case-card{
+background:#0e1a32;
+padding:25px;
+border-radius:10px;
+transition:0.3s;
+}
+
+.case-card:hover{
+transform:translateY(-6px);
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
+}
+
+.case-card h3{
+margin-bottom:10px;
+color:#2D8FE3;
+}
+
+.case-card ul{
+padding-left:18px;
+color:#cbd7ff;
+}
+
+.industry{
+margin-top:10px;
+font-size:13px;
+color:#7ea3ff;
+}
+
+/* CTA SECTION */
+
+.cta{
+text-align:center;
+padding:70px 20px;
+background:#101c33;
+}
+
+.cta h2{
+margin-bottom:10px;
+}
+
+.cta button{
+padding:14px 30px;
+background:#2D8FE3;
+border:none;
+color:white;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+}
+
+/* FOOTER */
+
+.footer{
+background:#020c1b;
+padding:60px 20px;
+margin-top:60px;
+}
+
+.footer-container{
+max-width:1200px;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:30px;
+}
+
+.footer h4{
+margin-bottom:15px;
+color:#2D8FE3;
+}
+
+.footer a{
+display:block;
+color:#c9d7ff;
+text-decoration:none;
+margin-bottom:8px;
+font-size:14px;
+}
+
+.footer a:hover{
+color:white;
+}
+
+.footer-bottom{
+text-align:center;
+margin-top:30px;
+color:#7a8cb3;
+font-size:13px;
+}
+
+</style>
 
 </head>
 
 <body>
 
-<header class="navbar">
+<!-- NAVBAR -->
 
-<div class="container">
+<div class="navbar">
 
-<div class="logo">Cyber-Node</div>
+<div class="logo">
+Cyber-Node
+</div>
 
-<nav>
-
+<div class="nav-links">
+<a href="index.html">Home</a>
 <a href="services.html">Services</a>
 <a href="pricing.html">Pricing</a>
 <a href="case-studies.html">Case Studies</a>
 <a href="resources.html">Resources</a>
 <a href="dashboard.html">Dashboard</a>
 <a href="about.html">About</a>
-</nav>
+</div>
 
 </div>
 
-</header>
-
-
+<!-- HERO -->
 
 <section class="hero">
 
 <h1>Cybersecurity Case Studies</h1>
 
 <p>
-
-Real-world examples of how Cyber-Node helps organizations
-identify vulnerabilities and strengthen security.
-
+Real-world examples of how Cyber-Node helps organizations identify vulnerabilities and strengthen security.
 </p>
 
 </section>
 
+<!-- CASE STUDIES -->
 
+<section class="case-section">
 
-<section class="case-studies">
-
-<div class="grid">
-
-<div class="card">
+<div class="case-card">
 
 <h3>Healthcare Security Assessment</h3>
 
 <p>
-
-Cyber-Node performed a full security assessment
-for a healthcare organization managing sensitive patient data.
-
+Cyber-Node conducted a full cybersecurity assessment for a healthcare organization handling protected patient data.
 </p>
 
 <ul>
-
-<li>42 vulnerabilities discovered</li>
-<li>Improved compliance readiness</li>
-<li>Reduced security risk exposure</li>
-
+<li>42 vulnerabilities discovered across network endpoints</li>
+<li>Weak authentication policies identified</li>
+<li>Endpoint security misconfigurations resolved</li>
+<li>HIPAA compliance readiness improved</li>
+<li>Network segmentation implemented</li>
 </ul>
 
-<p><strong>Industry:</strong> Healthcare</p>
+<div class="industry">
+Industry: Healthcare
+</div>
 
 </div>
 
-
-
-<div class="card">
+<div class="case-card">
 
 <h3>Small Business Infrastructure Audit</h3>
 
 <p>
-
-A growing technology company needed help identifying
-security weaknesses in their cloud infrastructure.
-
+A growing technology company required a full security review of their cloud and internal infrastructure.
 </p>
 
 <ul>
-
 <li>Network misconfigurations identified</li>
-<li>Security policies strengthened</li>
-<li>Improved monitoring capabilities</li>
-
+<li>Firewall policy improvements implemented</li>
+<li>Cloud storage access controls hardened</li>
+<li>Security monitoring enabled</li>
+<li>Reduced potential attack surface by 60%</li>
 </ul>
 
-<p><strong>Industry:</strong> Technology</p>
+<div class="industry">
+Industry: Technology
+</div>
 
 </div>
 
-
-
-<div class="card">
+<div class="case-card">
 
 <h3>Government Contractor Compliance Review</h3>
 
 <p>
-
-Cyber-Node evaluated the security posture of a company
-pursuing government contracts.
-
+Cyber-Node evaluated the cybersecurity posture of a company preparing to bid on government contracts.
 </p>
 
 <ul>
-
-<li>NIST framework alignment review</li>
-<li>Security documentation improvements</li>
+<li>NIST security framework alignment review</li>
+<li>Documentation and policies strengthened</li>
+<li>Access control procedures improved</li>
+<li>Incident response plan implemented</li>
 <li>Compliance readiness achieved</li>
-
 </ul>
 
-<p><strong>Industry:</strong> Government Contractor</p>
+<div class="industry">
+Industry: Government Contractor
+</div>
 
 </div>
 
-
-
-<div class="card">
+<div class="case-card">
 
 <h3>Automation Security Implementation</h3>
 
 <p>
-
-Cyber-Node implemented secure automation workflows
-for a business managing sensitive operational data.
-
+Cyber-Node deployed secure automation systems for a company managing sensitive operational data.
 </p>
 
 <ul>
-
-<li>Secure cloud document workflows</li>
-<li>Automated compliance tracking</li>
-<li>Improved audit logging</li>
-
+<li>Secure document workflow automation</li>
+<li>Automated compliance tracking system</li>
+<li>Security event logging enabled</li>
+<li>Protected API integrations deployed</li>
+<li>Operational risk significantly reduced</li>
 </ul>
 
-<p><strong>Industry:</strong> Professional Services</p>
-
+<div class="industry">
+Industry: Professional Services
 </div>
 
 </div>
 
 </section>
 
-
+<!-- CTA -->
 
 <section class="cta">
 
 <h2>Ready to Improve Your Security?</h2>
 
 <p>
-
-Run a free security scan or schedule a consultation
-with Cyber-Node today.
-
+Run a free security scan or schedule a consultation with Cyber-Node today.
 </p>
 
-<a href="tools/security-scan.html" class="btn-primary">
+<br>
 
+<button onclick="location.href='scanner.html'">
 Run Free Security Scan
-
-</a>
+</button>
 
 </section>
 
+<!-- FOOTER -->
 
+<footer class="footer">
 
-<footer>
+<div class="footer-container">
 
-<p>Cyber-Node © 2026</p>
+<div>
+
+<h4>Cyber-Node</h4>
+
+<a href="index.html">Home</a>
+<a href="services.html">Services</a>
+<a href="pricing.html">Pricing</a>
+<a href="case-studies.html">Case Studies</a>
+
+</div>
+
+<div>
+
+<h4>Security Services</h4>
+
+<a href="#">Security Assessments</a>
+<a href="#">Infrastructure Audits</a>
+<a href="#">Compliance Consulting</a>
+<a href="#">Automation Security</a>
+
+</div>
+
+<div>
+
+<h4>Resources</h4>
+
+<a href="#">Security Blog</a>
+<a href="#">Cybersecurity Guides</a>
+<a href="#">Security Tools</a>
+
+</div>
+
+<div>
+
+<h4>Contact</h4>
+
+<a href="#">Schedule Consultation</a>
+<a href="#">support@cyber-node.com</a>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+
+Cyber-Node © 2026 — Cybersecurity Solutions & Security Automation
+
+</div>
 
 </footer>
 
 </body>
-
 </html>
