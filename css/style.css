@@ -658,3 +658,44 @@ text-align:center;
 opacity:0.6;
 
 }
+.pricing-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:40px;
+margin-top:50px;
+}
+
+.pricing-card{
+background:#111827;
+padding:40px;
+border-radius:12px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+min-height:420px;
+}
+
+.pricing-card ul{
+text-align:left;
+margin:20px 0;
+}
+
+.pricing-card .btn-primary{
+margin-top:auto;
+align-self:center;
+}
+
+.highlight{
+border:2px solid #3b82f6;
+transform:scale(1.05);
+}
+
+.popular-badge{
+background:#3b82f6;
+color:white;
+font-size:12px;
+padding:4px 10px;
+border-radius:6px;
+display:inline-block;
+margin-bottom:10px;
+}
