@@ -342,47 +342,64 @@ Get Security Score
 </section>  
 <section class="security-check">
 
+<div class="security-container">
+
 <h2>Free Security Risk Check</h2>
-<p>Answer a few quick questions to see how secure your business is.</p>
+<p class="subtitle">
+Answer a few quick questions to see how secure your business is.
+</p>
 
 <form id="riskForm">
 
+<div class="form-group">
 <label>Do you use Multi-Factor Authentication?</label>
 <select name="mfa">
 <option value="0">Yes</option>
 <option value="10">No</option>
 </select>
+</div>
 
+<div class="form-group">
 <label>Do employees use company-managed devices?</label>
 <select name="devices">
 <option value="0">Yes</option>
 <option value="10">No</option>
 </select>
+</div>
 
+<div class="form-group">
 <label>Do you run regular data backups?</label>
 <select name="backup">
 <option value="0">Yes</option>
 <option value="10">No</option>
 </select>
+</div>
 
+<div class="form-group">
 <label>Do you provide cybersecurity training?</label>
 <select name="training">
 <option value="0">Yes</option>
 <option value="10">No</option>
 </select>
+</div>
 
+<div class="form-group">
 <label>Do you use antivirus / endpoint protection?</label>
 <select name="antivirus">
 <option value="0">Yes</option>
 <option value="10">No</option>
 </select>
+</div>
 
-<button type="button" onclick="calculateRisk()">Check My Security</button>
+<button type="button" onclick="calculateRisk()" class="scan-btn">
+Check My Security
+</button>
 
 </form>
 
 <div id="result"></div>
 
+</div>
 </section>
 
 <section class="cta section-alt">
