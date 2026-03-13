@@ -723,3 +723,28 @@ color:#3b82f6;
 margin-top:10px;
 font-weight:600;
 }
+.security-check{
+text-align:center;
+}
+
+.security-form{
+max-width:600px;
+margin:40px auto;
+display:grid;
+gap:15px;
+}
+
+.security-form select,
+.security-form input{
+
+padding:12px;
+border-radius:6px;
+border:1px solid rgba(255,255,255,0.1);
+background:#0f172a;
+color:white;
+
+}
+
+.security-form button{
+margin-top:10px;
+}
