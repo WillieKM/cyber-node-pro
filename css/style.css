@@ -748,3 +748,41 @@ color:white;
 .security-form button{
 margin-top:10px;
 }
+.security-check{
+background:#0F172A;
+color:white;
+padding:60px;
+border-radius:10px;
+}
+
+.security-check form{
+display:flex;
+flex-direction:column;
+gap:15px;
+max-width:500px;
+}
+
+.security-check select{
+padding:10px;
+border-radius:6px;
+}
+
+.security-check button{
+background:#2D8FE3;
+border:none;
+padding:12px;
+color:white;
+font-weight:bold;
+border-radius:6px;
+cursor:pointer;
+}
+
+.cta-btn{
+display:inline-block;
+margin-top:20px;
+padding:12px 20px;
+background:#2BB673;
+color:white;
+text-decoration:none;
+border-radius:6px;
+}
