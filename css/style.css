@@ -1098,3 +1098,11 @@ border-radius:20px;
 font-size:13px;
 font-weight:600;
 }
+.threat-feed li{
+background:#0f1f3d;
+padding:15px;
+margin-bottom:12px;
+border-left:4px solid #ff5252;
+border-radius:6px;
+font-size:14px;
+}
