@@ -1157,3 +1157,40 @@ background:#0f1f3d;
 border-radius:10px;
 margin-top:20px;
 }
+/* RESULTS PANEL */
+
+.attack-results{
+display:flex;
+justify-content:center;
+margin:60px auto;
+padding:0 20px;
+}
+
+.results-card{
+background:#0f1f3d;
+padding:40px;
+border-radius:12px;
+width:700px;
+text-align:left;
+box-shadow:0 10px 40px rgba(0,0,0,0.4);
+}
+
+.results-card h2{
+text-align:center;
+margin-bottom:20px;
+}
+
+.results-card h3{
+margin-top:20px;
+color:#2D8FE3;
+}
+
+.results-card ul{
+padding-left:20px;
+margin-top:10px;
+}
+
+.results-card li{
+margin-bottom:6px;
+color:#cbd7ff;
+}
