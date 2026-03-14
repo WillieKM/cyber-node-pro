@@ -1,3 +1,5 @@
+<div id="navbar"></div>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -135,7 +137,15 @@ opacity:0.6;
 </style>
 
 </head>
+<script>
 
+fetch("/components/navbar.html")
+.then(res => res.text())
+.then(data => {
+document.getElementById("navbar").innerHTML = data;
+});
+
+</script>
 <body>
 
 <!-- NAVBAR -->
