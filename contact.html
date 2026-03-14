@@ -12,12 +12,12 @@
 
 <style>
 
-/* CONTACT SECTION */
+/* CONTACT PAGE */
 
 .contact-section{
 padding:120px 20px;
-text-align:center;
 background:linear-gradient(135deg,#1e3a8a,#020617);
+text-align:center;
 }
 
 .contact-container{
@@ -33,9 +33,9 @@ box-shadow:0 10px 40px rgba(0,0,0,0.4);
 margin-bottom:10px;
 }
 
-.contact-container p{
+.contact-email{
 margin-bottom:30px;
-opacity:0.8;
+color:#cbd7ff;
 }
 
 .contact-form{
@@ -65,7 +65,6 @@ border-radius:6px;
 color:white;
 font-weight:600;
 cursor:pointer;
-transition:0.3s;
 }
 
 .contact-form button:hover{
@@ -78,7 +77,34 @@ background:#1c6fc4;
 
 <body>
 
-<!-- CONTACT -->
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+<div class="nav-container">
+
+<div class="logo">Cyber-Node</div>
+
+<ul class="nav-menu">
+
+<li><a href="index.html">Home</a></li>
+<li><a href="services.html">Services</a></li>
+<li><a href="pricing.html">Pricing</a></li>
+<li><a href="case-studies.html">Case Studies</a></li>
+<li><a href="resources.html">Resources</a></li>
+<li><a href="dashboard.html">Dashboard</a></li>
+
+<li>
+<a href="contact.html" class="contact-btn">Contact</a>
+</li>
+
+</ul>
+
+</div>
+
+</nav>
+
+<!-- CONTACT SECTION -->
 
 <section class="contact-section">
 
@@ -86,7 +112,9 @@ background:#1c6fc4;
 
 <h1>Contact Cyber-Node</h1>
 
-<p>Phone: 253-374-9087</p>
+<p class="contact-email">
+Email: <strong>sales@cyber-node.com</strong>
+</p>
 
 <form class="contact-form">
 
@@ -94,7 +122,7 @@ background:#1c6fc4;
 
 <input type="email" placeholder="Email Address" required>
 
-<textarea placeholder="How can we help?" required></textarea>
+<textarea placeholder="How can we help?"></textarea>
 
 <button type="submit">Send Message</button>
 
@@ -103,6 +131,67 @@ background:#1c6fc4;
 </div>
 
 </section>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+<div class="footer-grid container">
+
+<div>
+
+<h3>Cyber-Node</h3>
+
+<p>
+Cybersecurity intelligence platform providing
+security assessments and security automation.
+</p>
+
+</div>
+
+<div>
+
+<h4>Platform</h4>
+
+<ul>
+<li><a href="tools/security-scan.html">Security Scan</a></li>
+<li><a href="tools/attack-surface.html">Attack Surface</a></li>
+<li><a href="dashboard.html">Security Dashboard</a></li>
+</ul>
+
+</div>
+
+<div>
+
+<h4>Company</h4>
+
+<ul>
+<li><a href="about.html">About</a></li>
+<li><a href="services.html">Services</a></li>
+<li><a href="pricing.html">Pricing</a></li>
+</ul>
+
+</div>
+
+<div>
+
+<h4>Contact</h4>
+
+<ul>
+<li>sales@cyber-node.com</li>
+</ul>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+
+Cyber-Node © 2026 — Cybersecurity Intelligence Platform
+
+</div>
+
+</footer>
 
 </body>
 
