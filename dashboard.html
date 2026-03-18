@@ -6,9 +6,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Cyber-Node Dashboard</title>
+<title>Cyber-Node SOC Dashboard</title>
 
 <link rel="stylesheet" href="css/style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 
@@ -18,6 +20,7 @@ display:flex;
 min-height:100vh;
 background:#020617;
 color:white;
+font-family:Arial;
 }
 
 /* SIDEBAR */
@@ -25,8 +28,6 @@ color:white;
 width:220px;
 background:#0f172a;
 padding:20px;
-display:flex;
-flex-direction:column;
 }
 
 .sidebar h2{
@@ -34,9 +35,10 @@ margin-bottom:20px;
 }
 
 .sidebar a{
+display:block;
+margin:10px 0;
 color:white;
 text-decoration:none;
-margin:10px 0;
 opacity:0.8;
 }
 
@@ -50,30 +52,37 @@ flex:1;
 padding:30px;
 }
 
-/* TOPBAR */
-.topbar{
-display:flex;
-justify-content:space-between;
-margin-bottom:30px;
-}
-
-/* CARDS */
+/* GRID */
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:20px;
 }
 
+/* CARD */
 .card{
 background:#111827;
 padding:20px;
 border-radius:10px;
 }
 
+/* METRIC */
 .metric{
 font-size:28px;
 color:#3b82f6;
-margin-top:10px;
+}
+
+/* GAUGE */
+.gauge{
+width:150px;
+height:150px;
+margin:auto;
+border-radius:50%;
+background:conic-gradient(#3b82f6 0% 92%, #111827 92%);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:24px;
 }
 
 /* ACTIVITY */
@@ -81,22 +90,11 @@ margin-top:10px;
 margin-top:30px;
 }
 
-.activity ul{
-margin-top:15px;
-}
-
-.activity li{
-margin-bottom:10px;
-opacity:0.8;
-}
-
 </style>
 
 </head>
 
-
 <body>
-
 
 <div class="dashboard">
 
@@ -105,10 +103,10 @@ opacity:0.8;
 
 <h2>Cyber-Node</h2>
 
-<a href="dashboard.html">Dashboard</a>
-<a href="tools/security-scan.html">Security Scanner</a>
+<a href="#">Dashboard</a>
+<a href="tools/security-scan.html">Scanner</a>
 <a href="tools/attack-surface.html">Attack Surface</a>
-<a href="#">Threat Intelligence</a>
+<a href="#">Threat Intel</a>
 <a href="#">Reports</a>
 
 </div>
@@ -117,37 +115,53 @@ opacity:0.8;
 <!-- MAIN -->
 <div class="main">
 
-<div class="topbar">
-
 <h2>Security Operations Center</h2>
 
-<a href="index.html" class="btn-primary">Back to Site</a>
+<br>
 
-</div>
-
-
-<!-- METRICS -->
+<!-- TOP METRICS -->
 <div class="grid">
 
 <div class="card">
+
 <h3>Security Score</h3>
-<div class="metric" id="score">92%</div>
+
+<div class="gauge" id="gauge">92%</div>
+
 </div>
 
 <div class="card">
+
 <h3>Threat Alerts</h3>
 <div class="metric" id="alerts">24</div>
+
 </div>
 
 <div class="card">
+
 <h3>Vulnerabilities</h3>
 <div class="metric" id="vulns">8</div>
+
 </div>
 
 <div class="card">
-<h3>Attack Surface</h3>
-<div class="metric" id="assets">12 Assets</div>
+
+<h3>Assets Monitored</h3>
+<div class="metric" id="assets">12</div>
+
 </div>
+
+</div>
+
+
+<br><br>
+
+<!-- CHART -->
+<div class="card">
+
+<h3>Vulnerability Trends</h3>
+
+<canvas id="vulnChart"></canvas>
 
 </div>
 
@@ -155,7 +169,7 @@ opacity:0.8;
 <!-- ACTIVITY -->
 <div class="activity">
 
-<h3>Recent Security Activity</h3>
+<h3>Recent Activity</h3>
 
 <ul id="activityLog">
 
@@ -174,9 +188,25 @@ opacity:0.8;
 
 <script>
 
-/* SIMULATED LIVE DATA */
+/* CHART */
+const ctx = document.getElementById('vulnChart');
 
+new Chart(ctx,{
+type:'line',
+data:{
+labels:['Mon','Tue','Wed','Thu','Fri'],
+datasets:[{
+label:'Vulnerabilities',
+data:[12,9,14,8,6]
+}]
+}
+});
+
+
+/* LIVE METRICS */
 function updateDashboard(){
+
+let score = Math.floor(Math.random()*20)+80;
 
 document.getElementById("alerts").innerText =
 Math.floor(Math.random()*30)+10;
@@ -184,16 +214,20 @@ Math.floor(Math.random()*30)+10;
 document.getElementById("vulns").innerText =
 Math.floor(Math.random()*15)+5;
 
-document.getElementById("score").innerText =
-Math.floor(Math.random()*20)+80 + "%";
+document.getElementById("assets").innerText =
+Math.floor(Math.random()*20)+5;
+
+document.getElementById("gauge").innerText = score + "%";
+
+document.getElementById("gauge").style.background =
+`conic-gradient(#3b82f6 0% ${score}%, #111827 ${score}%)`;
 
 }
 
-/* UPDATE EVERY 5 SECONDS */
-setInterval(updateDashboard,5000);
+setInterval(updateDashboard,4000);
 
 </script>
 
-
 </body>
+
 </html>
