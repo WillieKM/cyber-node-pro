@@ -6,323 +6,194 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Security Operations Dashboard | Cyber-Node</title>
+<title>Cyber-Node Dashboard</title>
 
 <link rel="stylesheet" href="css/style.css">
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <style>
 
-/* DASHBOARD HERO */
-
-.hero{
-text-align:center;
-padding:100px 20px;
-background:linear-gradient(90deg,#1e3c72,#0b1d3a);
+/* LAYOUT */
+.dashboard{
+display:flex;
+min-height:100vh;
+background:#020617;
+color:white;
 }
 
-.hero h1{
-font-size:44px;
-margin-bottom:10px;
+/* SIDEBAR */
+.sidebar{
+width:220px;
+background:#0f172a;
+padding:20px;
+display:flex;
+flex-direction:column;
 }
 
-/* METRICS */
+.sidebar h2{
+margin-bottom:20px;
+}
 
-.dashboard-metrics{
+.sidebar a{
+color:white;
+text-decoration:none;
+margin:10px 0;
+opacity:0.8;
+}
+
+.sidebar a:hover{
+color:#3b82f6;
+}
+
+/* MAIN */
+.main{
+flex:1;
+padding:30px;
+}
+
+/* TOPBAR */
+.topbar{
+display:flex;
+justify-content:space-between;
+margin-bottom:30px;
+}
+
+/* CARDS */
+.grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:25px;
-max-width:1200px;
-margin:50px auto;
-padding:0 20px;
+gap:20px;
 }
 
-.metric-card{
-background:#0f1f3d;
-padding:30px;
+.card{
+background:#111827;
+padding:20px;
 border-radius:10px;
-text-align:center;
 }
 
-.metric-card h3{
+.metric{
+font-size:28px;
+color:#3b82f6;
+margin-top:10px;
+}
+
+/* ACTIVITY */
+.activity{
+margin-top:30px;
+}
+
+.activity ul{
+margin-top:15px;
+}
+
+.activity li{
 margin-bottom:10px;
-}
-
-.metric-card p{
-font-size:32px;
-color:#2D8FE3;
-}
-
-/* CHARTS */
-
-.dashboard-charts{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:30px;
-max-width:1200px;
-margin:40px auto;
-padding:0 20px;
-}
-
-.chart-box{
-background:#0f1f3d;
-padding:30px;
-border-radius:10px;
-}
-
-/* THREAT FEED */
-<section class="threat-feed">
-
-<h2>Live Vulnerability Intelligence</h2>
-
-<ul id="threatFeed">
-<li>Loading latest vulnerabilities...</li>
-</ul>
-
-</section>
-.threat-feed{
-max-width:1200px;
-margin:50px auto;
-padding:0 20px;
-}
-
-.threat-feed ul{
-list-style:none;
-padding:0;
-}
-
-.threat-feed li{
-background:#0f1f3d;
-padding:15px;
-margin-bottom:10px;
-border-left:4px solid #2D8FE3;
-}
-
-/* ATTACK MAP */
-
-.threat-map{
-max-width:1200px;
-margin:60px auto;
-padding:0 20px;
-}
-
-.threat-map iframe{
-border-radius:10px;
-}
-
-/* AI ASSISTANT */
-
-#aiAssistant{
-position:fixed;
-bottom:20px;
-right:20px;
-width:300px;
-background:#0f1f3d;
-border-radius:10px;
-overflow:hidden;
-box-shadow:0 10px 30px rgba(0,0,0,0.4);
-}
-
-#aiHeader{
-background:#2D8FE3;
-padding:10px;
-font-weight:bold;
-}
-
-#aiMessages{
-padding:10px;
-height:150px;
-overflow:auto;
-}
-
-#aiInput{
-width:100%;
-border:none;
-padding:10px;
-background:#081224;
-color:white;
+opacity:0.8;
 }
 
 </style>
 
 </head>
 
+
 <body>
 
 
-<!-- NAVBAR -->
+<div class="dashboard">
 
-<nav class="navbar">
+<!-- SIDEBAR -->
+<div class="sidebar">
 
-<div class="nav-container">
+<h2>Cyber-Node</h2>
 
-<div class="logo">Cyber-Node SOC</div>
-
-<ul class="nav-menu">
-
-<li><a href="index.html">Home</a></li>
-<li><a href="tools/security-scan.html">Scanner</a></li>
-<li><a href="tools/attack-surface.html">Attack Surface</a></li>
-<li><a href="dashboard.html">Dashboard</a></li>
-
-<li>
-<a href="logout.html" class="contact-btn">Logout</a>
-</li>
-
-</ul>
+<a href="dashboard.html">Dashboard</a>
+<a href="tools/security-scan.html">Security Scanner</a>
+<a href="tools/attack-surface.html">Attack Surface</a>
+<a href="#">Threat Intelligence</a>
+<a href="#">Reports</a>
 
 </div>
 
-</nav>
 
+<!-- MAIN -->
+<div class="main">
 
-<!-- HERO -->
+<div class="topbar">
 
-<section class="hero">
+<h2>Security Operations Center</h2>
 
-<h1>Security Operations Dashboard</h1>
+<a href="index.html" class="btn-primary">Back to Site</a>
 
-<p>Monitor security posture and vulnerability intelligence.</p>
+</div>
 
-</section>
-<section class="dashboard-metrics">
 
 <!-- METRICS -->
+<div class="grid">
 
-<section class="dashboard-metrics">
-<section class="domain-scanner">
-
-<h2>Domain Attack Surface Scan</h2>
-
-<p>Enter a domain to analyze its security exposure.</p>
-
-<div class="scanner-box">
-
-<input
-type="text"
-id="domainInput"
-placeholder="Enter domain (example.com)"
->
-
-<button onclick="runDomainScan()">
-Run Security Scan
-</button>
-
+<div class="card">
+<h3>Security Score</h3>
+<div class="metric" id="score">92%</div>
 </div>
 
-<div id="scanResults" class="scan-results">
-
-<p>No scan performed yet.</p>
-
+<div class="card">
+<h3>Threat Alerts</h3>
+<div class="metric" id="alerts">24</div>
 </div>
 
-</section>
-<div class="metric-card">
-<h3>Active Domains</h3>
-<p id="domainsCount">3</p>
+<div class="card">
+<h3>Vulnerabilities</h3>
+<div class="metric" id="vulns">8</div>
 </div>
 
-<div class="metric-card">
-<h3>Average Security Score</h3>
-<p id="avgScore">82</p>
+<div class="card">
+<h3>Attack Surface</h3>
+<div class="metric" id="assets">12 Assets</div>
 </div>
-
-<div class="metric-card">
-<h3>Vulnerabilities Detected</h3>
-<p id="vulnCount">5</p>
-</div>
-
-<div class="metric-card">
-<h3>Monitoring Status</h3>
-<p style="color:#4CAF50;">Active</p>
-</div>
-
-</section>
-
-
-<!-- CHARTS -->
-
-<section class="dashboard-charts">
-
-<div class="chart-box">
-
-<h3>Security Score Overview</h3>
-
-<canvas id="riskChart"></canvas>
 
 </div>
 
 
-<div class="chart-box">
+<!-- ACTIVITY -->
+<div class="activity">
 
-<h3>Attack Surface Map</h3>
+<h3>Recent Security Activity</h3>
 
-<canvas id="surfaceChart"></canvas>
+<ul id="activityLog">
 
-</div>
-
-</section>
-
-
-<!-- THREAT FEED -->
-
-<section class="threat-feed">
-
-<h2>Threat Intelligence Feed</h2>
-
-<ul id="threatFeed">
-
-<li>⚠️ New vulnerability discovered in web servers</li>
-
-<li>⚠️ Suspicious login activity detected globally</li>
-
-<li>⚠️ Critical CVE released affecting CMS platforms</li>
+<li>Scan completed for example.com</li>
+<li>New vulnerability detected</li>
+<li>Security report generated</li>
 
 </ul>
 
-</section>
-
-
-<!-- GLOBAL ATTACK MAP -->
-
-<section class="threat-map">
-
-<h2>Global Cyber Attack Activity</h2>
-
-<section class="threat-map">
-
-<h2>Global Cyber Attack Activity</h2>
-
-<canvas id="attackMap"></canvas>
-
-</section>>
-
-
-<!-- AI ASSISTANT -->
-
-<div id="aiAssistant">
-
-<div id="aiHeader">
-Cyber-Node AI Security Assistant
 </div>
 
-<div id="aiMessages">
-<p>Hello. Ask me about cybersecurity risks or vulnerabilities.</p>
 </div>
-
-<input id="aiInput" placeholder="Ask a security question...">
 
 </div>
 
 
-<script src="js/dashboard.js"></script>
-<script src="js/dashboard-chart.js"></script>
-<script src="js/threat-feed.js"></script>
-<script src="js/ai-assistant.js"></script>
+<script>
+
+/* SIMULATED LIVE DATA */
+
+function updateDashboard(){
+
+document.getElementById("alerts").innerText =
+Math.floor(Math.random()*30)+10;
+
+document.getElementById("vulns").innerText =
+Math.floor(Math.random()*15)+5;
+
+document.getElementById("score").innerText =
+Math.floor(Math.random()*20)+80 + "%";
+
+}
+
+/* UPDATE EVERY 5 SECONDS */
+setInterval(updateDashboard,5000);
+
+</script>
+
 
 </body>
-<script src="js/live-cve-feed.js"></script>
 </html>
-<script src="js/domain-scanner.js"></script>
-<script src="js/attack-map.js"></script>
