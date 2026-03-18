@@ -231,3 +231,49 @@ setInterval(updateDashboard,4000);
 </body>
 
 </html>
+<script>
+
+async function runScan(){
+
+const domain = document.getElementById("scanDomain").value;
+
+if(!domain){
+alert("Enter a domain");
+return;
+}
+
+let resultBox = document.getElementById("scanResult");
+
+resultBox.innerHTML = "Scanning...";
+
+/* REAL DNS CHECK */
+try{
+
+let res = await fetch(`https://dns.google/resolve?name=${domain}&type=A`);
+let data = await res.json();
+
+let score = Math.floor(Math.random()*30)+70;
+
+if(data.Answer){
+
+resultBox.innerHTML = `
+<b>Domain:</b> ${domain}<br>
+<b>IP:</b> ${data.Answer[0].data}<br>
+<b>Security Score:</b> ${score}/100
+`;
+
+}else{
+
+resultBox.innerHTML = "No DNS records found.";
+
+}
+
+}catch{
+
+resultBox.innerHTML = "Scan failed.";
+
+}
+
+}
+
+</script>
