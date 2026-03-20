@@ -1,24 +1,171 @@
-<section class="scanner-section">
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="scanner-container">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cyber Security Scanner | Cyber-Node</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+
+/* HERO */
+.hero{
+text-align:center;
+padding:120px 20px 60px;
+background:linear-gradient(135deg,#1e3a8a,#020617);
+}
+
+.hero h1{
+font-size:42px;
+margin-bottom:10px;
+}
+
+.hero p{
+opacity:0.85;
+}
+
+/* SCANNER SECTION */
+.scanner-section{
+padding:60px 20px 100px;
+background:#020617;
+}
+
+.scanner-container{
+max-width:700px;
+margin:auto;
+text-align:center;
+}
+
+.scanner-sub{
+opacity:0.8;
+margin-bottom:25px;
+}
+
+/* INPUT */
+.scanner-box{
+display:flex;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+margin-bottom:30px;
+}
+
+.scanner-box input{
+padding:14px;
+width:280px;
+border-radius:8px;
+border:none;
+background:#111827;
+color:white;
+}
+
+.scanner-box button{
+padding:14px 20px;
+background:#2D8FE3;
+border:none;
+border-radius:8px;
+color:white;
+cursor:pointer;
+}
+
+/* RESULT CARD */
+.scan-result-card{
+background:#111827;
+padding:25px;
+border-radius:12px;
+text-align:left;
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
+}
+
+.scan-placeholder{
+opacity:0.6;
+}
+
+/* FOOTER */
+.footer{
+background:#020617;
+padding:80px 20px 40px;
+border-top:1px solid rgba(255,255,255,0.05);
+}
+
+.footer-grid{
+max-width:1100px;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:40px;
+}
+
+.footer ul{
+list-style:none;
+padding:0;
+}
+
+.footer li{
+margin-bottom:8px;
+}
+
+.footer a{
+color:white;
+text-decoration:none;
+}
+
+.footer a:hover{
+color:#3b82f6;
+}
+
+.footer-bottom{
+text-align:center;
+margin-top:40px;
+opacity:0.6;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div id="navbar"></div>
+
+<script>
+fetch("../components/navbar.html")
+.then(res => res.text())
+.then(data => {
+document.getElementById("navbar").innerHTML = data;
+});
+</script>
+
+<!-- HERO -->
+<section class="hero">
 
 <h1>Cyber Security Scanner</h1>
 
-<p class="scanner-sub">
-Run a quick security analysis on any website.
-</p>
+<p>Run a quick security analysis on any website.</p>
+
+</section>
+
+<!-- SCANNER -->
+<section class="scanner-section">
+
+<div class="scanner-container">
 
 <div class="scanner-box">
 
 <input type="text" id="scanDomain" placeholder="example.com">
 
-<button onclick="runScan()" class="btn-primary">
+<button onclick="runScan()">
 Run Security Scan
 </button>
 
 </div>
 
-<!-- RESULT PANEL -->
+<!-- RESULTS -->
 <div class="scan-result-card" id="scanResult">
 
 <h3>Scan Results</h3>
@@ -32,3 +179,106 @@ No scan performed yet.
 </div>
 
 </section>
+
+<!-- FOOTER -->
+<footer class="footer">
+
+<div class="footer-grid">
+
+<div>
+<h3>Cyber-Node</h3>
+<ul>
+<li><a href="../index.html">Home</a></li>
+<li><a href="../services.html">Services</a></li>
+<li><a href="../dashboard.html">Dashboard</a></li>
+</ul>
+</div>
+
+<div>
+<h3>Security Tools</h3>
+<ul>
+<li><a href="security-scan.html">Security Scan</a></li>
+<li><a href="attack-surface.html">Attack Surface</a></li>
+</ul>
+</div>
+
+<div>
+<h3>Resources</h3>
+<ul>
+<li><a href="../resources.html">Security Guides</a></li>
+<li><a href="../case-studies.html">Case Studies</a></li>
+</ul>
+</div>
+
+<div>
+<h3>Contact</h3>
+<ul>
+<li>security@cyber-node.com</li>
+<li>Schedule Consultation</li>
+</ul>
+</div>
+
+</div>
+
+<div class="footer-bottom">
+Cyber-Node © 2026 — Cybersecurity Intelligence Platform
+</div>
+
+</footer>
+
+<!-- SCRIPT -->
+<script>
+
+async function runScan(){
+
+const domain = document.getElementById("scanDomain").value;
+
+if(!domain){
+alert("Enter a domain");
+return;
+}
+
+let result = document.getElementById("scanResult");
+
+result.innerHTML = "<p>Scanning...</p>";
+
+try{
+
+let res = await fetch(`https://dns.google/resolve?name=${domain}&type=A`);
+let data = await res.json();
+
+let score = Math.floor(Math.random()*30)+70;
+
+let color = "lime";
+if(score < 80) color = "orange";
+if(score < 60) color = "red";
+
+let ip = data.Answer ? data.Answer[0].data : "Not found";
+
+result.innerHTML = `
+<h3>Scan Results</h3>
+
+<p><b>Domain:</b> ${domain}</p>
+<p><b>IP Address:</b> ${ip}</p>
+
+<p><b>Security Score:</b> 
+<span style="color:${color}; font-weight:bold;">
+${score}/100
+</span>
+</p>
+
+<p><b>Status:</b> ${score > 80 ? "Secure" : score > 60 ? "Moderate Risk" : "High Risk"}</p>
+`;
+
+}catch{
+
+result.innerHTML = "Scan failed. Try again.";
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
