@@ -10,6 +10,111 @@
 
 <link rel="stylesheet" href="css/style.css">
 
+<style>
+
+/* HERO UPGRADE */
+.hero{
+text-align:center;
+padding:80px 20px 60px;
+background:linear-gradient(135deg,#1e3a8a,#020617);
+}
+
+.hero h1{
+font-size:38px;
+margin-bottom:15px;
+}
+
+.hero p{
+max-width:700px;
+margin:auto;
+opacity:0.85;
+margin-bottom:25px;
+}
+
+/* TRUST BADGES */
+.hero-badges{
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+margin-bottom:25px;
+font-size:14px;
+}
+
+.hero-badges span{
+background:rgba(255,255,255,0.05);
+padding:8px 14px;
+border-radius:20px;
+}
+
+/* CTA BUTTONS */
+.hero-cta{
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.btn-secondary{
+padding:12px 20px;
+border:1px solid #3b82f6;
+border-radius:6px;
+color:#3b82f6;
+text-decoration:none;
+}
+
+.btn-secondary:hover{
+background:#3b82f6;
+color:white;
+}
+
+/* PRICING GRID FIX */
+.pricing-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:30px;
+margin-top:40px;
+}
+
+/* CARD IMPROVEMENT */
+.pricing-card{
+background:#111827;
+padding:30px;
+border-radius:12px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+transition:0.3s;
+}
+
+.pricing-card:hover{
+transform:translateY(-5px);
+}
+
+/* HIGHLIGHT CARD */
+.pricing-card.highlight{
+border:1px solid #3b82f6;
+box-shadow:0 0 25px rgba(59,130,246,0.3);
+}
+
+/* POPULAR BADGE */
+.popular-badge{
+display:inline-block;
+margin-bottom:10px;
+background:#3b82f6;
+padding:5px 12px;
+border-radius:20px;
+font-size:12px;
+}
+
+/* CTA SECTION */
+.section-alt{
+text-align:center;
+padding:80px 20px;
+background:#0f172a;
+}
+
+</style>
+
 </head>
 
 <body>
@@ -35,13 +140,34 @@
 </header>
 
 
+<!-- 🔥 IMPROVED HERO -->
 <section class="hero">
 
 <div class="container">
 
-<h1>Cyber-Node Security Plans</h1>
+<h1>Cybersecurity Solutions Built to Protect Your Business</h1>
 
-<p>Choose the right cybersecurity solution for your organization.</p>
+<p>
+Identify vulnerabilities, achieve compliance, and prevent cyber threats with Cyber-Node’s security platform.
+</p>
+
+<div class="hero-badges">
+<span>✔ Risk Assessments</span>
+<span>✔ HIPAA / NIST Ready</span>
+<span>✔ Real-Time Security Insights</span>
+</div>
+
+<div class="hero-cta">
+
+<a href="contact.html" class="btn-primary">
+Schedule Consultation
+</a>
+
+<a href="tools/security-scan.html" class="btn-secondary">
+Run Free Scan
+</a>
+
+</div>
 
 </div>
 
@@ -49,6 +175,7 @@
 
 
 
+<!-- PRICING -->
 <section class="pricing section">
 
 <div class="container">
@@ -136,6 +263,7 @@ Contact Sales
 
 
 
+<!-- CTA -->
 <section class="cta section-alt">
 
 <div class="container">
@@ -154,6 +282,7 @@ Run Free Security Scan
 
 
 
+<!-- FOOTER -->
 <footer class="footer">
 
 <div class="container footer-grid">
