@@ -1,70 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
+<section class="scanner-section">
 
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Cyber Security Scan | Cyber-Node</title>
-
-<link rel="stylesheet" href="../css/style.css">
-
-</head>
-
-<body>
-
-<header class="navbar">
-
-<div class="container">
-
-<div class="logo">Cyber-Node</div>
-
-<nav>
-
-<a href="../index.html">Home</a>
-<a href="../services.html">Services</a>
-<a href="../pricing.html">Pricing</a>
-<a href="../dashboard.html">Dashboard</a>
-<a href="../contact.html" class="contact-btn">Contact</a>
-
-</nav>
-
-</div>
-
-</header>
-
-
-
-<section class="hero">
+<div class="scanner-container">
 
 <h1>Cyber Security Scanner</h1>
 
-<p>
-
+<p class="scanner-sub">
 Run a quick security analysis on any website.
-
 </p>
 
-</section>
+<div class="scanner-box">
 
+<input type="text" id="scanDomain" placeholder="example.com">
 
-
-<section class="scan-section">
-
-<input id="domainInput" placeholder="example.com">
-
-<button onclick="scanDomain()" class="btn-primary">
-
+<button onclick="runScan()" class="btn-primary">
 Run Security Scan
-
 </button>
 
-<div id="results"></div>
+</div>
+
+<!-- RESULT PANEL -->
+<div class="scan-result-card" id="scanResult">
+
+<h3>Scan Results</h3>
+
+<p class="scan-placeholder">
+No scan performed yet.
+</p>
+
+</div>
+
+</div>
 
 </section>
-
-<script src="../js/security-scan.js"></script>
-
-</body>
-</html>
