@@ -4,36 +4,42 @@ let latestScore = 0
 let latestLevel = ""
 let latestRecommendation = ""
 
+/* MAIN CALCULATION */
 function calculateScore(){
 
-let email = document.getElementById("email").value
+const email = document.getElementById("email").value.trim()
 
-if(email === ""){
+if(!email){
 alert("Please enter your email to view your security score.")
 return
 }
 
-/* Optional: basic email validation */
 if(!email.includes("@")){
 alert("Enter a valid email address.")
 return
 }
 
-/* LOADING STATE */
+/* BUTTON FIX (safer selector) */
 const btn = document.querySelector(".security-form button")
+
+if(!btn) return
+
 btn.innerText = "Analyzing..."
 btn.disabled = true
 
 setTimeout(()=>{
 
-let industry = parseInt(document.getElementById("industry").value || 0)
-let companySize = parseInt(document.getElementById("companySize").value || 0)
-let monitoring = parseInt(document.getElementById("monitoring").value || 0)
-let compliance = parseInt(document.getElementById("compliance").value || 0)
+/* INPUT VALUES */
+const industry = parseInt(document.getElementById("industry").value || 0)
+const companySize = parseInt(document.getElementById("companySize").value || 0)
+const monitoring = parseInt(document.getElementById("monitoring").value || 0)
+const compliance = parseInt(document.getElementById("compliance").value || 0)
 
-let risk = industry + companySize + monitoring + compliance
-let score = 100 - risk
+/* SCORE LOGIC */
+const risk = industry + companySize + monitoring + compliance
+const score = Math.max(0, 100 - risk)
 
+/* LEVEL LOGIC */
 let level = "Low Risk"
 let recommendation = "Security Monitoring"
 let color = "#22c55e"
@@ -50,13 +56,18 @@ recommendation = "Penetration Testing"
 color = "#ef4444"
 }
 
+/* SAVE GLOBAL */
 latestScore = score
 latestLevel = level
 latestRecommendation = recommendation
 
-document.getElementById("resultCard").style.display = "block"
+/* RESULT UI */
+const resultCard = document.getElementById("resultCard")
 
-document.getElementById("resultCard").innerHTML = `
+if(resultCard){
+resultCard.style.display = "block"
+
+resultCard.innerHTML = `
 <h3>Security Assessment Results</h3>
 
 <p><strong>Score:</strong> 
@@ -77,36 +88,54 @@ ${recommendation}
 A detailed security report is available for your organization.
 </p>
 `
+}
 
-document.getElementById("downloadBtn").style.display="inline-block"
+/* SHOW DOWNLOAD BUTTON */
+const downloadBtn = document.getElementById("downloadBtn")
+if(downloadBtn){
+downloadBtn.style.display = "inline-block"
+}
 
+/* RESET BUTTON */
 btn.innerText = "Calculate Security Score"
 btn.disabled = false
 
-/* SAVE LEAD (local demo version) */
-saveLead(email, score)
+/* SAVE LEAD */
+saveLead(email, score, level, recommendation)
 
-}, 1200)
+}, 1000)
 
 }
 
-/* SAVE LEAD (LOCAL STORAGE FOR NOW) */
-function saveLead(email, score){
+
+/* SAVE LEAD (LOCAL STORAGE) */
+function saveLead(email, score, level, recommendation){
+
+try{
 
 let leads = JSON.parse(localStorage.getItem("cybernode_leads") || "[]")
 
 leads.push({
-email: email,
-score: score,
+email,
+score,
+level,
+recommendation,
 date: new Date().toISOString()
 })
 
 localStorage.setItem("cybernode_leads", JSON.stringify(leads))
 
+}catch(e){
+console.log("Storage error:", e)
 }
+
+}
+
 
 /* PDF DOWNLOAD */
 function downloadReport(){
+
+if(!latestScore) return
 
 const { jsPDF } = window.jspdf
 const doc = new jsPDF()
@@ -118,14 +147,12 @@ doc.setFontSize(12)
 
 doc.text("Security Score: " + latestScore + "/100",20,60)
 doc.text("Risk Level: " + latestLevel,20,70)
-doc.text("Recommended Service: " + latestRecommendation,20,80)
-
-doc.text("Summary:",20,100)
+doc.text("Recommendation: " + latestRecommendation,20,80)
 
 doc.text(
-"This report highlights potential security risks and provides recommendations to strengthen your organization's cybersecurity posture.",
+"This report highlights potential risks and provides recommendations to improve your cybersecurity posture.",
 20,
-110,
+100,
 {maxWidth:160}
 )
 
