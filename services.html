@@ -101,8 +101,15 @@ background:linear-gradient(135deg,#1e293b,#020617);
 </style>
 
 </head>
+<div id="navbar"></div>
 
-<body>
+<script>
+fetch("components/navbar.html")
+.then(res => res.text())
+.then(data => {
+document.getElementById("navbar").innerHTML = data;
+});
+</script><body>
 
 <!-- HERO -->
 <section class="hero">
@@ -314,6 +321,14 @@ Schedule Consultation
 </a>
 
 </section>
+<div id="footer"></div>
 
+<script>
+fetch("components/footer.html")
+.then(res => res.text())
+.then(data => {
+document.getElementById("footer").innerHTML = data;
+});
+</script>
 </body>
 </html>
