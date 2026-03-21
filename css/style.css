@@ -1512,3 +1512,159 @@ font-size:14px;
 .nav-cta:hover{
 background:#2563eb;
 }
+/* GLOBAL */
+body{
+background:#020617;
+color:white;
+font-family:Arial, sans-serif;
+margin:0;
+}
+
+/* BUTTON */
+.btn-primary{
+background:#3b82f6;
+color:white;
+padding:12px 20px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+.btn-primary:hover{
+background:#2563eb;
+}
+
+/* NAVBAR */
+.navbar{
+background:#020617;
+padding:15px 30px;
+border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+.nav-container{
+max-width:1200px;
+margin:auto;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.nav-links{
+display:flex;
+gap:25px;
+}
+
+.nav-links a{
+color:#cbd5e1;
+text-decoration:none;
+}
+
+.nav-links a:hover{
+color:#3b82f6;
+}
+
+/* HERO */
+.hero{
+text-align:center;
+padding:80px 20px;
+background:linear-gradient(135deg,#1e3a8a,#020617);
+}
+
+.hero h1{
+font-size:38px;
+margin-bottom:10px;
+}
+
+.hero-sub{
+max-width:600px;
+margin:auto;
+opacity:0.8;
+}
+
+/* TOOL SECTION */
+.security-check{
+padding:80px 20px;
+}
+
+/* 2-COLUMN LAYOUT */
+.tool-container{
+max-width:1100px;
+margin:auto;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:50px;
+align-items:center;
+}
+
+/* LEFT TEXT */
+.tool-left{
+text-align:left;
+}
+
+.tool-left h2{
+margin-bottom:15px;
+}
+
+.tool-sub{
+opacity:0.8;
+margin-bottom:20px;
+}
+
+.tool-benefits{
+list-style:none;
+padding:0;
+}
+
+.tool-benefits li{
+margin-bottom:10px;
+color:#cbd5e1;
+}
+
+/* FORM */
+.security-form{
+display:grid;
+gap:15px;
+max-width:400px;
+}
+
+.security-form select,
+.security-form input{
+padding:14px;
+border-radius:8px;
+border:1px solid rgba(255,255,255,0.1);
+background:#111827;
+color:white;
+}
+
+/* RESULT CARD */
+.result-card{
+margin-top:40px;
+background:#111827;
+padding:25px;
+border-radius:12px;
+max-width:600px;
+margin-left:auto;
+margin-right:auto;
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* FOOTER */
+.footer{
+text-align:center;
+padding:40px;
+opacity:0.7;
+}
+
+/* MOBILE FIX */
+@media(max-width:900px){
+
+.tool-container{
+grid-template-columns:1fr;
+text-align:center;
+}
+
+.tool-left{
+text-align:center;
+}
+
+}
