@@ -1,163 +1,279 @@
-<script>
+<!DOCTYPE html>
+<html lang="en">
 
-let latestScore = 0
-let latestLevel = ""
-let latestRecommendation = ""
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services | Cyber-Node</title>
 
-/* MAIN CALCULATION */
-function calculateScore(){
+<link rel="stylesheet" href="css/style.css">
 
-const email = document.getElementById("email").value.trim()
+<style>
 
-if(!email){
-alert("Please enter your email to view your security score.")
-return
+/* SECTION SPACING */
+.section{
+padding:100px 20px;
 }
 
-if(!email.includes("@")){
-alert("Enter a valid email address.")
-return
+/* HERO */
+.hero{
+text-align:center;
+padding:120px 20px 100px;
+background:linear-gradient(135deg,#1e3a8a,#020617);
 }
 
-/* BUTTON FIX (safer selector) */
-const btn = document.querySelector(".security-form button")
-
-if(!btn) return
-
-btn.innerText = "Analyzing..."
-btn.disabled = true
-
-setTimeout(()=>{
-
-/* INPUT VALUES */
-const industry = parseInt(document.getElementById("industry").value || 0)
-const companySize = parseInt(document.getElementById("companySize").value || 0)
-const monitoring = parseInt(document.getElementById("monitoring").value || 0)
-const compliance = parseInt(document.getElementById("compliance").value || 0)
-
-/* SCORE LOGIC */
-const risk = industry + companySize + monitoring + compliance
-const score = Math.max(0, 100 - risk)
-
-/* LEVEL LOGIC */
-let level = "Low Risk"
-let recommendation = "Security Monitoring"
-let color = "#22c55e"
-
-if(score < 70){
-level = "Moderate Risk"
-recommendation = "Security Risk Assessment"
-color = "#f59e0b"
+.hero h1{
+font-size:42px;
+margin-bottom:15px;
 }
 
-if(score < 50){
-level = "High Risk"
-recommendation = "Penetration Testing"
-color = "#ef4444"
+.hero p{
+max-width:650px;
+margin:auto;
+opacity:0.85;
 }
 
-/* SAVE GLOBAL */
-latestScore = score
-latestLevel = level
-latestRecommendation = recommendation
+/* GRID */
+.grid{
+max-width:1100px;
+margin:50px auto 0;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+}
 
-/* RESULT UI */
-const resultCard = document.getElementById("resultCard")
+/* CARD */
+.card{
+background:#111827;
+padding:25px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,0.05);
+transition:0.3s;
+}
 
-if(resultCard){
-resultCard.style.display = "block"
+.card:hover{
+transform:translateY(-5px);
+border-color:#3b82f6;
+}
 
-resultCard.innerHTML = `
-<h3>Security Assessment Results</h3>
+.card h3{
+margin-bottom:10px;
+}
 
-<p><strong>Score:</strong> 
-<span style="color:${color}; font-size:22px; font-weight:bold;">
-${score}/100
-</span></p>
+.card p{
+opacity:0.8;
+margin-bottom:10px;
+}
 
-<p><strong>Risk Level:</strong> ${level}</p>
+.card ul{
+padding-left:18px;
+}
 
-<p><strong>Recommended Service:</strong> 
-<span style="color:#3b82f6; font-weight:600;">
-${recommendation}
-</span></p>
+.card li{
+margin-bottom:6px;
+color:#cbd5e1;
+}
 
-<hr style="margin:20px 0; opacity:0.1;">
+/* SECTION TITLE */
+.section-title{
+text-align:center;
+margin-bottom:10px;
+}
 
-<p style="font-size:14px; opacity:0.8;">
-A detailed security report is available for your organization.
+.section-sub{
+text-align:center;
+opacity:0.75;
+margin-bottom:20px;
+}
+
+/* PROCESS STEPS */
+.process .card{
+text-align:center;
+}
+
+/* CTA */
+.cta{
+text-align:center;
+padding:100px 20px;
+background:linear-gradient(135deg,#1e293b,#020617);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero">
+
+<h1>Cybersecurity & Automation Services</h1>
+
+<p>
+Cyber-Node helps organizations identify risks, automate workflows, 
+and strengthen cybersecurity posture with scalable solutions.
 </p>
-`
-}
 
-/* SHOW DOWNLOAD BUTTON */
-const downloadBtn = document.getElementById("downloadBtn")
-if(downloadBtn){
-downloadBtn.style.display = "inline-block"
-}
+</section>
 
-/* RESET BUTTON */
-btn.innerText = "Calculate Security Score"
-btn.disabled = false
+<!-- CYBERSECURITY -->
+<section class="section">
 
-/* SAVE LEAD */
-saveLead(email, score, level, recommendation)
+<h2 class="section-title">Cybersecurity Services</h2>
 
-}, 1000)
+<div class="grid">
 
-}
+<div class="card">
+<h3>Security Risk Assessment</h3>
+<p>Comprehensive evaluation of your security posture.</p>
+<ul>
+<li>Infrastructure vulnerability scanning</li>
+<li>Security architecture review</li>
+<li>Compliance readiness (HIPAA / NIST)</li>
+<li>Detailed remediation roadmap</li>
+</ul>
+</div>
 
+<div class="card">
+<h3>Penetration Testing</h3>
+<p>Simulated attacks to identify exploitable weaknesses.</p>
+<ul>
+<li>Web application testing</li>
+<li>Network penetration testing</li>
+<li>Exploit simulation</li>
+<li>Executive security report</li>
+</ul>
+</div>
 
-/* SAVE LEAD (LOCAL STORAGE) */
-function saveLead(email, score, level, recommendation){
+<div class="card">
+<h3>Compliance Consulting</h3>
+<p>Prepare for regulatory and industry frameworks.</p>
+<ul>
+<li>HIPAA readiness</li>
+<li>NIST implementation</li>
+<li>SOC2 preparation</li>
+<li>Security documentation</li>
+</ul>
+</div>
 
-try{
+</div>
 
-let leads = JSON.parse(localStorage.getItem("cybernode_leads") || "[]")
+</section>
 
-leads.push({
-email,
-score,
-level,
-recommendation,
-date: new Date().toISOString()
-})
+<!-- AUTOMATION -->
+<section class="section">
 
-localStorage.setItem("cybernode_leads", JSON.stringify(leads))
+<h2 class="section-title">Automation Security Solutions</h2>
 
-}catch(e){
-console.log("Storage error:", e)
-}
+<p class="section-sub">
+Reduce manual work and improve compliance through automation.
+</p>
 
-}
+<div class="grid">
 
+<div class="card">
+<h3>Workflow Automation Security</h3>
+<ul>
+<li>Secure document workflows</li>
+<li>Automated compliance tracking</li>
+<li>Cloud-based systems</li>
+</ul>
+</div>
 
-/* PDF DOWNLOAD */
-function downloadReport(){
+<div class="card">
+<h3>Compliance Automation Platforms</h3>
+<ul>
+<li>HIPAA-ready systems</li>
+<li>Policy management tools</li>
+<li>Audit tracking dashboards</li>
+</ul>
+</div>
 
-if(!latestScore) return
+<div class="card">
+<h3>Operations Security Automation</h3>
+<ul>
+<li>Real-time monitoring dashboards</li>
+<li>Automated vulnerability tracking</li>
+<li>Continuous security alerts</li>
+</ul>
+</div>
 
-const { jsPDF } = window.jspdf
-const doc = new jsPDF()
+</div>
 
-doc.setFontSize(18)
-doc.text("Cyber-Node Security Report",20,30)
+</section>
 
-doc.setFontSize(12)
+<!-- PROCESS -->
+<section class="section process">
 
-doc.text("Security Score: " + latestScore + "/100",20,60)
-doc.text("Risk Level: " + latestLevel,20,70)
-doc.text("Recommendation: " + latestRecommendation,20,80)
+<h2 class="section-title">Automation Implementation Process</h2>
 
-doc.text(
-"This report highlights potential risks and provides recommendations to improve your cybersecurity posture.",
-20,
-100,
-{maxWidth:160}
-)
+<div class="grid">
 
-doc.save("CyberNode-Report.pdf")
+<div class="card">
+<h3>1. Security Assessment</h3>
+<p>We evaluate infrastructure and security risks.</p>
+</div>
 
-}
+<div class="card">
+<h3>2. Automation Design</h3>
+<p>We build solutions tailored to your workflows.</p>
+</div>
 
-</script>
+<div class="card">
+<h3>3. Implementation</h3>
+<p>Deploy automation tools and monitoring systems.</p>
+</div>
+
+<div class="card">
+<h3>4. Continuous Monitoring</h3>
+<p>Real-time alerts and security optimization.</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- TOOL SECTION -->
+<section class="section">
+
+<h2 class="section-title">Free Cybersecurity Risk Check</h2>
+
+<p class="section-sub">
+Instantly evaluate your security posture.
+</p>
+
+<div class="grid">
+
+<div class="card">
+<h3>Run Free Assessment</h3>
+<p>Use our security score tool to identify risks.</p>
+<a href="risk-check.html" class="btn-primary">Start Assessment</a>
+</div>
+
+<div class="card">
+<h3>Security Report</h3>
+<p>Get a detailed report with recommendations.</p>
+<a href="pricing.html" class="btn-primary">View Pricing</a>
+</div>
+
+</div>
+
+</section>
+
+<!-- CTA -->
+<section class="cta">
+
+<h2>Start Strengthening Your Security</h2>
+
+<p>
+Run a free scan or schedule a consultation with Cyber-Node today.
+</p>
+
+<a href="tools/security-scan.html" class="btn-primary">
+Run Free Security Scan
+</a>
+
+</section>
+
+</body>
+</html>
