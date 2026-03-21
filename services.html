@@ -1,317 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Security Risk Check | Cyber-Node</title>
-
-<link rel="stylesheet" href="css/style.css">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-<style>
-
-/* NAVBAR */
-.navbar{
-background:#020617;
-padding:15px 30px;
-border-bottom:1px solid rgba(255,255,255,0.05);
-position:sticky;
-top:0;
-z-index:1000;
-}
-
-.nav-container{
-max-width:1200px;
-margin:auto;
-display:flex;
-align-items:center;
-justify-content:space-between;
-}
-
-.logo{
-font-weight:600;
-font-size:18px;
-}
-
-.nav-links{
-display:flex;
-gap:25px;
-}
-
-.nav-links a{
-color:#cbd5e1;
-text-decoration:none;
-font-size:14px;
-}
-
-.nav-links a:hover{
-color:#3b82f6;
-}
-
-.nav-cta{
-background:#3b82f6;
-padding:8px 16px;
-border-radius:6px;
-color:white;
-text-decoration:none;
-}
-
-/* HERO */
-.hero{
-text-align:center;
-padding:90px 20px 60px;
-background:linear-gradient(135deg,#1e3a8a,#020617);
-}
-
-.hero h1{
-font-size:40px;
-margin-bottom:15px;
-}
-
-.hero-sub{
-max-width:600px;
-margin:auto;
-opacity:0.85;
-margin-bottom:25px;
-line-height:1.6;
-}
-
-.hero-actions{
-display:flex;
-justify-content:center;
-gap:15px;
-flex-wrap:wrap;
-}
-
-.btn-secondary{
-border:1px solid #3b82f6;
-padding:12px 20px;
-border-radius:6px;
-color:#3b82f6;
-text-decoration:none;
-}
-
-.btn-secondary:hover{
-background:#3b82f6;
-color:white;
-}
-
-/* TOOL SECTION */
-.security-check{
-padding:80px 20px;
-background:#020617;
-}
-
-/* GRID */
-.tool-container{
-max-width:1100px;
-margin:auto;
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:60px;
-align-items:center;
-}
-
-/* LEFT */
-.tool-left h2{
-margin-bottom:15px;
-}
-
-.tool-sub{
-opacity:0.85;
-margin-bottom:20px;
-line-height:1.6;
-}
-
-.tool-benefits{
-list-style:none;
-padding:0;
-}
-
-.tool-benefits li{
-margin-bottom:10px;
-color:#cbd5e1;
-}
-
-/* FORM */
-.security-form{
-max-width:400px;
-display:grid;
-gap:15px;
-}
-
-.security-form select,
-.security-form input{
-padding:14px;
-border-radius:8px;
-border:1px solid rgba(255,255,255,0.1);
-background:#111827;
-color:white;
-}
-
-/* RESULT */
-.result-card{
-margin-top:40px;
-background:#111827;
-padding:25px;
-border-radius:12px;
-max-width:600px;
-margin-left:auto;
-margin-right:auto;
-box-shadow:0 10px 30px rgba(0,0,0,0.4);
-}
-
-/* FOOTER */
-.footer{
-background:#020617;
-padding:40px;
-text-align:center;
-opacity:0.7;
-}
-
-/* MOBILE */
-@media(max-width:900px){
-.tool-container{
-grid-template-columns:1fr;
-text-align:center;
-}
-}
-
-</style>
-
-</head>
-
-<body>
-
-<!-- NAVBAR -->
-<header class="navbar">
-
-<div class="nav-container">
-
-<div class="logo">Cyber-Node</div>
-
-<nav class="nav-links">
-<a href="index.html">Home</a>
-<a href="services.html">Services</a>
-<a href="pricing.html">Pricing</a>
-<a href="case-studies.html">Case Studies</a>
-<a href="dashboard.html">Dashboard</a>
-</nav>
-
-<a href="contact.html" class="nav-cta">Contact</a>
-
-</div>
-
-</header>
-
-<!-- HERO -->
-<section class="hero">
-
-<h1>Cybersecurity Risk Check</h1>
-
-<p class="hero-sub">
-Quickly assess your organization's security posture and identify risks 
-before they become costly breaches.
-</p>
-
-<div class="hero-actions">
-
-<a href="#tool" class="btn-primary">Start Free Assessment</a>
-<a href="contact.html" class="btn-secondary">Talk to an Expert</a>
-
-</div>
-
-</section>
-
-<!-- TOOL -->
-<section id="tool" class="security-check">
-
-<div class="tool-container">
-
-<!-- LEFT -->
-<div class="tool-left">
-
-<h2>Cyber-Node Security Score Tool</h2>
-
-<p class="tool-sub">
-Answer a few quick questions to evaluate your cybersecurity posture 
-and receive a personalized risk score.
-</p>
-
-<ul class="tool-benefits">
-<li>✔ Identify security gaps instantly</li>
-<li>✔ Understand compliance readiness</li>
-<li>✔ Get actionable recommendations</li>
-</ul>
-
-</div>
-
-<!-- RIGHT -->
-<div>
-
-<div class="security-form">
-
-<select id="industry">
-<option value="">Select Industry</option>
-<option value="10">Healthcare</option>
-<option value="15">Government Contractor</option>
-<option value="8">Technology</option>
-<option value="12">Finance</option>
-<option value="5">Other</option>
-</select>
-
-<select id="companySize">
-<option value="">Company Size</option>
-<option value="5">1-10 Employees</option>
-<option value="10">11-50 Employees</option>
-<option value="15">51-200 Employees</option>
-<option value="20">200+ Employees</option>
-</select>
-
-<select id="monitoring">
-<option value="">Security Monitoring</option>
-<option value="20">No Monitoring</option>
-<option value="10">Basic Monitoring</option>
-<option value="0">Advanced SOC Monitoring</option>
-</select>
-
-<select id="compliance">
-<option value="">Compliance Program</option>
-<option value="20">None</option>
-<option value="10">Partial</option>
-<option value="0">Fully Implemented</option>
-</select>
-
-<input id="email" type="email" placeholder="Email to receive report">
-
-<button onclick="calculateScore()" class="btn-primary">
-Calculate Security Score
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- RESULT -->
-<div id="resultCard" class="result-card" style="display:none;"></div>
-
-<button onclick="downloadReport()" class="btn-primary" id="downloadBtn" style="display:none; margin-top:20px;">
-Download Security Report
-</button>
-
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-Cyber-Node © 2026 — Cybersecurity Intelligence Platform
-</footer>
-
 <script>
 
 let latestScore = 0
@@ -319,6 +5,26 @@ let latestLevel = ""
 let latestRecommendation = ""
 
 function calculateScore(){
+
+let email = document.getElementById("email").value
+
+if(email === ""){
+alert("Please enter your email to view your security score.")
+return
+}
+
+/* Optional: basic email validation */
+if(!email.includes("@")){
+alert("Enter a valid email address.")
+return
+}
+
+/* LOADING STATE */
+const btn = document.querySelector(".security-form button")
+btn.innerText = "Analyzing..."
+btn.disabled = true
+
+setTimeout(()=>{
 
 let industry = parseInt(document.getElementById("industry").value || 0)
 let companySize = parseInt(document.getElementById("companySize").value || 0)
@@ -330,18 +36,18 @@ let score = 100 - risk
 
 let level = "Low Risk"
 let recommendation = "Security Monitoring"
-let color = "lime"
+let color = "#22c55e"
 
 if(score < 70){
 level = "Moderate Risk"
 recommendation = "Security Risk Assessment"
-color = "orange"
+color = "#f59e0b"
 }
 
 if(score < 50){
 level = "High Risk"
 recommendation = "Penetration Testing"
-color = "red"
+color = "#ef4444"
 }
 
 latestScore = score
@@ -354,33 +60,77 @@ document.getElementById("resultCard").innerHTML = `
 <h3>Security Assessment Results</h3>
 
 <p><strong>Score:</strong> 
-<span style="color:${color}; font-weight:bold;">
+<span style="color:${color}; font-size:22px; font-weight:bold;">
 ${score}/100
 </span></p>
 
 <p><strong>Risk Level:</strong> ${level}</p>
-<p><strong>Recommended Service:</strong> ${recommendation}</p>
+
+<p><strong>Recommended Service:</strong> 
+<span style="color:#3b82f6; font-weight:600;">
+${recommendation}
+</span></p>
+
+<hr style="margin:20px 0; opacity:0.1;">
+
+<p style="font-size:14px; opacity:0.8;">
+A detailed security report is available for your organization.
+</p>
 `
 
 document.getElementById("downloadBtn").style.display="inline-block"
 
+btn.innerText = "Calculate Security Score"
+btn.disabled = false
+
+/* SAVE LEAD (local demo version) */
+saveLead(email, score)
+
+}, 1200)
+
 }
 
+/* SAVE LEAD (LOCAL STORAGE FOR NOW) */
+function saveLead(email, score){
+
+let leads = JSON.parse(localStorage.getItem("cybernode_leads") || "[]")
+
+leads.push({
+email: email,
+score: score,
+date: new Date().toISOString()
+})
+
+localStorage.setItem("cybernode_leads", JSON.stringify(leads))
+
+}
+
+/* PDF DOWNLOAD */
 function downloadReport(){
 
 const { jsPDF } = window.jspdf
 const doc = new jsPDF()
 
+doc.setFontSize(18)
 doc.text("Cyber-Node Security Report",20,30)
-doc.text("Score: " + latestScore + "/100",20,60)
+
+doc.setFontSize(12)
+
+doc.text("Security Score: " + latestScore + "/100",20,60)
 doc.text("Risk Level: " + latestLevel,20,70)
-doc.text("Recommendation: " + latestRecommendation,20,80)
+doc.text("Recommended Service: " + latestRecommendation,20,80)
+
+doc.text("Summary:",20,100)
+
+doc.text(
+"This report highlights potential security risks and provides recommendations to strengthen your organization's cybersecurity posture.",
+20,
+110,
+{maxWidth:160}
+)
 
 doc.save("CyberNode-Report.pdf")
 
 }
 
 </script>
-
-</body>
-</html>
