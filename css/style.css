@@ -18,8 +18,9 @@ a{
 text-decoration:none;
 color:inherit;
 }
-
-/* =========================
+.tool-container {
+  justify-items: center;
+}/* =========================
    LAYOUT
 ========================= */
 .container{
