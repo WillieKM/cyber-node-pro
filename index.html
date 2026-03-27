@@ -116,20 +116,42 @@ Schedule Consultation
 </section>
 
 <!-- SCANNER SECTION -->
-<div class="card scanner-card">
+<section class="section-alt">
 
-<h3>Cyber Security Scanner</h3>
-<p class="scanner-sub">
-Run a quick security analysis on any website.
-</p>
+  <div class="container">
 
-<div class="scanner-box">
+    <h2 style="text-align:center;">Cyber Security Scanner</h2>
+    <p style="text-align:center; margin-bottom:30px;">
+      Run a quick security analysis on any website.
+    </p>
 
-<input type="text" id="scanDomain" placeholder="example.com">
+    <div class="tool-container">
 
-<button onclick="runScan()" class="btn-primary">
-Run Security Scan
-</button>
+      <!-- LEFT SIDE (INPUT) -->
+      <div style="text-align:center;">
+        <input type="text" placeholder="example.com">
+        <button class="btn-primary">Run Security Scan</button>
+        <p style="margin-top:10px; opacity:0.7;">
+          No scan performed yet.
+        </p>
+      </div>
+
+      <!-- RIGHT SIDE (INFO) -->
+      <div>
+        <h3>What We Analyze</h3>
+        <ul>
+          <li>✔ Open ports & services</li>
+          <li>✔ SSL & encryption</li>
+          <li>✔ Known vulnerabilities</li>
+          <li>✔ Risk exposure level</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
 
 </div>
 
