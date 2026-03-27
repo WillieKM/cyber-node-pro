@@ -60,21 +60,73 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
   </div>
 </section>
 
-<!-- SOC DASHBOARD PREVIEW (UPGRADED) -->
 <section class="section-alt">
   <div class="container">
 
-    <h2 style="text-align:center;">Security Operations Center</h2>
+    <h2 style="text-align:center; margin-bottom:40px;">
+      Security Operations Center
+    </h2>
 
-    <div class="dashboard-grid">
+    <div class="soc-grid">
 
       <!-- METRICS -->
-      <div class="panel">
+      <div class="soc-card">
         <h3>Security Metrics</h3>
-        <p>Threat Alerts: <strong style="color:#ef4444;">24</strong></p>
-        <p>Security Score: <strong style="color:#22c55e;">92%</strong></p>
-        <p>Active Assets: 12</p>
+        <div class="metric-line">
+          Threat Alerts <span class="danger">24</span>
+        </div>
+        <div class="metric-line">
+          Security Score <span class="success">92%</span>
+        </div>
+        <div class="metric-line">
+          Active Assets <span>12</span>
+        </div>
       </div>
+
+      <!-- THREAT FEED -->
+      <div class="soc-card">
+        <h3>Threat Intelligence</h3>
+        <ul class="threat-feed">
+          <li class="danger">CVE-2026-1842 Exploit detected</li>
+          <li class="warning">Suspicious login attempt</li>
+          <li>Open port detected (443)</li>
+        </ul>
+      </div>
+
+      <!-- ATTACK MAP (FULL WIDTH) -->
+      <div class="soc-card soc-wide">
+        <h3>Live Global Threat Activity</h3>
+
+        <iframe
+        src="https://threatmap.checkpoint.com/"
+        width="100%"
+        height="350"
+        style="border:none;border-radius:10px;">
+        </iframe>
+
+      </div>
+
+      <!-- SYSTEM STATUS -->
+      <div class="soc-card">
+        <h3>System Status</h3>
+        <p class="success">All Systems Operational</p>
+        <p>Last Scan: 2 mins ago</p>
+      </div>
+
+      <!-- ACTIVITY TIMELINE -->
+      <div class="soc-card">
+        <h3>Recent Activity</h3>
+        <ul class="timeline">
+          <li>Scan completed – 2 mins ago</li>
+          <li>Vulnerability detected – 10 mins ago</li>
+          <li>Patch applied – 1 hour ago</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</section>
 
       <!-- THREAT FEED -->
       <div class="panel">
