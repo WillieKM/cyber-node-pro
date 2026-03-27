@@ -390,3 +390,15 @@ opacity:1;
 transform:translateY(0);
 pointer-events:auto;
 }
+.dropdown-content{
+opacity:0;
+transform:translateY(10px);
+transition:0.2s ease;
+pointer-events:none;
+}
+
+.dropdown:hover .dropdown-content{
+opacity:1;
+transform:translateY(0);
+pointer-events:auto;
+}
