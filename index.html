@@ -48,91 +48,123 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 </header>
 
 <!-- HERO -->
-<section class="hero fade-in">
+<section class="hero">
   <div class="container">
-
     <h1>Cybersecurity Intelligence & Monitoring Platform</h1>
-
-    <p>
-      Identify vulnerabilities, monitor infrastructure,
-      and strengthen your organization's security posture.
-    </p>
+    <p>Identify vulnerabilities, monitor infrastructure, and prevent attacks before they happen.</p>
 
     <div class="hero-buttons">
-      <a href="tools/security-scan.html" class="btn-primary">
-        Run Free Security Scan
-      </a>
-      <a href="consultation.html" class="btn-secondary">
-        Schedule Consultation
-      </a>
+      <a href="tools/security-scan.html" class="btn-primary">Run Free Scan</a>
+      <a href="consultation.html" class="btn-secondary">Schedule Consultation</a>
     </div>
-
   </div>
 </section>
 
-<!-- SCANNER -->
-<section class="section-alt fade-in">
+<!-- SOC DASHBOARD PREVIEW (UPGRADED) -->
+<section class="section-alt">
   <div class="container">
 
-    <h2 style="text-align:center;">Cyber Security Scanner</h2>
+    <h2 style="text-align:center;">Security Operations Center</h2>
 
-    <div class="tool-container">
+    <div class="dashboard-grid">
 
-      <div style="text-align:center;">
-        <input type="text" placeholder="example.com">
-        <button class="btn-primary">Run Security Scan</button>
-        <p style="opacity:0.7;">No scan performed yet.</p>
+      <!-- METRICS -->
+      <div class="panel">
+        <h3>Security Metrics</h3>
+        <p>Threat Alerts: <strong style="color:#ef4444;">24</strong></p>
+        <p>Security Score: <strong style="color:#22c55e;">92%</strong></p>
+        <p>Active Assets: 12</p>
       </div>
 
-      <div>
-        <h3>What We Analyze</h3>
-        <ul>
-          <li>✔ Open ports & services</li>
-          <li>✔ SSL & encryption</li>
-          <li>✔ Known vulnerabilities</li>
-          <li>✔ Risk exposure level</li>
+      <!-- THREAT FEED -->
+      <div class="panel">
+        <h3>Threat Intelligence Feed</h3>
+        <ul class="threat-feed">
+          <li>🚨 CVE-2026-1842 Exploit detected</li>
+          <li>⚠️ Suspicious login attempt</li>
+          <li>🔍 Open port detected (443)</li>
         </ul>
       </div>
 
+      <!-- ATTACK MAP PREVIEW -->
+      <div class="panel">
+        <h3>Live Attack Activity</h3>
+        <iframe src="https://threatmap.checkpoint.com/" height="200"></iframe>
+      </div>
+
+      <!-- STATUS -->
+      <div class="panel">
+        <h3>System Status</h3>
+        <p style="color:#22c55e;">All Systems Operational</p>
+        <p>Last Scan: 2 mins ago</p>
+      </div>
+
     </div>
 
   </div>
 </section>
 
-<!-- FRAMEWORK -->
-<section class="section fade-in">
+<!-- ATTACK SURFACE GRAPH -->
+<section class="attack-graph">
+  <div class="container">
+    <h2>Attack Surface Visualization</h2>
+    <p>Map exposed infrastructure and relationships.</p>
+    <div id="graph"></div>
+  </div>
+</section>
+
+<script src="js/attack-graph.js"></script>
+
+<!-- GLOBAL THREAT MAP -->
+<section class="threat-map section-alt">
+  <div class="container">
+    <h2>Global Cyber Threat Activity</h2>
+
+    <iframe
+    src="https://threatmap.checkpoint.com/"
+    width="100%"
+    height="420"
+    style="border:none;border-radius:12px;">
+    </iframe>
+
+  </div>
+</section>
+
+<!-- NEW: SECURITY INTELLIGENCE TIMELINE -->
+<section class="section">
   <div class="container">
 
-    <h2>Security Framework Expertise</h2>
+    <h2>Live Security Intelligence</h2>
 
     <div class="grid">
 
-      <div class="card">NIST Cybersecurity Framework</div>
-      <div class="card">OWASP Security Testing</div>
-      <div class="card">HIPAA Security Compliance</div>
-      <div class="card">Cloud Infrastructure Security</div>
+      <div class="card">
+        <h3>Blocked Attacks</h3>
+        <p style="font-size:28px;color:#3b82f6;">1,342</p>
+      </div>
+
+      <div class="card">
+        <h3>Active Vulnerabilities</h3>
+        <p style="font-size:28px;color:#ef4444;">8</p>
+      </div>
+
+      <div class="card">
+        <h3>Resolved Issues</h3>
+        <p style="font-size:28px;color:#22c55e;">56</p>
+      </div>
+
+      <div class="card">
+        <h3>Monitoring Status</h3>
+        <p style="color:#22c55e;">Active</p>
+      </div>
 
     </div>
-
-  </div>
-</section>
-
-<!-- PLATFORM -->
-<section class="section-alt fade-in">
-  <div class="container">
-
-    <h2>Cyber-Node Security Platform</h2>
-
-    <p>
-      Automated vulnerability scanning, attack surface discovery,
-      and security monitoring in one unified platform.
-    </p>
 
   </div>
 </section>
 
 <!-- SERVICES -->
-<section class="section fade-in">
+<section class="section-alt">
   <div class="container">
 
     <h2>Core Security Services</h2>
@@ -141,96 +173,35 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
       <div class="card">
         <i class="fa-solid fa-shield-halved"></i>
-        <h3>Security Risk Assessments</h3>
-        <p>Identify vulnerabilities and risks.</p>
+        <h3>Risk Assessments</h3>
+        <p>Identify vulnerabilities.</p>
       </div>
 
       <div class="card">
         <i class="fa-solid fa-user-secret"></i>
-        <h3>Penetration Testing</h3>
-        <p>Simulate attacks before hackers do.</p>
+        <h3>Pen Testing</h3>
+        <p>Simulate attacks.</p>
       </div>
 
       <div class="card">
         <i class="fa-solid fa-chart-line"></i>
-        <h3>Compliance Consulting</h3>
-        <p>Prepare for HIPAA, NIST, and more.</p>
+        <h3>Compliance</h3>
+        <p>Meet NIST, HIPAA.</p>
       </div>
 
       <div class="card">
         <i class="fa-solid fa-gear"></i>
-        <h3>Workflow Automation</h3>
-        <p>Secure your operations.</p>
+        <h3>Automation</h3>
+        <p>Secure workflows.</p>
       </div>
 
     </div>
 
   </div>
 </section>
-
-<!-- PROCESS -->
-<section class="section-alt fade-in">
-  <div class="container">
-
-    <h2>How Cyber-Node Works</h2>
-
-    <div class="grid">
-
-      <div class="card">Scan</div>
-      <div class="card">Detect</div>
-      <div class="card">Report</div>
-      <div class="card">Secure</div>
-
-    </div>
-
-  </div>
-</section>
-
-<!-- DASHBOARD METRICS -->
-<section class="section fade-in">
-  <div class="container">
-
-    <h2>Security Operations Dashboard</h2>
-
-    <div class="grid">
-
-      <div class="metric-card">
-        <h3>Threat Alerts</h3>
-        <p id="alerts">0</p>
-      </div>
-
-      <div class="metric-card">
-        <h3>Security Score</h3>
-        <p id="score">0</p>
-      </div>
-
-      <div class="metric-card">
-        <h3>Assets</h3>
-        <p id="assets">0</p>
-      </div>
-
-      <div class="metric-card">
-        <h3>Compliance</h3>
-        <p>Active</p>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-<!-- ATTACK GRAPH -->
-<section class="attack-graph fade-in">
-  <div class="container">
-    <h2>Attack Surface Visualization</h2>
-    <div id="graph"></div>
-  </div>
-</section>
-
-<script src="js/attack-graph.js"></script>
 
 <!-- CTA -->
-<section class="cta section-alt fade-in">
+<section class="cta section">
   <div class="container">
     <h2>Start Strengthening Your Security</h2>
     <a href="tools/security-scan.html" class="btn-primary">
@@ -269,45 +240,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     Cyber-Node © 2026
   </div>
 </footer>
-
-<!-- ANIMATION SCRIPT -->
-<script>
-
-function animateValue(id, start, end, duration) {
-let range = end - start;
-let current = start;
-let increment = end > start ? 1 : -1;
-let stepTime = Math.abs(Math.floor(duration / range));
-let obj = document.getElementById(id);
-
-let timer = setInterval(function () {
-current += increment;
-obj.innerHTML = current;
-if (current == end) clearInterval(timer);
-}, stepTime);
-}
-
-/* RUN ANIMATIONS */
-window.onload = function(){
-animateValue("alerts",0,24,1000);
-animateValue("score",0,92,1000);
-animateValue("assets",0,12,1000);
-}
-
-/* SCROLL FADE */
-const observer = new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-entry.target.classList.add("show");
-}
-});
-});
-
-document.querySelectorAll(".fade-in").forEach(el=>{
-observer.observe(el);
-});
-
-</script>
 
 </body>
 </html>
