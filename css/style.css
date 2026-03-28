@@ -658,3 +658,63 @@ text-align:center;
 font-size:13px;
 opacity:0.6;
 }
+/* PROGRESS BAR */
+.progress-bar{
+width:100%;
+height:8px;
+background:#1e293b;
+border-radius:6px;
+margin-top:15px;
+overflow:hidden;
+}
+
+#progressFill{
+height:100%;
+width:0%;
+background:#3b82f6;
+transition:0.2s;
+}
+
+/* RESULT GRID */
+.result-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:15px;
+margin-top:20px;
+}
+
+.result-box{
+background:#0f172a;
+padding:15px;
+border-radius:8px;
+text-align:center;
+}
+
+.result-box p{
+opacity:0.6;
+font-size:13px;
+}
+
+.result-box h4{
+margin-top:5px;
+}
+
+/* DETAILS */
+.result-details{
+margin-top:20px;
+}
+
+.result-details ul{
+padding-left:18px;
+}
+
+.result-details li{
+margin-bottom:8px;
+color:#cbd5e1;
+}
+
+/* SCAN BUTTON HOVER */
+.scanner-box button:hover{
+background:#1c6fc4;
+box-shadow:0 0 12px rgba(59,130,246,0.5);
+}
