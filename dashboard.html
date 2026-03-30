@@ -1,288 +1,706 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Cyber-Node SOC Dashboard</title>
-
-<link rel="stylesheet" href="css/style.css">
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* LAYOUT */
-.dashboard{
-display:flex;
-min-height:100vh;
-background:#020617;
-color:white;
-font-family:Arial;
-}
+  :root {
+    --bg:       #040c16;
+    --bg2:      #060e1a;
+    --bg3:      #071525;
+    --border:   #0d2236;
+    --accent:   #00d4ff;
+    --red:      #ff2244;
+    --orange:   #ff8c00;
+    --green:    #00cc77;
+    --text:     #c8d8e8;
+    --muted:    #2a5a8a;
+    --mono:     'Share Tech Mono', monospace;
+    --sans:     'Rajdhani', sans-serif;
+  }
 
-/* SIDEBAR */
-.sidebar{
-width:220px;
-background:#0f172a;
-padding:20px;
-}
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    min-height: 100vh;
+  }
 
-.sidebar h2{
-margin-bottom:20px;
-}
+  /* ── LAYOUT ─────────────────── */
+  .dashboard { display: flex; min-height: 100vh; }
 
-.sidebar a{
-display:block;
-margin:10px 0;
-color:white;
-text-decoration:none;
-opacity:0.8;
-}
+  /* ── SIDEBAR ────────────────── */
+  .sidebar {
+    width: 200px;
+    min-width: 200px;
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    padding: 24px 0;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+  }
 
-.sidebar a:hover{
-color:#3b82f6;
-}
+  .brand {
+    padding: 0 20px 24px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
 
-/* MAIN */
-.main{
-flex:1;
-padding:30px;
-}
+  .brand-hex {
+    width: 30px; height: 30px;
+    background: var(--accent);
+    clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+    margin-bottom: 10px;
+  }
 
-/* GRID */
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-}
+  .brand-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #e8f4ff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
 
-/* CARD */
-.card{
-background:#111827;
-padding:20px;
-border-radius:10px;
-}
+  .brand-ver {
+    font-size: 10px;
+    color: var(--accent);
+    font-family: var(--mono);
+    letter-spacing: 2px;
+  }
 
-/* METRIC */
-.metric{
-font-size:28px;
-color:#3b82f6;
-}
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-left: 2px solid transparent;
+    transition: all 0.2s;
+  }
 
-/* GAUGE */
-.gauge{
-width:150px;
-height:150px;
-margin:auto;
-border-radius:50%;
-background:conic-gradient(#3b82f6 0% 92%, #111827 92%);
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:24px;
-}
+  .nav-link:hover { color: #88b8d8; background: #0a1520; }
+  .nav-link.active { color: var(--accent); border-left-color: var(--accent); background: #071525; }
 
-/* ACTIVITY */
-.activity{
-margin-top:30px;
-}
+  .nav-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.7;
+  }
 
+  /* ── MAIN ───────────────────── */
+  .main { flex: 1; padding: 28px 32px; overflow-y: auto; }
+
+  /* ── TOPBAR ─────────────────── */
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+  }
+
+  .page-sub {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--muted);
+    font-family: var(--mono);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .page-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #e8f4ff;
+    letter-spacing: 1px;
+  }
+
+  .live-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 11px;
+    font-family: var(--mono);
+    color: #4a8a6a;
+    letter-spacing: 1px;
+  }
+
+  .pulse-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(0,204,119,0.5); }
+    50%      { box-shadow: 0 0 0 5px rgba(0,204,119,0); }
+  }
+
+  /* ── STAT GRID ──────────────── */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .stat-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 20%; right: 20%;
+    height: 1px;
+  }
+
+  .stat-card.c-blue::before  { background: var(--accent); }
+  .stat-card.c-red::before   { background: var(--red); }
+  .stat-card.c-orange::before{ background: var(--orange); }
+  .stat-card.c-green::before { background: var(--green); }
+
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-family: var(--mono);
+    margin-bottom: 14px;
+  }
+
+  /* Score ring */
+  .score-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .ring-container {
+    position: relative;
+    width: 72px; height: 72px;
+  }
+
+  .ring-container svg { transform: rotate(-90deg); }
+
+  .ring-num {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--accent);
+    font-family: var(--mono);
+  }
+
+  .score-info-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #c8d8e8;
+    letter-spacing: 1px;
+  }
+
+  .score-info-sub {
+    font-size: 10px;
+    color: #4a8a6a;
+    font-family: var(--mono);
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+
+  /* Numeric metrics */
+  .big-num {
+    font-size: 42px;
+    font-weight: 700;
+    font-family: var(--mono);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .big-num.red    { color: var(--red); }
+  .big-num.orange { color: var(--orange); }
+  .big-num.green  { color: var(--green); }
+
+  .stat-delta {
+    font-size: 11px;
+    font-family: var(--mono);
+    color: var(--muted);
+  }
+
+  .stat-delta.up   { color: var(--red); }
+  .stat-delta.down { color: var(--green); }
+
+  /* ── BOTTOM ROW ─────────────── */
+  .bottom-row {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .panel {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+  }
+
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .panel-title {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-family: var(--mono);
+  }
+
+  .panel-badge {
+    font-size: 10px;
+    font-family: var(--mono);
+    color: var(--accent);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 2px 8px;
+    border-radius: 3px;
+    letter-spacing: 1px;
+  }
+
+  /* ── CHART ──────────────────── */
+  .chart-wrap { height: 180px; position: relative; }
+
+  /* ── THREAT LIST ────────────── */
+  .threat-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .threat-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    background: #071020;
+    border: 1px solid #0d1e30;
+    border-radius: 6px;
+    border-left: 3px solid;
+  }
+
+  .threat-item.critical { border-left-color: #ff2244; }
+  .threat-item.high     { border-left-color: #ff6b00; }
+  .threat-item.medium   { border-left-color: #ffd700; }
+  .threat-item.low      { border-left-color: #00cc77; }
+
+  .threat-icon {
+    width: 28px; height: 28px;
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+
+  .threat-icon.critical { background:#1a0010; color:#ff2244; }
+  .threat-icon.high     { background:#1a0a00; color:#ff6b00; }
+  .threat-icon.medium   { background:#1a1400; color:#ffd700; }
+  .threat-icon.low      { background:#001a0d; color:#00cc77; }
+
+  .threat-info { flex: 1; min-width: 0; }
+
+  .threat-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #c8d8e8;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .threat-meta {
+    font-size: 10px;
+    font-family: var(--mono);
+    color: var(--muted);
+    margin-top: 2px;
+    letter-spacing: 1px;
+  }
+
+  .sev-badge {
+    font-size: 10px;
+    font-family: var(--mono);
+    padding: 3px 8px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+  }
+
+  .sev-badge.critical { background:#1a0010; color:#ff2244; border:1px solid #440020; }
+  .sev-badge.high     { background:#1a0a00; color:#ff6b00; border:1px solid #442000; }
+  .sev-badge.medium   { background:#1a1400; color:#ffd700; border:1px solid #443300; }
+  .sev-badge.low      { background:#001a0d; color:#00cc77; border:1px solid #003322; }
+
+  /* ── ACTIVITY LOG ───────────── */
+  .activity-panel { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+
+  #activityLog {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 160px;
+    overflow-y: auto;
+  }
+
+  #activityLog li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    font-family: var(--mono);
+    color: #4a7a9a;
+    padding: 8px 10px;
+    background: var(--bg3);
+    border-radius: 4px;
+    border-left: 2px solid var(--muted);
+    letter-spacing: 0.5px;
+  }
+
+  #activityLog li::before {
+    content: '>';
+    color: var(--accent);
+    font-size: 11px;
+  }
+
+  @media (max-width: 1100px) {
+    .stat-grid { grid-template-columns: 1fr 1fr; }
+    .bottom-row { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 700px) {
+    .sidebar { display: none; }
+    .stat-grid { grid-template-columns: 1fr; }
+    .main { padding: 16px; }
+  }
 </style>
-
 </head>
-
 <body>
-
 <div class="dashboard">
 
-<!-- SIDEBAR -->
-<div class="sidebar">
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="brand">
+      <div class="brand-hex"></div>
+      <div class="brand-name">Cyber-Node</div>
+      <div class="brand-ver">v2.4.1</div>
+    </div>
+    <a href="#" class="nav-link active"><span class="nav-dot"></span>Dashboard</a>
+    <a href="tools/security-scan.html" class="nav-link"><span class="nav-dot"></span>Scanner</a>
+    <a href="tools/attack-surface.html" class="nav-link"><span class="nav-dot"></span>Attack Surface</a>
+    <a href="#" class="nav-link"><span class="nav-dot"></span>Threat Intel</a>
+    <a href="#" class="nav-link"><span class="nav-dot"></span>Reports</a>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div>
+        <div class="page-sub">// security operations center</div>
+        <div class="page-title">SOC Dashboard</div>
+      </div>
+      <div class="live-pill">
+        <div class="pulse-dot"></div>
+        LIVE MONITORING
+      </div>
+    </div>
+
+    <!-- STAT CARDS -->
+    <div class="stat-grid">
+
+      <div class="stat-card c-blue">
+        <div class="stat-label">Security Score</div>
+        <div class="score-wrap">
+          <div class="ring-container">
+            <svg width="72" height="72" viewBox="0 0 72 72">
+              <circle cx="36" cy="36" r="29" fill="none" stroke="#0d2035" stroke-width="6"/>
+              <circle id="ringArc" cx="36" cy="36" r="29" fill="none" stroke="#00d4ff" stroke-width="6"
+                stroke-dasharray="182.2" stroke-dashoffset="32" stroke-linecap="round"/>
+            </svg>
+            <div class="ring-num" id="scoreNum">92%</div>
+          </div>
+          <div>
+            <div class="score-info-label" id="scoreLabel">GOOD</div>
+            <div class="score-info-sub" id="scoreSub">+2 from last scan</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stat-card c-red">
+        <div class="stat-label">Threat Alerts</div>
+        <div class="big-num red" id="alerts">24</div>
+        <div class="stat-delta up" id="alertsDelta">▲ 3 since yesterday</div>
+      </div>
+
+      <div class="stat-card c-orange">
+        <div class="stat-label">Vulnerabilities</div>
+        <div class="big-num orange" id="vulns">8</div>
+        <div class="stat-delta down" id="vulnsDelta">▼ 2 patched today</div>
+      </div>
+
+      <div class="stat-card c-green">
+        <div class="stat-label">Assets Monitored</div>
+        <div class="big-num green" id="assets">12</div>
+        <div class="stat-delta" id="assetsDelta" style="color:var(--muted)">all systems nominal</div>
+      </div>
+
+    </div>
+
+    <!-- CHART + THREATS -->
+    <div class="bottom-row">
+
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">// vulnerability trends</div>
+          <div class="panel-badge">30D</div>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="vulnChart"></canvas>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">// active threats</div>
+          <div class="panel-badge">LIVE</div>
+        </div>
+        <div class="threat-list">
+          <div class="threat-item critical">
+            <div class="threat-icon critical">⚡</div>
+            <div class="threat-info">
+              <div class="threat-name">SQL Injection</div>
+              <div class="threat-meta">api.endpoint — 2m ago</div>
+            </div>
+            <div class="sev-badge critical">Critical</div>
+          </div>
+          <div class="threat-item high">
+            <div class="threat-icon high">&#128275;</div>
+            <div class="threat-info">
+              <div class="threat-name">Auth Bypass</div>
+              <div class="threat-meta">admin.portal — 11m ago</div>
+            </div>
+            <div class="sev-badge high">High</div>
+          </div>
+          <div class="threat-item medium">
+            <div class="threat-icon medium">&#9888;</div>
+            <div class="threat-info">
+              <div class="threat-name">XSS Detected</div>
+              <div class="threat-meta">search.form — 34m ago</div>
+            </div>
+            <div class="sev-badge medium">Medium</div>
+          </div>
+          <div class="threat-item low">
+            <div class="threat-icon low">&#10003;</div>
+            <div class="threat-info">
+              <div class="threat-name">Port Scan</div>
+              <div class="threat-meta">192.168.1.44 — 1h ago</div>
+            </div>
+            <div class="sev-badge low">Low</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ACTIVITY LOG -->
+    <div class="activity-panel">
+      <div class="panel-header">
+        <div class="panel-title">// recent activity</div>
+        <div class="panel-badge" id="activityCount">3 events</div>
+      </div>
+      <ul id="activityLog">
+        <li>Scan completed — example.com</li>
+        <li>New vulnerability detected — CVE-2024-1234</li>
+        <li>Security report generated</li>
+      </ul>
+    </div>
+
+  </div><!-- /main -->
+</div><!-- /dashboard -->
 
-<h2>Cyber-Node</h2>
-
-<a href="#">Dashboard</a>
-<a href="tools/security-scan.html">Scanner</a>
-<a href="tools/attack-surface.html">Attack Surface</a>
-<a href="#">Threat Intel</a>
-<a href="#">Reports</a>
-
-</div>
-
-
-<!-- MAIN -->
-<div class="main">
-
-<h2>Security Operations Center</h2>
-
-<br>
-
-<!-- TOP METRICS -->
-<div class="grid">
-
-<div class="card">
-
-<h3>Security Score</h3>
-
-<div class="gauge" id="gauge">92%</div>
-
-</div>
-
-<div class="card">
-
-<h3>Threat Alerts</h3>
-<div class="metric" id="alerts">24</div>
-
-</div>
-
-<div class="card">
-
-<h3>Vulnerabilities</h3>
-<div class="metric" id="vulns">8</div>
-
-</div>
-
-<div class="card">
-
-<h3>Assets Monitored</h3>
-<div class="metric" id="assets">12</div>
-
-</div>
-
-</div>
-
-
-<br><br>
-
-<!-- CHART -->
-<div class="card">
-
-<h3>Vulnerability Trends</h3>
-
-<canvas id="vulnChart"></canvas>
-
-</div>
-
-
-<!-- ACTIVITY -->
-<div class="activity">
-
-<h3>Recent Activity</h3>
-
-<ul id="activityLog">
-
-<li>Scan completed for example.com</li>
-<li>New vulnerability detected</li>
-<li>Security report generated</li>
-
-</ul>
-
-</div>
-
-</div>
-
-</div>
-
-
-<script>
-
-/* CHART */
-const ctx = document.getElementById('vulnChart');
-
-new Chart(ctx,{
-type:'line',
-data:{
-labels:['Mon','Tue','Wed','Thu','Fri'],
-datasets:[{
-label:'Vulnerabilities',
-data:[12,9,14,8,6]
-}]
-}
-});
-
-
-/* LIVE METRICS */
-function updateDashboard(){
-
-let score = Math.floor(Math.random()*20)+80;
-
-document.getElementById("alerts").innerText =
-Math.floor(Math.random()*30)+10;
-
-document.getElementById("vulns").innerText =
-Math.floor(Math.random()*15)+5;
-
-document.getElementById("assets").innerText =
-Math.floor(Math.random()*20)+5;
-
-document.getElementById("gauge").innerText = score + "%";
-
-document.getElementById("gauge").style.background =
-`conic-gradient(#3b82f6 0% ${score}%, #111827 ${score}%)`;
-
-}
-
-setInterval(updateDashboard,4000);
-
-</script>
-
-</body>
-
-</html>
-<script>
-
-async function runScan(){
-
-const domain = document.getElementById("scanDomain").value;
-
-if(!domain){
-alert("Enter a domain");
-return;
-}
-
-let resultBox = document.getElementById("scanResult");
-
-resultBox.innerHTML = "Scanning...";
-
-/* REAL DNS CHECK */
-try{
-
-let res = await fetch(`https://dns.google/resolve?name=${domain}&type=A`);
-let data = await res.json();
-
-let score = Math.floor(Math.random()*30)+70;
-
-if(data.Answer){
-
-resultBox.innerHTML = `
-<b>Domain:</b> ${domain}<br>
-<b>IP:</b> ${data.Answer[0].data}<br>
-<b>Security Score:</b> ${score}/100
-`;
-
-}else{
-
-resultBox.innerHTML = "No DNS records found.";
-
-}
-
-}catch{
-
-resultBox.innerHTML = "Scan failed.";
-
-}
-
-}
-
-</script>
 <div id="footer"></div>
 
 <script>
-fetch("/components/footer.html")
-.then(res => res.text())
-.then(data => {
-document.getElementById("footer").innerHTML = data;
+/* ── CHART ──────────────────────────────────────── */
+const ctx = document.getElementById('vulnChart').getContext('2d');
+const vulnChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ['W1','W2','W3','W4','W5','W6','W7'],
+    datasets: [
+      {
+        label: 'Vulnerabilities',
+        data: [12, 9, 14, 8, 11, 7, 6],
+        borderColor: '#00d4ff',
+        backgroundColor: 'rgba(0,212,255,0.08)',
+        tension: 0.4,
+        fill: true,
+        pointBackgroundColor: '#00d4ff',
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        borderWidth: 2
+      },
+      {
+        label: 'Threats',
+        data: [18, 15, 20, 14, 16, 13, 11],
+        borderColor: '#ff6b35',
+        backgroundColor: 'rgba(255,107,53,0.06)',
+        tension: 0.4,
+        fill: true,
+        pointBackgroundColor: '#ff6b35',
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        borderWidth: 2,
+        borderDash: [5, 3]
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        labels: {
+          color: '#2a5a8a',
+          font: { family: "'Share Tech Mono', monospace", size: 11 },
+          boxWidth: 14
+        }
+      }
+    },
+    scales: {
+      x: {
+        ticks: { color: '#2a5a8a', font: { family: "'Share Tech Mono', monospace", size: 10 } },
+        grid: { color: '#0d2236' }
+      },
+      y: {
+        ticks: { color: '#2a5a8a', font: { family: "'Share Tech Mono', monospace", size: 10 } },
+        grid: { color: '#0d2236' }
+      }
+    }
+  }
 });
+
+/* ── LIVE METRICS ───────────────────────────────── */
+const circumference = 2 * Math.PI * 29; // r=29
+
+function updateScore(score) {
+  const offset = circumference - (score / 100) * circumference;
+  document.getElementById('ringArc').style.strokeDashoffset = offset;
+  document.getElementById('scoreNum').textContent = score + '%';
+  const label = score >= 90 ? 'EXCELLENT' : score >= 75 ? 'GOOD' : 'FAIR';
+  document.getElementById('scoreLabel').textContent = label;
+}
+
+function addActivity(msg) {
+  const log = document.getElementById('activityLog');
+  const li = document.createElement('li');
+  li.textContent = msg;
+  log.prepend(li);
+  while (log.children.length > 8) log.removeChild(log.lastChild);
+  document.getElementById('activityCount').textContent = log.children.length + ' events';
+}
+
+const eventPool = [
+  'Port scan detected — 203.0.113.7',
+  'SSL certificate expiring — api.cyber-node.io',
+  'Brute force attempt blocked',
+  'New asset added — 192.168.1.50',
+  'CVE-2024-8821 flagged',
+  'Firewall rule updated',
+  'Scan completed — target.com',
+  'DNS anomaly detected',
+];
+
+function updateDashboard() {
+  const score = Math.floor(Math.random() * 15) + 82;
+  const alerts = Math.floor(Math.random() * 20) + 10;
+  const vulns  = Math.floor(Math.random() * 10) + 5;
+  const assets = Math.floor(Math.random() * 10) + 8;
+
+  updateScore(score);
+  document.getElementById('alerts').textContent = alerts;
+  document.getElementById('vulns').textContent  = vulns;
+  document.getElementById('assets').textContent = assets;
+
+  const event = eventPool[Math.floor(Math.random() * eventPool.length)];
+  addActivity(event);
+
+  // push new data point to chart
+  const now = new Date();
+  const label = `${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}`;
+  vulnChart.data.labels.push(label);
+  vulnChart.data.datasets[0].data.push(vulns);
+  vulnChart.data.datasets[1].data.push(alerts);
+  if (vulnChart.data.labels.length > 12) {
+    vulnChart.data.labels.shift();
+    vulnChart.data.datasets.forEach(d => d.data.shift());
+  }
+  vulnChart.update('none');
+}
+
+updateScore(92); // init ring
+setInterval(updateDashboard, 4000);
+
+/* ── FOOTER ─────────────────────────────────────── */
+fetch('/components/footer.html')
+  .then(r => r.ok ? r.text() : '')
+  .then(html => { if(html) document.getElementById('footer').innerHTML = html; })
+  .catch(() => {});
+
+/* ── DNS SCANNER (kept from original) ──────────── */
+async function runScan() {
+  const domain = document.getElementById('scanDomain')?.value;
+  if (!domain) { alert('Enter a domain'); return; }
+  const resultBox = document.getElementById('scanResult');
+  resultBox.innerHTML = 'Scanning...';
+  try {
+    const res  = await fetch(`https://dns.google/resolve?name=${domain}&type=A`);
+    const data = await res.json();
+    const score = Math.floor(Math.random() * 30) + 70;
+    resultBox.innerHTML = data.Answer
+      ? `<b>Domain:</b> ${domain}<br><b>IP:</b> ${data.Answer[0].data}<br><b>Security Score:</b> ${score}/100`
+      : 'No DNS records found.';
+    addActivity(`Scan completed — ${domain}`);
+  } catch { resultBox.innerHTML = 'Scan failed.'; }
+}
 </script>
+</body>
+</html>
