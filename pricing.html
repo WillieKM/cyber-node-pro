@@ -1,331 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Pricing | Cyber-Node</title>
-
-<link rel="stylesheet" href="css/style.css">
-
+<title>Pricing | Cyber-Node Security Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --bg: #0e1f38;
+    --bg2: #142840;
+    --border: #2e5070;
+    --accent: #00d4ff;
+    --neon-lime: #bfff00; /* High-impact price color */
+    --text: #e8f4ff;
+    --muted: #90bcd8;
+    --mono: 'Share Tech Mono', monospace;
+    --sans: 'Rajdhani', sans-serif;
+  }
 
-/* HERO UPGRADE */
-.hero{
-text-align:center;
-padding:80px 20px 60px;
-background:linear-gradient(135deg,#1e3a8a,#020617);
-}
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    margin: 0;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
 
-.hero h1{
-font-size:38px;
-margin-bottom:15px;
-}
+  /* --- HERO SECTION WITH CYBER GRID --- */
+  .hero-wrap {
+    position: relative;
+    padding: 160px 20px 80px;
+    text-align: center;
+    background: linear-gradient(180deg, #1a3252 0%, #0e1f38 100%);
+    border-bottom: 1px solid var(--border);
+  }
 
-.hero p{
-max-width:700px;
-margin:auto;
-opacity:0.85;
-margin-bottom:25px;
-}
+  .grid-lines {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(0,212,255,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.05) 1px, transparent 1px);
+    background-size: 45px 45px;
+    mask-image: radial-gradient(circle, black, transparent 85%);
+  }
 
-/* TRUST BADGES */
-.hero-badges{
-display:flex;
-justify-content:center;
-gap:15px;
-flex-wrap:wrap;
-margin-bottom:25px;
-font-size:14px;
-}
+  .hero-content { position: relative; z-index: 2; }
+  .hero-content h1 { font-size: 48px; letter-spacing: -1px; margin-bottom: 15px; }
+  .hero-content h1 span { color: var(--accent); }
+  
+  .hero-badges {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--muted);
+  }
 
-.hero-badges span{
-background:rgba(255,255,255,0.05);
-padding:8px 14px;
-border-radius:20px;
-}
+  .hero-badges span {
+    border: 1px solid var(--border);
+    padding: 5px 15px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.02);
+  }
 
-/* CTA BUTTONS */
-.hero-cta{
-display:flex;
-justify-content:center;
-gap:15px;
-flex-wrap:wrap;
-}
+  /* --- PRICING CARDS --- */
+  .pricing-section {
+    max-width: 1200px;
+    margin: -40px auto 100px;
+    padding: 0 20px;
+    position: relative;
+    z-index: 10;
+  }
 
-.btn-secondary{
-padding:12px 20px;
-border:1px solid #3b82f6;
-border-radius:6px;
-color:#3b82f6;
-text-decoration:none;
-}
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+  }
 
-.btn-secondary:hover{
-background:#3b82f6;
-color:white;
-}
+  .pricing-card {
+    background: #0a1628;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 45px 35px;
+    transition: 0.3s ease;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+  }
 
-/* PRICING GRID FIX */
-.pricing-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:30px;
-margin-top:40px;
-}
+  .pricing-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0, 212, 255, 0.15);
+  }
 
-/* CARD IMPROVEMENT */
-.pricing-card{
-background:#111827;
-padding:30px;
-border-radius:12px;
-text-align:center;
-box-shadow:0 10px 30px rgba(0,0,0,0.3);
-transition:0.3s;
-}
+  /* Highlight Card Styling */
+  .pricing-card.highlight {
+    border: 1px solid var(--accent);
+    background: #0d1e35;
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.1);
+  }
 
-.pricing-card:hover{
-transform:translateY(-5px);
-}
+  .popular-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    display: block;
+  }
 
-/* HIGHLIGHT CARD */
-.pricing-card.highlight{
-border:1px solid #3b82f6;
-box-shadow:0 0 25px rgba(59,130,246,0.3);
-}
+  /* --- NEON LIME PRICING --- */
+  .price-tag {
+    font-family: var(--mono);
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--neon-lime);
+    margin-bottom: 10px;
+    text-shadow: 0 0 12px rgba(191, 255, 0, 0.4);
+  }
 
-/* POPULAR BADGE */
-.popular-badge{
-display:inline-block;
-margin-bottom:10px;
-background:#3b82f6;
-padding:5px 12px;
-border-radius:20px;
-font-size:12px;
-}
+  .pricing-card h3 { font-size: 24px; margin-bottom: 5px; color: #fff; }
+  .pricing-card p { font-size: 14px; color: var(--muted); margin-bottom: 30px; min-height: 44px; }
 
-/* CTA SECTION */
-.section-alt{
-text-align:center;
-padding:80px 20px;
-background:#0f172a;
-}
+  .features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 40px 0;
+    flex-grow: 1;
+  }
 
+  .features-list li {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--muted);
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(46, 80, 112, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .features-list li::before { content: '✓'; color: var(--accent); font-weight: bold; }
+
+  /* --- BUTTONS --- */
+  .cn-btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    font-family: var(--mono);
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 13px;
+    border-radius: 4px;
+    text-align: center;
+    transition: 0.3s;
+  }
+
+  .btn-primary { background: var(--accent); color: var(--bg); }
+  .btn-outline { border: 1px solid var(--accent); color: var(--accent); }
+  .cn-btn:hover { box-shadow: 0 0 20px rgba(0,212,255,0.4); }
+
+  @media (max-width: 800px) {
+    .hero-content h1 { font-size: 34px; }
+  }
 </style>
-
 </head>
-
 <body>
 
-<header class="navbar">
+<div id="navbar"></div>
 
-<div class="nav-container">
+<section class="hero-wrap">
+  <div class="grid-lines"></div>
+  <div class="hero-content">
+    <div style="font-family: var(--mono); color: var(--accent); letter-spacing: 5px; margin-bottom: 10px;">[ PRICING_PROTOCOLS ]</div>
+    <h1>Solutions Built to <span>Protect</span></h1>
+    <p>Flexible cybersecurity intelligence plans for startups, SMBs, and enterprise infrastructure.</p>
+    
+    <div class="hero-badges">
+      <span>✔ Risk Assessments</span>
+      <span>✔ HIPAA / NIST Ready</span>
+      <span>✔ Real-Time Insights</span>
+    </div>
 
-<div class="logo">Cyber-Node</div>
-
-<nav class="nav-links">
-<a href="index.html">Home</a>
-<a href="services.html">Services</a>
-<a href="pricing.html">Pricing</a>
-<a href="case-studies.html">Case Studies</a>
-<a href="resources.html">Resources</a>
-<a href="dashboard.html">Dashboard</a>
-<a href="about.html">About</a>
-</nav>
-
-<a href="contact.html" class="nav-cta">Contact</a>
-
-</div>
-
-</header>
-
-
-<!-- 🔥 IMPROVED HERO -->
-<section class="hero">
-
-<div class="container">
-
-<h1>Cybersecurity Solutions Built to Protect Your Business</h1>
-
-<p>
-Identify vulnerabilities, achieve compliance, and prevent cyber threats with Cyber-Node’s security platform.
-</p>
-
-<div class="hero-badges">
-<span>✔ Risk Assessments</span>
-<span>✔ HIPAA / NIST Ready</span>
-<span>✔ Real-Time Security Insights</span>
-</div>
-
-<div class="hero-cta">
-
-<a href="contact.html" class="btn-primary">
-Schedule Consultation
-</a>
-
-<a href="tools/security-scan.html" class="btn-secondary">
-Run Free Scan
-</a>
-
-</div>
-
-</div>
-
+    <div style="display: flex; justify-content: center; gap: 20px;">
+      <a href="contact.html" class="cn-btn btn-primary" style="width:auto; padding: 15px 40px;">Request Consultation</a>
+    </div>
+  </div>
 </section>
 
+<div class="pricing-section">
+  <div class="pricing-grid">
+    
+    <div class="pricing-card">
+      <div class="price-tag">$1,500</div>
+      <h3>Starter</h3>
+      <p>Initial security evaluation for emerging small businesses.</p>
+      <ul class="features-list">
+        <li>Security Risk Assessment</li>
+        <li>Infrastructure Vuln Scan</li>
+        <li>Compliance Readiness Review</li>
+        <li>Basic Remediation Report</li>
+      </ul>
+      <a href="contact.html" class="cn-btn btn-outline">Get Started</a>
+    </div>
 
+    <div class="pricing-card highlight">
+      <span class="popular-tag">// Most Popular</span>
+      <div class="price-tag">$4,500</div>
+      <h3>Professional</h3>
+      <p>Comprehensive security assessment for growing organizations.</p>
+      <ul class="features-list">
+        <li>Full Infrastructure Assessment</li>
+        <li>Web App Vulnerability Testing</li>
+        <li>NIST / HIPAA Framework Review</li>
+        <li>Detailed Remediation Roadmap</li>
+        <li>Executive Security Report</li>
+      </ul>
+      <a href="contact.html" class="cn-btn btn-primary">Initialize Assessment</a>
+    </div>
 
-<!-- PRICING -->
-<section class="pricing section">
+    <div class="pricing-card">
+      <div class="price-tag">CUSTOM</div>
+      <h3>Enterprise</h3>
+      <p>Advanced cybersecurity consulting and automated defense.</p>
+      <ul class="features-list">
+        <li>Full Penetration Testing</li>
+        <li>Compliance Automation Systems</li>
+        <li>Live Security Dashboards</li>
+        <li>24/7 Infrastructure Monitoring</li>
+        <li>Priority Security Consulting</li>
+      </ul>
+      <a href="contact.html" class="cn-btn btn-outline">Contact Sales</a>
+    </div>
 
-<div class="container">
-
-<div class="pricing-grid">
-
-
-<div class="pricing-card">
-
-<h3>Starter</h3>
-
-<h2>$1,500</h2>
-
-<p>Security evaluation for small businesses.</p>
-
-<ul>
-<li>✔ Security risk assessment</li>
-<li>✔ Infrastructure vulnerability scan</li>
-<li>✔ Compliance readiness review</li>
-<li>✔ Security recommendations report</li>
-</ul>
-
-<a href="contact.html" class="btn-primary">
-Get Started
-</a>
-
+  </div>
 </div>
 
+<div id="footer"></div>
 
+<script>
+  // Load Navbar component
+  fetch("components/navbar.html")
+    .then(r => r.ok ? r.text() : '')
+    .then(html => { if(html) document.getElementById("navbar").innerHTML = html; })
+    .catch(e => console.error("Nav Error:", e));
 
-<div class="pricing-card highlight">
-
-<span class="popular-badge">Most Popular</span>
-
-<h3>Professional</h3>
-
-<h2>$4,500</h2>
-
-<p>Comprehensive cybersecurity assessment.</p>
-
-<ul>
-<li>✔ Full infrastructure security assessment</li>
-<li>✔ Web application vulnerability testing</li>
-<li>✔ NIST / HIPAA readiness review</li>
-<li>✔ Detailed remediation roadmap</li>
-<li>✔ Executive security report</li>
-</ul>
-
-<a href="contact.html" class="btn-primary">
-Start Assessment
-</a>
-
-</div>
-
-
-
-<div class="pricing-card">
-
-<h3>Enterprise</h3>
-
-<h2>Custom</h2>
-
-<p>Advanced cybersecurity consulting and automation.</p>
-
-<ul>
-<li>✔ Full penetration testing</li>
-<li>✔ Compliance automation systems</li>
-<li>✔ Security monitoring dashboards</li>
-<li>✔ Infrastructure monitoring</li>
-<li>✔ Ongoing security consulting</li>
-</ul>
-
-<a href="contact.html" class="btn-primary">
-Contact Sales
-</a>
-
-</div>
-
-
-</div>
-
-</div>
-
-</section>
-
-
-
-<!-- CTA -->
-<section class="cta section-alt">
-
-<div class="container">
-
-<h2>Start Strengthening Your Security</h2>
-
-<p>Run a free scan or schedule a consultation today.</p>
-
-<a href="tools/security-scan.html" class="btn-primary">
-Run Free Security Scan
-</a>
-
-</div>
-
-</section>
-
-
-
-<!-- FOOTER -->
-<footer class="footer">
-
-<div class="container footer-grid">
-
-<div>
-<h3>Cyber-Node</h3>
-<p>Cybersecurity intelligence platform providing security assessments,
-automation systems, and monitoring tools.</p>
-</div>
-
-<div>
-<h4>Platform</h4>
-<ul>
-<li><a href="tools/security-scan.html">Security Scan</a></li>
-<li><a href="dashboard.html">Security Dashboard</a></li>
-</ul>
-</div>
-
-<div>
-<h4>Services</h4>
-<ul>
-<li><a href="services.html">Cybersecurity Services</a></li>
-<li><a href="pricing.html">Pricing</a></li>
-</ul>
-</div>
-
-<div>
-<h4>Contact</h4>
-<ul>
-<li>Email: security@cyber-node.com</li>
-<li>Consultation</li>
-</ul>
-</div>
-
-</div>
-
-<div class="footer-bottom">
-<p>Cyber-Node © 2026</p>
-</div>
-
-</footer>
+  // Load Footer component
+  fetch("components/footer.html")
+    .then(r => r.ok ? r.text() : '')
+    .then(html => { if(html) document.getElementById("footer").innerHTML = html; })
+    .catch(e => console.error("Footer Error:", e));
+</script>
 
 </body>
 </html>
