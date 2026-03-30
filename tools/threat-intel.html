@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Threat Intel | Cyber-Node v2.4.1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #070d19;
+            --sidebar-bg: #0a1628;
+            --card-bg: rgba(20, 40, 64, 0.4);
+            --accent: #00d4ff;
+            --red: #ff4466;
+            --orange: #ffaa22;
+            --text: #e8f4ff;
+            --muted: #90bcd8;
+            --border: #2e5070;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            background: var(--bg-dark); 
+            color: var(--text); 
+            font-family: 'Rajdhani', sans-serif; 
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* --- SIDEBAR (Matches image_a6677e.png) --- */
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border);
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand { margin-bottom: 40px; }
+        .brand h2 { font-size: 20px; letter-spacing: 2px; }
+        .brand span { color: var(--accent); }
+        .version { font-family: 'Share Tech Mono', monospace; font-size: 12px; color: var(--accent); opacity: 0.7; }
+
+        .nav-links { list-style: none; margin-top: 20px; }
+        .nav-links li { margin-bottom: 15px; }
+        .nav-links a { 
+            text-decoration: none; 
+            color: var(--muted); 
+            font-family: 'Share Tech Mono', monospace; 
+            font-size: 14px;
+            text-transform: uppercase;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+        .nav-links a.active::before { content: '●'; font-size: 8px; }
+
+        /* --- MAIN CONTENT --- */
+        .main-content { flex: 1; padding: 40px; overflow-y: auto; }
+        .header-area { margin-bottom: 30px; }
+        .header-eyebrow { font-family: 'Share Tech Mono', monospace; color: var(--accent); font-size: 12px; }
+        
+        .intel-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+        }
+
+        /* --- INTEL CARDS --- */
+        .intel-module {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 25px;
+        }
+
+        .alert-item {
+            background: rgba(10, 22, 40, 0.6);
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .alert-item.critical { border-left-color: var(--red); box-shadow: inset 5px 0 15px rgba(255, 68, 102, 0.1); }
+        .alert-item.warning { border-left-color: var(--orange); }
+
+        .alert-content h4 { font-size: 18px; margin-bottom: 5px; }
+        .alert-content p { font-size: 14px; color: var(--muted); font-family: 'Share Tech Mono', monospace; }
+
+        .alert-meta { text-align: right; font-family: 'Share Tech Mono', monospace; }
+        .severity { font-size: 10px; padding: 2px 6px; border-radius: 3px; background: rgba(255,255,255,0.1); display: block; margin-bottom: 5px; }
+
+        /* --- THREAT MAP PLACEHOLDER --- */
+        .map-container {
+            height: 300px;
+            background: url('https://cyber-node.com/assets/grid-bg.png'); /* Replace with your grid asset */
+            background-color: #050b14;
+            border: 1px solid var(--border);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .map-overlay { font-family: 'Share Tech Mono', monospace; font-size: 12px; color: var(--accent); text-align: center; }
+
+        .btn-action {
+            background: var(--accent);
+            color: var(--sidebar-bg);
+            border: none;
+            padding: 5px 12px;
+            font-family: 'Share Tech Mono', monospace;
+            font-weight: 700;
+            font-size: 11px;
+            cursor: pointer;
+            border-radius: 3px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="brand">
+            <h2>CYBER<span>-NODE</span></h2>
+            <div class="version">v2.4.1</div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="scanner.html">Scanner</a></li>
+            <li><a href="attack-surface.html">Attack Surface</a></li>
+            <li><a href="#" class="active">Threat Intel</a></li>
+            <li><a href="reports.html">Reports</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <div class="header-area">
+            <span class="header-eyebrow">// SECURITY_OPERATIONS_CENTER</span>
+            <h1>Threat Intelligence Feed</h1>
+        </div>
+
+        <div class="intel-grid">
+            <section class="intel-module">
+                <h3 style="margin-bottom: 20px;">// LIVE_MALWARE_STREAM</h3>
+                
+                <div class="alert-item critical">
+                    <div class="alert-content">
+                        <h4>Ransomware: BlackByte v3.0</h4>
+                        <p>New variant detected in wild. Utilizing AES-256 encryption on localized SQL nodes.</p>
+                        <button class="btn-action">VIEW_SIGNATURE</button>
+                    </div>
+                    <div class="alert-meta">
+                        <span class="severity" style="color: var(--red);">CRITICAL</span>
+                        <div style="font-size: 12px;">09:52:02</div>
+                    </div>
+                </div>
+
+                <div class="alert-item warning">
+                    <div class="alert-content">
+                        <h4>SSH Brute Force: 192.168.1.105</h4>
+                        <p>Multiple failed authentication attempts detected from unauthorized IP range.</p>
+                        <button class="btn-action">BLOCK_IP</button>
+                    </div>
+                    <div class="alert-meta">
+                        <span class="severity" style="color: var(--orange);">WARNING</span>
+                        <div style="font-size: 12px;">09:45:11</div>
+                    </div>
+                </div>
+
+                <div class="alert-item">
+                    <div class="alert-content">
+                        <h4>Patch Available: CVE-2026-001</h4>
+                        <p>Official security advisory released for Linux Kernel 6.12. Update recommended.</p>
+                    </div>
+                    <div class="alert-meta">
+                        <span class="severity">INFO</span>
+                        <div style="font-size: 12px;">08:30:00</div>
+                    </div>
+                </div>
+            </section>
+
+            <div style="display: flex; flex-direction: column; gap: 25px;">
+                <section class="intel-module">
+                    <h3>// THREAT_GEOGRAPHY</h3>
+                    <div class="map-container">
+                        <div class="map-overlay">
+                            [ SCANNING_GLOBAL_NODES... ]<br>
+                            <span style="font-size: 10px; opacity: 0.5;">RECON_IN_PROGRESS</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="intel-module">
+                    <h3>// TOP_ATTACK_VECTORS</h3>
+                    <div style="font-family: 'Share Tech Mono', monospace; font-size: 14px; margin-top: 15px;">
+                        <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                            <span>Credential Stuffing</span><span style="color:var(--accent);">42%</span>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                            <span>Phishing/Social</span><span style="color:var(--accent);">28%</span>
+                        </div>
+                        <div style="display:flex; justify-content:space-between;">
+                            <span>SQL Injection</span><span style="color:var(--accent);">15%</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
