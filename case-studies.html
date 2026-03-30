@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Case Studies | Cyber-Node</title>
+<title>Case Studies | Cyber-Node Archive</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -29,13 +29,14 @@
     color: var(--text);
     font-family: var(--sans);
     line-height: 1.6;
+    overflow-x: hidden;
   }
 
-  /* Shared Hero Style from Scanner */
+  /* --- HERO SECTION --- */
   .hero {
     position: relative;
     text-align: center;
-    padding: 120px 20px 80px;
+    padding: 160px 20px 100px;
     border-bottom: 1px solid var(--border);
     background: linear-gradient(180deg, #1a3252 0%, #0e1f38 100%);
     overflow: hidden;
@@ -62,214 +63,231 @@
 
   .hero-eyebrow {
     font-size: 13px;
-    letter-spacing: 4px;
+    letter-spacing: 5px;
     font-family: var(--mono);
     color: var(--accent);
     text-transform: uppercase;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
 
   .hero h1 {
-    font-size: 56px;
+    font-size: 64px;
     font-weight: 700;
     color: #f0f8ff;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+    line-height: 1;
   }
 
   .hero h1 span { color: var(--accent); }
 
-  /* Case Studies Grid */
-  .case-section {
+  .hero p {
+    font-family: var(--mono);
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* --- CASE STUDIES GRID --- */
+  .case-container {
     max-width: 1200px;
-    margin: -40px auto 80px;
+    margin: -50px auto 100px;
     padding: 0 20px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
     position: relative;
-    z-index: 2;
+    z-index: 10;
   }
 
   .case-card {
     background: var(--bg2);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 32px;
+    padding: 40px;
+    transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   }
 
   .case-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
     border-color: var(--accent);
+    box-shadow: 0 15px 40px rgba(0,212,255,0.1);
   }
 
   .case-industry {
     font-family: var(--mono);
-    font-size: 11px;
+    font-size: 12px;
     color: var(--accent);
     text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 12px;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
   }
 
   .case-industry::before {
     content: '';
-    width: 8px;
-    height: 8px;
+    width: 8px; height: 8px;
     background: var(--accent);
     border-radius: 50%;
-    box-shadow: 0 0 8px var(--accent);
+    box-shadow: 0 0 10px var(--accent);
   }
 
   .case-card h3 {
-    font-size: 24px;
-    margin-bottom: 16px;
+    font-size: 28px;
     color: #f0f8ff;
+    margin-bottom: 15px;
+    font-weight: 700;
   }
 
   .case-card p {
+    font-size: 16px;
     color: var(--muted);
-    font-size: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    min-height: 50px;
   }
 
   .case-list {
     list-style: none;
-    margin-bottom: 24px;
+    margin-bottom: 30px;
     flex-grow: 1;
   }
 
   .case-list li {
     font-family: var(--mono);
-    font-size: 13px;
+    font-size: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(46, 80, 112, 0.3);
     color: var(--text);
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(46, 80, 112, 0.4);
     display: flex;
-    align-items: flex-start;
-    gap: 10px;
+    align-items: center;
+    gap: 12px;
   }
 
   .case-list li::before {
     content: '›';
     color: var(--accent);
     font-weight: bold;
+    font-size: 18px;
   }
 
-  /* Call to Action */
-  .cta-block {
+  /* --- CALL TO ACTION --- */
+  .cta-section {
     text-align: center;
     padding: 100px 20px;
-    border-top: 1px solid var(--border);
     background: radial-gradient(circle at center, rgba(0,212,255,0.05) 0%, transparent 70%);
+    border-top: 1px solid var(--border);
   }
 
   .cn-btn {
     display: inline-block;
-    padding: 16px 40px;
+    padding: 18px 45px;
     background: var(--accent);
     color: #0a1628;
-    border: none;
-    border-radius: 7px;
+    text-decoration: none;
     font-family: var(--mono);
     font-size: 14px;
     font-weight: 700;
     letter-spacing: 2px;
-    text-decoration: none;
     text-transform: uppercase;
+    border-radius: 8px;
     transition: all 0.2s;
     margin-top: 30px;
+    border: none;
+    cursor: pointer;
   }
 
   .cn-btn:hover {
     background: #33ddff;
-    box-shadow: 0 0 20px rgba(0,212,255,0.4);
+    box-shadow: 0 0 25px rgba(0,212,255,0.4);
+    transform: scale(1.02);
   }
 
   @media (max-width: 768px) {
-    .hero h1 { font-size: 38px; }
-    .case-section { margin-top: 40px; }
+    .hero h1 { font-size: 42px; }
+    .case-container { margin-top: 20px; }
   }
 </style>
 </head>
 <body>
 
+<div id="navbar"></div>
+
 <section class="hero">
   <div class="hero-grid-lines"></div>
   <div class="hero-content">
-    <div class="hero-eyebrow">// Archive: Field Operations</div>
+    <div class="hero-eyebrow">// Intelligence Reports</div>
     <h1>Cybersecurity <span>Case Studies</span></h1>
-    <p style="color: var(--muted); font-family: var(--mono); max-width: 600px; margin: 0 auto;">
-      Real-world documentation of threat mitigation and structural hardening.
-    </p>
+    <p>Documented operational success in vulnerability remediation and infrastructure hardening.</p>
   </div>
 </section>
 
-<div class="case-section">
+<main class="case-container">
+  
   <div class="case-card">
     <div class="case-industry">Healthcare</div>
     <h3>Security Assessment</h3>
-    <p>Full-scale vulnerability assessment for a patient-data intensive environment.</p>
+    <p>Comprehensive audit of patient-data infrastructure and endpoint security protocols.</p>
     <ul class="case-list">
-      <li>42 critical vulnerabilities resolved</li>
-      <li>Weak auth policies identified</li>
-      <li>HIPAA compliance hardened</li>
-      <li>Network segmentation deployed</li>
+      <li>42 Vulnerabilities Mitigated</li>
+      <li>HIPAA Compliance Alignment</li>
+      <li>Endpoint Security Hardened</li>
+      <li>Network Segmentation Live</li>
     </ul>
   </div>
 
-  <div class="case-card" style="border-left: 4px solid var(--accent);">
+  <div class="case-card" style="border-top: 4px solid var(--accent);">
     <div class="case-industry">Technology</div>
     <h3>Infrastructure Audit</h3>
-    <p>Scaling a cloud-first infrastructure while minimizing the attack surface.</p>
+    <p>Full-spectrum review of cloud-native infrastructure for a growing SaaS provider.</p>
     <ul class="case-list">
-      <li>Cloud storage access hardened</li>
-      <li>Firewall policy optimization</li>
-      <li>Real-time monitoring enabled</li>
-      <li>Attack surface reduced by 60%</li>
+      <li>60% Attack Surface Reduction</li>
+      <li>Cloud Access Controls Locked</li>
+      <li>Firewall Policy Optimization</li>
+      <li>Continuous Monitoring Enabled</li>
     </ul>
   </div>
 
   <div class="case-card">
-    <div class="case-industry">Government</div>
+    <div class="case-industry">Gov-Contractor</div>
     <h3>Compliance Review</h3>
-    <p>Aligning operations with NIST frameworks for high-stakes contract bidding.</p>
+    <p>Structural alignment with NIST frameworks to secure government bidding eligibility.</p>
     <ul class="case-list">
-      <li>NIST framework alignment</li>
-      <li>Access control overhaul</li>
-      <li>Incident response plan tested</li>
-      <li>Compliance readiness achieved</li>
+      <li>NIST Framework Certified</li>
+      <li>Incident Response Testing</li>
+      <li>Access Control Procedures</li>
+      <li>Audit Readiness Achieved</li>
     </ul>
   </div>
-</div>
 
-<section class="cta-block">
-  <div class="hero-eyebrow">Ready to secure your node?</div>
-  <h2 style="font-size: 32px;">Initialize a System Scan Today</h2>
-  <a href="#" class="cn-btn">Run Free Security Scan</a>
+</main>
+
+<section class="cta-section">
+  <div class="hero-eyebrow">Initialize Protection</div>
+  <h2 style="font-size: 36px; font-weight: 700;">Ready to secure your architecture?</h2>
+  <a href="../pages/scanner.html" class="cn-btn">Run Free Security Scan</a>
 </section>
 
-</body>
-</html>
+<div id="footer"></div>
+
 <script>
   // Load Navbar
   fetch("../components/navbar.html")
     .then(r => r.ok ? r.text() : '')
-    .then(html => { 
-      if(html) document.getElementById("navbar").innerHTML = html; 
-    })
-    .catch(() => console.error("Navbar failed to load"));
+    .then(html => { if(html) document.getElementById("navbar").innerHTML = html; })
+    .catch(e => console.error("Nav error:", e));
 
   // Load Footer
   fetch("../components/footer.html")
     .then(r => r.ok ? r.text() : '')
-    .then(html => { 
-      if(html) document.getElementById("footer").innerHTML = html; 
-    })
-    .catch(() => console.error("Footer failed to load"));
+    .then(html => { if(html) document.getElementById("footer").innerHTML = html; })
+    .catch(e => console.error("Footer error:", e));
 </script>
+
+</body>
+</html>
