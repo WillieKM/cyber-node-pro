@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cyber-Node | Luminous SOC Dashboard</title>
+<title>Cyber-Node | Luminous SOC v2.4.1</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -11,10 +11,9 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    /* Brighter, more saturated Blue Palette */
-    --bg:       #0a192f; /* Deep Navy instead of Black */
-    --bg2:      #112240; /* Lighter layered navy */
-    --bg3:      #1d2d50; /* Highlighted navy */
+    --bg:       #0a192f; 
+    --bg2:      #112240; 
+    --bg3:      #1d2d50; 
     --border:   #233554; 
     --accent:   #00d4ff;
     --red:      #ff4d6d;
@@ -28,7 +27,7 @@
 
   body {
     background: var(--bg);
-    /* Subtle Grid Overlay to add texture/brightness */
+    /* High-tech grid overlay */
     background-image: 
       linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
       linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
@@ -36,26 +35,25 @@
     color: var(--text);
     font-family: var(--sans);
     min-height: 100vh;
+    display: flex;
   }
 
-  .dashboard { display: flex; min-height: 100vh; }
-
-  /* ── SIDEBAR ────────────────── */
+  /* ── FIXED SIDEBAR ────────────────── */
   .sidebar {
     width: 220px;
-    background: rgba(17, 34, 64, 0.8);
+    background: rgba(17, 34, 64, 0.98);
     backdrop-filter: blur(10px);
     border-right: 1px solid var(--border);
-    padding: 24px 0;
     display: flex;
     flex-direction: column;
-    position: sticky;
-    top: 0;
+    position: fixed;
     height: 100vh;
+    z-index: 1000;
+    padding-top: 24px;
   }
 
   .brand {
-    padding: 0 20px 24px;
+    padding: 0 24px 24px;
     border-bottom: 1px solid var(--border);
     margin-bottom: 16px;
   }
@@ -74,18 +72,19 @@
     color: #fff;
     letter-spacing: 2px;
     text-transform: uppercase;
-    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
   }
 
   .nav-link {
-    padding: 12px 20px;
+    padding: 14px 24px;
     color: var(--muted);
     text-decoration: none;
     font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
+    font-family: var(--mono);
     text-transform: uppercase;
     transition: 0.3s;
+    display: block;
+    z-index: 1001;
+    position: relative;
   }
 
   .nav-link:hover { color: var(--accent); background: rgba(0, 212, 255, 0.1); }
@@ -96,28 +95,64 @@
     text-shadow: 0 0 8px var(--accent);
   }
 
-  /* ── MAIN CONTENT ───────────────────── */
-  .main { flex: 1; padding: 32px; overflow-y: auto; }
-
-  .page-title {
-    font-size: 28px;
-    color: #fff;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  /* ── MAIN AREA (Offset for Sidebar) ── */
+  .main { 
+    flex: 1; 
+    margin-left: 220px; 
+    padding: 32px; 
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
+
+  /* ── TOP NAV BAR ──────────────────── */
+  .top-nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 25px;
+    margin-bottom: 24px;
+    font-family: var(--mono);
+    font-size: 12px;
+  }
+
+  .top-nav a { color: var(--muted); text-decoration: none; transition: 0.2s; }
+  .top-nav a:hover { color: var(--accent); }
+  .contact-btn { 
+    color: var(--accent) !important; 
+    border: 1px solid var(--accent); 
+    padding: 4px 12px; 
+    border-radius: 4px; 
+    background: rgba(0, 212, 255, 0.05);
+  }
+
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+
+  .page-title { font-size: 32px; font-weight: 700; color: #fff; letter-spacing: 1px; }
 
   .live-pill {
     background: rgba(0, 245, 160, 0.1);
     border: 1px solid var(--green);
+    padding: 6px 16px;
+    border-radius: 20px;
     color: var(--green);
-    text-shadow: 0 0 5px var(--green);
+    font-family: var(--mono);
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
-  /* ── BRIGHTER STAT CARDS ──────────────── */
+  /* ── STAT CARDS ───────────────────── */
   .stat-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 24px;
   }
 
   .stat-card {
@@ -125,211 +160,171 @@
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 24px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
   }
 
-  .stat-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--accent);
-    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.15);
+  .big-num { font-size: 48px; font-family: var(--mono); line-height: 1; margin: 10px 0; }
+
+  /* ── PANELS ───────────────────────── */
+  .bottom-row {
+    display: grid;
+    grid-template-columns: 1.8fr 1.2fr;
+    gap: 20px;
+    margin-bottom: 24px;
   }
 
-  .stat-label {
-    color: var(--accent);
-    font-weight: 600;
-    margin-bottom: 15px;
-  }
-
-  .big-num {
-    font-size: 48px;
-    text-shadow: 0 0 15px currentColor;
-  }
-
-  /* ── PANELS (Glassmorphism) ─────────────── */
   .panel {
     background: rgba(17, 34, 64, 0.6);
     backdrop-filter: blur(5px);
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 24px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
   }
 
-  .bottom-row {
-    display: grid;
-    grid-template-columns: 1.8fr 1.2fr;
-    gap: 20px;
-    margin-bottom: 20px;
-  }
-
-  /* ── THREAT LIST BRIGHTNESS ────────────── */
   .threat-item {
     background: rgba(29, 45, 80, 0.6);
     border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    padding: 12px;
     margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
-  .threat-item.critical { border-left: 4px solid var(--red); box-shadow: 0 0 15px rgba(255, 77, 109, 0.2); }
-  .threat-item.high { border-left: 4px solid var(--orange); }
+  .threat-item.critical { border-left-color: var(--red); box-shadow: 0 0 10px rgba(255, 77, 109, 0.1); }
 
-  .sev-badge.critical { background: var(--red); color: #fff; font-weight: bold; }
-
-  /* ── ACTIVITY LOG ───────────── */
-  #activityLog li {
-    background: rgba(29, 45, 80, 0.4);
-    color: var(--text);
-    border-left: 2px solid var(--accent);
+  /* ── FOOTER ───────────────────────── */
+  footer {
+    margin-top: auto;
+    padding: 24px 0;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 11px;
   }
 
-  /* Scrollbar Customization for Brighter Look */
-  ::-webkit-scrollbar { width: 8px; }
-  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
-  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
-
 </style>
 </head>
 <body>
-<div class="dashboard">
 
-  <div class="sidebar">
+  <aside class="sidebar">
     <div class="brand">
       <div class="brand-hex"></div>
       <div class="brand-name">Cyber-Node</div>
-      <div class="brand-ver">v2.4.1</div>
+      <div style="font-size: 10px; color: var(--accent); font-family: var(--mono);">v2.4.1</div>
     </div>
-    <a href="#" class="nav-link active">Dashboard</a>
-    <a href="#" class="nav-link">Scanner</a>
-    <a href="#" class="nav-link">Attack Surface</a>
-    <a href="#" class="nav-link">Threat Intel</a>
-    <a href="#" class="nav-link">Reports</a>
-  </div>
+    <nav>
+      <a href="#" class="nav-link active">Dashboard</a>
+      <a href="#" class="nav-link">Scanner</a>
+      <a href="#" class="nav-link">Attack Surface</a>
+      <a href="#" class="nav-link">Threat Intel</a>
+      <a href="#" class="nav-link">Reports</a>
+    </nav>
+  </aside>
 
-  <div class="main">
+  <main class="main">
+    
+    <nav class="top-nav">
+      <a href="#">HOME</a>
+      <a href="#">SERVICES</a>
+      <a href="#">PRICING</a>
+      <a href="#" class="contact-btn">CONTACT</a>
+    </nav>
 
     <div class="topbar">
       <div>
-        <div class="page-sub">// NETWORK DEFENSE OPERATIONS</div>
-        <div class="page-title">SOC Command Center</div>
+        <div style="font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 3px;">// SECURITY OPERATIONS</div>
+        <h1 class="page-title">SOC Dashboard</h1>
       </div>
       <div class="live-pill">
-        <div class="pulse-dot"></div>
-        LIVE ENCRYPTED FEED
+        <span style="width: 8px; height: 8px; background: var(--green); border-radius: 50%;"></span>
+        SYSTEM_ONLINE
       </div>
     </div>
 
     <div class="stat-grid">
       <div class="stat-card">
-        <div class="stat-label">System Integrity</div>
-        <div class="score-wrap">
-          <div class="ring-container">
-            <svg width="80" height="80" viewBox="0 0 80 80">
-              <circle cx="40" cy="40" r="34" fill="none" stroke="#233554" stroke-width="8"/>
-              <circle cx="40" cy="40" r="34" fill="none" stroke="#00d4ff" stroke-width="8"
-                stroke-dasharray="213.6" stroke-dashoffset="17" stroke-linecap="round"/>
-            </svg>
-            <div class="ring-num">92%</div>
-          </div>
-          <div>
-            <div class="score-info-label">OPTIMAL</div>
-            <div class="score-info-sub">+2.4% gain</div>
-          </div>
-        </div>
+        <div style="font-family: var(--mono); font-size: 12px; color: var(--accent);">SECURITY_SCORE</div>
+        <div class="big-num" style="color: var(--accent);">92%</div>
+        <div style="font-size: 12px; color: var(--green);">+2% Optimized</div>
       </div>
-
       <div class="stat-card">
-        <div class="stat-label">Threat Alerts</div>
+        <div style="font-family: var(--mono); font-size: 12px; color: var(--red);">ACTIVE_THREATS</div>
         <div class="big-num" style="color: var(--red);">24</div>
-        <div class="stat-delta up">▲ Elevated Activity</div>
+        <div style="font-size: 12px; color: var(--muted);">Detected 24h</div>
       </div>
-
       <div class="stat-card">
-        <div class="stat-label">Active Vulnerabilities</div>
-        <div class="big-num" style="color: var(--orange);">08</div>
-        <div class="stat-delta down">▼ 2 Mitigated</div>
+        <div style="font-family: var(--mono); font-size: 12px; color: var(--orange);">VULNERABILITIES</div>
+        <div class="big-num" style="color: var(--orange);">06</div>
+        <div style="font-size: 12px; color: var(--muted);">Pending Patch</div>
       </div>
-
       <div class="stat-card">
-        <div class="stat-label">Nodes Protected</div>
-        <div class="big-num" style="color: var(--green);">1,240</div>
-        <div class="stat-delta">Status: Nominal</div>
+        <div style="font-family: var(--mono); font-size: 12px; color: var(--green);">MONITORED_NODES</div>
+        <div class="big-num" style="color: var(--green);">112</div>
+        <div style="font-size: 12px; color: var(--muted);">All Nominal</div>
       </div>
     </div>
 
     <div class="bottom-row">
       <div class="panel">
-        <div class="panel-header">
-          <div class="panel-title">// Threat Propagation (30D)</div>
-        </div>
-        <div class="chart-wrap">
-          <canvas id="vulnChart"></canvas>
-        </div>
+        <h3 style="font-family: var(--mono); font-size: 14px; margin-bottom: 20px;">// VULNERABILITY_TRENDS</h3>
+        <div style="height: 200px;"><canvas id="myChart"></canvas></div>
       </div>
-
       <div class="panel">
-        <div class="panel-header">
-          <div class="panel-title">// Active Intrusions</div>
+        <h3 style="font-family: var(--mono); font-size: 14px; margin-bottom: 20px;">// RECENT_ALERTS</h3>
+        <div class="threat-item critical">
+          <div>
+            <div style="font-size: 14px; font-weight: 600;">SQL Injection Attempt</div>
+            <div style="font-size: 11px; color: var(--muted); font-family: var(--mono);">192.168.1.44 • 2m ago</div>
+          </div>
+          <div style="color: var(--red); font-family: var(--mono); font-size: 11px;">CRIT</div>
         </div>
-        <div class="threat-list">
-          <div class="threat-item critical">
-            <div class="threat-info">
-              <div class="threat-name">SQL Injection Attempt</div>
-              <div class="threat-meta">Source: 194.22.1.8 • 2m ago</div>
-            </div>
-            <div class="sev-badge critical">CRIT</div>
+        <div class="threat-item">
+          <div>
+            <div style="font-size: 14px; font-weight: 600;">Auth Bypass Blocked</div>
+            <div style="font-size: 11px; color: var(--muted); font-family: var(--mono);">admin.portal • 15m ago</div>
           </div>
-          <div class="threat-item high">
-            <div class="threat-info">
-              <div class="threat-name">Unauthorized API Access</div>
-              <div class="threat-meta">Endpoint: /v1/admin • 12m ago</div>
-            </div>
-            <div class="sev-badge" style="background: var(--orange);">HIGH</div>
-          </div>
+          <div style="color: var(--accent); font-family: var(--mono); font-size: 11px;">HIGH</div>
         </div>
       </div>
     </div>
 
-    <div class="activity-panel panel">
-      <div class="panel-header">
-        <div class="panel-title">// Console Output</div>
-      </div>
-      <ul id="activityLog">
-        <li>Firewall rules synchronized across 4 regions</li>
-        <li>Malicious payload quarantined from node-88</li>
-        <li>Automated security audit: 0 critical leaks found</li>
-      </ul>
-    </div>
+    <footer>
+      <div>&copy; 2026 CYBER-NODE // DEFENSE ENCRYPTION ACTIVE</div>
+      <div style="color: var(--accent);">V2.4.1_LUMINOUS_STABLE</div>
+    </footer>
 
-  </div>
-</div>
+  </main>
 
-<script>
-// Logic remains similar to original, but Chart colors updated for brightness
-const ctx = document.getElementById('vulnChart').getContext('2d');
-new Chart(ctx, {
-  type: 'line',
-  data: {
-    labels: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'],
-    datasets: [{
-      label: 'Intrusions',
-      data: [65, 59, 80, 81, 56, 55, 40],
-      borderColor: '#00d4ff',
-      backgroundColor: 'rgba(0, 212, 255, 0.2)',
-      fill: true,
-      tension: 0.4
-    }]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      y: { grid: { color: '#233554' }, ticks: { color: '#8892b0' } },
-      x: { grid: { display: false }, ticks: { color: '#8892b0' } }
-    },
-    plugins: { legend: { display: false } }
-  }
-});
-</script>
+  <script>
+    const ctx = document.getElementById('myChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00'],
+        datasets: [{
+          data: [12, 19, 13, 15, 22, 10],
+          borderColor: '#00d4ff',
+          backgroundColor: 'rgba(0, 212, 255, 0.1)',
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { display: false }, ticks: { color: '#8892b0', font: { family: 'Share Tech Mono' } } },
+          y: { grid: { color: '#233554' }, ticks: { color: '#8892b0' } }
+        }
+      }
+    });
+  </script>
 </body>
 </html>
