@@ -1,43 +1,270 @@
-<footer class="footer">
+<style>
+  .cn-footer {
+    background: #040c16;
+    border-top: 1px solid #0d2236;
+    padding: 48px 48px 24px;
+    font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+    color: #c8d8e8;
+    position: relative;
+    overflow: hidden;
+  }
 
-<div class="footer-grid">
+  .cn-footer::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #00d4ff55, #00d4ff, #00d4ff55, transparent);
+  }
 
-<div>
-<h3>Cyber-Node</h3>
-<p>
-Cybersecurity intelligence platform providing security assessments,
-automation systems, and monitoring tools.
-</p>
-</div>
+  .cn-footer-grid {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
 
-<div>
-<h4>Platform</h4>
-<ul>
-<li><a href="/tools/security-scan.html">Security Scan</a></li>
-<li><a href="/dashboard.html">Dashboard</a></li>
-</ul>
-</div>
+  /* Brand col */
+  .cn-footer-brand .hex {
+    width: 28px; height: 28px;
+    background: #00d4ff;
+    clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+    margin-bottom: 10px;
+  }
 
-<div>
-<h4>Services</h4>
-<ul>
-<li><a href="/services.html">Services</a></li>
-<li><a href="/pricing.html">Pricing</a></li>
-</ul>
-</div>
+  .cn-footer-brand .name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #e8f4ff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
 
-<div>
-<h4>Contact</h4>
-<ul>
-<li>Email: security@cyber-node.com</li>
-<li><a href="/contact.html">Consultation</a></li>
-</ul>
-</div>
+  .cn-footer-brand .tagline {
+    font-size: 12px;
+    color: #2a5a8a;
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
 
-</div>
+  .cn-footer-brand .status-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-family: 'Share Tech Mono', monospace;
+    color: #4a8a6a;
+    letter-spacing: 1px;
+  }
 
-<div class="footer-bottom">
-Cyber-Node © 2026
-</div>
+  .cn-footer-brand .status-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #00cc77;
+    animation: fpulse 2.5s infinite;
+  }
+
+  @keyframes fpulse {
+    0%,100% { opacity: 1; }
+    50%      { opacity: 0.4; }
+  }
+
+  /* Columns */
+  .cn-footer-col h4 {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #00d4ff;
+    font-family: 'Share Tech Mono', monospace;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #0d2236;
+  }
+
+  .cn-footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .cn-footer-col ul li a {
+    font-size: 13px;
+    color: #4a6a8a;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .cn-footer-col ul li a::before {
+    content: '›';
+    color: #0d2236;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+
+  .cn-footer-col ul li a:hover { color: #00d4ff; }
+  .cn-footer-col ul li a:hover::before { color: #00d4ff; }
+
+  /* Contact col specifics */
+  .cn-footer-col .contact-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 4px;
+  }
+
+  .cn-footer-col .contact-label {
+    font-size: 10px;
+    font-family: 'Share Tech Mono', monospace;
+    color: #2a5a8a;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .cn-footer-col .contact-val {
+    font-size: 12px;
+    color: #4a8a8a;
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  .cn-footer-col .contact-val a {
+    color: #4a8a8a;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .cn-footer-col .contact-val a:hover { color: #00d4ff; }
+
+  /* Divider */
+  .cn-footer-divider {
+    height: 1px;
+    background: #0d2236;
+    margin-bottom: 20px;
+  }
+
+  /* Bottom bar */
+  .cn-footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .cn-footer-bottom .copy {
+    font-size: 11px;
+    font-family: 'Share Tech Mono', monospace;
+    color: #1a3a5a;
+    letter-spacing: 1px;
+  }
+
+  .cn-footer-bottom .copy span { color: #2a5a8a; }
+
+  .cn-footer-bottom .badges {
+    display: flex;
+    gap: 8px;
+  }
+
+  .cn-footer-bottom .badge {
+    font-size: 10px;
+    font-family: 'Share Tech Mono', monospace;
+    color: #2a5a8a;
+    border: 1px solid #0d2236;
+    padding: 3px 10px;
+    border-radius: 3px;
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 900px) {
+    .cn-footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+    .cn-footer { padding: 36px 24px 20px; }
+  }
+
+  @media (max-width: 560px) {
+    .cn-footer-grid { grid-template-columns: 1fr; }
+    .cn-footer-bottom { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+
+<footer class="cn-footer">
+  <div class="cn-footer-grid">
+
+    <!-- Brand -->
+    <div class="cn-footer-brand">
+      <div class="hex"></div>
+      <div class="name">Cyber-Node</div>
+      <div class="tagline">
+        Cybersecurity intelligence platform<br>
+        providing security assessments,<br>
+        threat monitoring &amp; attack surface analysis.
+      </div>
+      <div class="status-row">
+        <div class="status-dot"></div>
+        ALL SYSTEMS OPERATIONAL
+      </div>
+    </div>
+
+    <!-- Platform -->
+    <div class="cn-footer-col">
+      <h4>Platform</h4>
+      <ul>
+        <li><a href="/dashboard.html">Dashboard</a></li>
+        <li><a href="/tools/security-scan.html">Security Scan</a></li>
+        <li><a href="/tools/attack-surface.html">Attack Surface</a></li>
+        <li><a href="#">Threat Intel</a></li>
+        <li><a href="#">Reports</a></li>
+      </ul>
+    </div>
+
+    <!-- Services -->
+    <div class="cn-footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#">Penetration Testing</a></li>
+        <li><a href="#">Vulnerability Scanning</a></li>
+        <li><a href="#">SOC Monitoring</a></li>
+        <li><a href="#">Consulting</a></li>
+        <li><a href="#">Pricing</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div class="cn-footer-col">
+      <h4>Contact</h4>
+      <div class="contact-item">
+        <span class="contact-label">Email</span>
+        <span class="contact-val"><a href="mailto:security@cyber-node.com">security@cyber-node.com</a></span>
+      </div>
+      <div class="contact-item" style="margin-top:10px;">
+        <span class="contact-label">Consultation</span>
+        <span class="contact-val"><a href="#">Book a free call →</a></span>
+      </div>
+      <div class="contact-item" style="margin-top:10px;">
+        <span class="contact-label">Response time</span>
+        <span class="contact-val">&lt; 24 hours</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="cn-footer-divider"></div>
+
+  <div class="cn-footer-bottom">
+    <div class="copy">
+      Cyber-Node &copy; <span>2026</span> — All rights reserved
+    </div>
+    <div class="badges">
+      <div class="badge">SSL SECURED</div>
+      <div class="badge">SOC 2 READY</div>
+      <div class="badge">GDPR</div>
+    </div>
+  </div>
 
 </footer>
