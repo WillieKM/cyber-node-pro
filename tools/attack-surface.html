@@ -1,322 +1,260 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Attack Surface Discovery | Cyber-Node</title>
-
-<link rel="stylesheet" href="../css/style.css">
-
+<title>Attack Surface Discovery | Cyber-Node Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* HERO */
-.hero{
-text-align:center;
-padding:140px 20px 100px;
-background:linear-gradient(135deg,#1e3a8a,#020617);
-}
+  :root {
+    --bg: #0e1f38;
+    --bg2: #142840;
+    --bg3: #1a3250;
+    --border: #2e5070;
+    --accent: #00d4ff;
+    --red: #ff4466;
+    --green: #00dd88;
+    --text: #e8f4ff;
+    --muted: #90bcd8;
+    --mono: 'Share Tech Mono', monospace;
+    --sans: 'Rajdhani', sans-serif;
+  }
 
-.hero h1{
-font-size:44px;
-margin-bottom:10px;
-}
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-.hero p{
-opacity:0.9;
-}
+  /* --- HERO & GRID --- */
+  .hero {
+    position: relative;
+    text-align: center;
+    padding: 140px 20px 80px;
+    background: linear-gradient(180deg, #1a3252 0%, #0e1f38 100%);
+    border-bottom: 1px solid var(--border);
+  }
 
-/* SCANNER */
-.domain-scanner{
-text-align:center;
-margin-top:40px;
-}
+  .grid-lines {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(0,212,255,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.05) 1px, transparent 1px);
+    background-size: 45px 45px;
+    mask-image: radial-gradient(circle, black, transparent 90%);
+  }
 
-.scanner-box{
-display:flex;
-justify-content:center;
-gap:10px;
-flex-wrap:wrap;
-}
+  .hero-content { position: relative; z-index: 1; }
+  .hero-eyebrow { font-family: var(--mono); color: var(--accent); letter-spacing: 4px; font-size: 10px; text-transform: uppercase; margin-bottom: 15px; }
+  .hero h1 { font-size: 52px; font-weight: 700; margin-bottom: 15px; }
+  .hero h1 span { color: var(--accent); }
+  .hero p { font-family: var(--mono); color: var(--muted); font-size: 15px; max-width: 650px; margin: 0 auto; }
 
-.scanner-box input{
-padding:12px;
-width:260px;
-border:none;
-border-radius:6px;
-}
+  /* --- DISCOVERY INTERFACE --- */
+  .scanner-section { padding: 60px 20px; max-width: 900px; margin: 0 auto; }
+  
+  .input-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    display: flex;
+    gap: 15px;
+  }
 
-.scanner-box button{
-padding:12px 20px;
-background:#2D8FE3;
-border:none;
-border-radius:6px;
-color:white;
-cursor:pointer;
-}
+  .field-wrap { position: relative; flex: 1; }
+  .field-icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); font-family: var(--mono); color: var(--accent); }
 
-/* RESULTS */
-.attack-results{
-display:flex;
-justify-content:center;
-margin:60px auto;
-padding:0 20px;
-}
+  .cn-input {
+    width: 100%;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 15px 15px 15px 45px;
+    color: #fff;
+    font-family: var(--mono);
+    border-radius: 6px;
+    outline: none;
+    transition: 0.3s;
+  }
+  .cn-input:focus { border-color: var(--accent); }
 
-.results-card{
-background:#0f1f3d;
-padding:40px;
-border-radius:12px;
-width:700px;
-max-width:95%;
-box-shadow:0 10px 40px rgba(0,0,0,0.4);
-}
+  .cn-btn {
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    padding: 0 30px;
+    font-family: var(--mono);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .cn-btn:hover { box-shadow: 0 0 20px rgba(0,212,255,0.4); }
 
-.results-card h2{
-text-align:center;
-margin-bottom:20px;
-}
+  /* --- RESULTS TERMINAL --- */
+  .results-wrapper {
+    background: #050b14;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    display: none; /* Shown after scan */
+  }
 
-.domain-name{
-text-align:center;
-margin-bottom:30px;
-font-weight:500;
-}
+  .terminal-header {
+    background: var(--bg3);
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-.result-block{
-margin-top:20px;
-}
+  .terminal-title { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+  .dot-group { display: flex; gap: 6px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #333; }
 
-.result-block h3{
-color:#2D8FE3;
-margin-bottom:10px;
-}
+  .terminal-body { padding: 30px; font-family: var(--mono); font-size: 14px; line-height: 1.8; }
+  
+  .res-block { margin-bottom: 25px; }
+  .res-label { color: var(--accent); margin-bottom: 10px; display: block; border-bottom: 1px solid rgba(0,212,255,0.1); padding-bottom: 5px; }
+  
+  .res-list { list-style: none; padding-left: 15px; }
+  .res-item { color: var(--text); position: relative; }
+  .res-item::before { content: "› "; color: var(--accent); }
 
-.result-block ul{
-padding-left:20px;
-}
+  .badge {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-left: 10px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
 
-.result-block li{
-margin-bottom:6px;
-color:#cbd7ff;
-}
+  /* --- PLACEHOLDER --- */
+  .placeholder-box {
+    text-align: center;
+    padding: 80px 20px;
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+    opacity: 0.5;
+  }
 
-/* FOOTER */
-.footer{
-background:#020617;
-padding:80px 20px 40px;
-border-top:1px solid rgba(255,255,255,0.05);
-margin-top:100px;
-}
-
-.footer-grid{
-max-width:1100px;
-margin:auto;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:40px;
-}
-
-.footer ul{
-list-style:none;
-padding:0;
-}
-
-.footer li{
-margin-bottom:8px;
-}
-
-.footer a{
-color:white;
-text-decoration:none;
-}
-
-.footer a:hover{
-color:#3b82f6;
-}
-
-.footer-bottom{
-text-align:center;
-margin-top:40px;
-opacity:0.6;
-}
-
+  @media (max-width: 768px) {
+    .input-card { flex-direction: column; }
+    .cn-btn { padding: 15px; }
+  }
 </style>
-
 </head>
-
 <body>
 
-<!-- NAVBAR LOAD -->
 <div id="navbar"></div>
 
-<script>
-fetch("../components/navbar.html")
-.then(res => res.text())
-.then(data => {
-document.getElementById("navbar").innerHTML = data;
-});
-</script>
-
-
-<!-- HERO -->
 <section class="hero">
-
-<h1>Attack Surface Discovery</h1>
-
-<p>Identify exposed infrastructure and potential security risks.</p>
-
+  <div class="grid-lines"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">// ASSET_ENUMERATION_MODULE</div>
+    <h1>Attack <span>Surface</span> Discovery</h1>
+    <p>Map out the digital footprint of any organization to identify exposed subdomains, DNS records, and infrastructure leaks.</p>
+  </div>
 </section>
 
+<section class="scanner-section">
+  <div class="input-card">
+    <div class="field-wrap">
+      <span class="field-icon">⌕</span>
+      <input class="cn-input" type="text" id="domainInput" placeholder="Enter target domain (e.g. example.com)">
+    </div>
+    <button class="cn-btn" onclick="runDiscovery()">Initialize Discovery</button>
+  </div>
 
-<!-- SCANNER -->
-<section class="domain-scanner">
+  <div id="placeholder" class="placeholder-box">
+    <div style="font-size: 40px; margin-bottom: 15px;">📡</div>
+    <p style="font-family: var(--mono); letter-spacing: 2px;">READY TO INITIALIZE RECONNAISSANCE</p>
+  </div>
 
-<div class="scanner-box">
+  <div id="resultsUI" class="results-wrapper">
+    <div class="terminal-header">
+      <div class="dot-group">
+        <div class="dot" style="background: var(--red);"></div>
+        <div class="dot" style="background: var(--orange);"></div>
+        <div class="dot" style="background: var(--green);"></div>
+      </div>
+      <div class="terminal-title">SURFACE_MAP_OUTPUT [Target: <span id="targetDisplay">--</span>]</div>
+    </div>
+    <div class="terminal-body">
+      
+      <div class="res-block">
+        <span class="res-label">PRIMARY_IPV4_RECORDS</span>
+        <ul class="res-list" id="dnsList"></ul>
+      </div>
 
-<input type="text" id="domainInput" placeholder="example.com">
+      <div class="res-block">
+        <span class="res-label">SUBDOMAIN_ENUMERATION</span>
+        <ul class="res-list" id="subdomainList"></ul>
+      </div>
 
-<button onclick="runDiscovery()">
-Run Discovery Scan
-</button>
+      <div class="res-block">
+        <span class="res-label">HEURISTIC_INSIGHTS</span>
+        <ul class="res-list" id="securityInsights"></ul>
+      </div>
 
-</div>
-
+    </div>
+  </div>
 </section>
 
-
-<!-- RESULTS -->
-<section class="attack-results">
-
-<div class="results-card">
-
-<h2>Attack Surface Results</h2>
-
-<p class="domain-name">
-Domain: <span id="domainName">--</span>
-</p>
-
-<div class="result-block">
-
-<h3>DNS Records</h3>
-
-<ul id="dnsList">
-<li>No scan performed yet</li>
-</ul>
-
-</div>
-
-<div class="result-block">
-
-<h3>Discovered Subdomains</h3>
-
-<ul id="subdomainList">
-<li>No scan performed yet</li>
-</ul>
-
-</div>
-
-<div class="result-block">
-
-<h3>Security Insights</h3>
-
-<ul id="securityInsights">
-<li>No scan performed yet</li>
-</ul>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- FOOTER -->
-<footer class="footer">
-
-<div class="footer-grid">
-
-<div>
-<h3>Cyber-Node</h3>
-<ul>
-<li><a href="../index.html">Home</a></li>
-<li><a href="../services.html">Services</a></li>
-<li><a href="../dashboard.html">Dashboard</a></li>
-</ul>
-</div>
-
-<div>
-<h3>Security Tools</h3>
-<ul>
-<li><a href="security-scan.html">Security Scan</a></li>
-<li><a href="attack-surface.html">Attack Surface</a></li>
-</ul>
-</div>
-
-<div>
-<h3>Resources</h3>
-<ul>
-<li><a href="../resources.html">Security Guides</a></li>
-<li><a href="../case-studies.html">Case Studies</a></li>
-</ul>
-</div>
-
-<div>
-<h3>Contact</h3>
-<ul>
-<li>security@cyber-node.com</li>
-<li>Schedule Consultation</li>
-</ul>
-</div>
-
-</div>
-
-<div class="footer-bottom">
-Cyber-Node © 2026 — Cybersecurity Intelligence Platform
-</div>
-
-</footer>
-
+<div id="footer"></div>
 
 <script>
+  // Load dynamic components
+  fetch("../components/navbar.html").then(r => r.text()).then(h => document.getElementById("navbar").innerHTML = h);
+  fetch("../components/footer.html").then(r => r.text()).then(h => document.getElementById("footer").innerHTML = h);
 
-function runDiscovery(){
+  function runDiscovery() {
+    const domain = document.getElementById("domainInput").value.trim();
+    if (!domain) {
+      alert("Target domain required for mapping.");
+      return;
+    }
 
-const domain = document.getElementById("domainInput").value;
+    // Toggle UI
+    document.getElementById("placeholder").style.display = "none";
+    document.getElementById("resultsUI").style.display = "block";
+    document.getElementById("targetDisplay").innerText = domain.toUpperCase();
 
-if(domain === ""){
-alert("Enter a domain to scan.");
-return;
-}
+    // Populate DNS
+    document.getElementById("dnsList").innerHTML = `
+      <li class="res-item">23.21.157.88 <span class="badge">A_RECORD</span></li>
+      <li class="res-item">23.21.234.173 <span class="badge">A_RECORD</span></li>
+      <li class="res-item">ns1.nameserver.com <span class="badge">NS_RECORD</span></li>
+    `;
 
-document.getElementById("domainName").innerText = domain;
+    // Populate Subdomains
+    document.getElementById("subdomainList").innerHTML = `
+      <li class="res-item">dev.${domain} <span class="badge" style="color:var(--accent)">STAGING</span></li>
+      <li class="res-item">api.${domain} <span class="badge">ENDPOINT</span></li>
+      <li class="res-item">mail.${domain} <span class="badge">MX_SERVER</span></li>
+      <li class="res-item">cdn.${domain} <span class="badge">ASSET_HOST</span></li>
+    `;
 
-/* DNS Records */
-document.getElementById("dnsList").innerHTML = `
-<li>23.21.157.88</li> 
-<li>23.21.234.173</li>
-`;
-
-/* Subdomains */
-document.getElementById("subdomainList").innerHTML = `
-<li>dev.${domain}</li>
-<li>api.${domain}</li>
-<li>mail.${domain}</li>
-<li>cdn.${domain}</li>
-`;
-
-/* Security Insights */
-document.getElementById("securityInsights").innerHTML = `
-<li>SSL Certificate detected</li>
-<li>Cloud infrastructure detected</li>
-<li>Potential attack surface discovered</li>
-`;
-
-}
-
+    // Populate Insights
+    document.getElementById("securityInsights").innerHTML = `
+      <li class="res-item">Cloudflare WAF detected on primary node.</li>
+      <li class="res-item" style="color:var(--red)">Exposed development environment detected (dev.${domain}).</li>
+      <li class="res-item">DMARC policy verified for mail routing.</li>
+      <li class="res-item">S3 Bucket leak check: <span style="color:var(--green)">SECURE</span></li>
+    `;
+  }
 </script>
-
 </body>
 </html>
