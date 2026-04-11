@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Block internal/platform paths from indexing
+Disallow: /dashboard.html
+Disallow: /login.html
+Disallow: /platform/
+Disallow: /api/
+Disallow: /backend/
+
+Sitemap: https://www.cyber-node.com/sitemap.xml
