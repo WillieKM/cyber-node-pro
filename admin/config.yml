@@ -1,0 +1,32 @@
+backend:
+  name: github
+  repo: WillieKM/cyber-node-pro       # your GitHub repo
+  branch: main                         # branch to commit posts to
+  base_url: https://www.cyber-node.com # your live domain
+  auth_endpoint: api/auth              # Vercel OAuth handler (see setup guide)
+
+media_folder: "images/blog"           # where uploaded images are stored
+public_folder: "/images/blog"         # public URL path for images
+
+collections:
+  - name: "posts"
+    label: "Blog Posts"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title",       name: "title",       widget: "string" }
+      - { label: "Date",        name: "date",        widget: "datetime" }
+      - { label: "Author",      name: "author",      widget: "string",   default: "Cyber-Node Team" }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - "Threat Intel"
+          - "Compliance"
+          - "How-To"
+          - "CVE Alerts"
+          - "Platform Updates"
+      - { label: "Description", name: "description", widget: "text",     hint: "Short summary shown on blog listing (max 160 chars)" }
+      - { label: "Cover Image", name: "cover",       widget: "image",    required: false }
+      - { label: "Body",        name: "body",        widget: "markdown" }
