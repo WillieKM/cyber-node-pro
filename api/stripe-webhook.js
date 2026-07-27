@@ -2,6 +2,9 @@ import Stripe from 'stripe';
 import { runScan } from '../lib/scan-domain.js';
 import { generateReportPDF } from '../lib/generate-report-pdf.js';
 import { sendReportEmail } from '../lib/send-report-email.js';
+import { initSentry, captureError } from '../lib/sentry.js';
+
+initSentry();
 
 // Stripe signature verification needs the exact raw request bytes — Vercel's
 // default body parsing would re-serialize JSON and break the signature check.
@@ -58,8 +61,9 @@ export default async function handler(req, res) {
     console.log(`Report sent for ${domain} to ${email} (session ${session.id})`);
   } catch (err) {
     console.error(`Fulfillment failed for session ${session.id}:`, err.message);
+    captureError(err, { sessionId: session.id, domain });
     // Still ack the webhook — Stripe payment already succeeded; this failure
-    // needs to surface via logs/monitoring, not a Stripe retry of the payment event.
+    // needs to surface via Sentry/logs, not a Stripe retry of the payment event.
   }
 
   return res.status(200).json({ received: true });
