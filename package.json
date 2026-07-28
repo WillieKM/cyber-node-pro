@@ -3,8 +3,9 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "stripe": "^22.2.3",
+    "@sentry/node": "^9.0.0",
+    "@upstash/redis": "^1.38.0",
     "pdfkit": "^0.19.1",
-    "@sentry/node": "^9.0.0"
+    "stripe": "^22.2.3"
   }
 }

@@ -1,10 +1,15 @@
 import Stripe from 'stripe';
+import { Redis } from '@upstash/redis';
 import { runScan } from '../lib/scan-domain.js';
 import { generateReportPDF } from '../lib/generate-report-pdf.js';
 import { sendReportEmail } from '../lib/send-report-email.js';
 import { initSentry, captureError } from '../lib/sentry.js';
 
 initSentry();
+
+const redis = process.env.UPSTASH_REDIS_REST_URL
+  ? new Redis({ url: process.env.UPSTASH_REDIS_REST_URL, token: process.env.UPSTASH_REDIS_REST_TOKEN })
+  : null;
 
 // Stripe signature verification needs the exact raw request bytes — Vercel's
 // default body parsing would re-serialize JSON and break the signature check.
@@ -51,6 +56,17 @@ export default async function handler(req, res) {
   }
 
   const domain = refId.replace(/_/g, '.');
+
+  // Idempotency check — if Stripe retries the webhook (timeout, network blip),
+  // skip re-processing so the customer doesn't receive the report twice.
+  if (redis) {
+    const alreadyProcessed = await redis.get(`webhook:${session.id}`);
+    if (alreadyProcessed) {
+      console.log(`Session ${session.id} already processed — skipping`);
+      return res.status(200).json({ received: true, skipped: 'already processed' });
+    }
+    await redis.set(`webhook:${session.id}`, '1', { ex: 60 * 60 * 24 * 7 }); // expire after 7 days
+  }
 
   try {
     // isSafeDomain check inside runScan rejects IP literals and private ranges
