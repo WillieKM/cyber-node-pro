@@ -64,6 +64,17 @@
     opacity: 0.8;
     border-left: 1px solid rgba(46, 80, 112, 0.6);
     padding-left: 20px !important;
+    display: inline-flex !important;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .flag-icon {
+    width: 18px;
+    height: 13px;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.15);
+    flex-shrink: 0;
   }
 
   /* Hamburger toggle */
@@ -141,7 +152,7 @@
     <li><a href="/pricing.html">Pricing</a></li>
     <li><a href="/about.html">About</a></li>
     <li><a href="/contact.html" class="nav-cta">Contact</a></li>
-    <li><a href="/ke/" class="nav-region">🇰🇪 Kenya Site</a></li>
+    <li><a href="/ke/" class="nav-region"><svg class="flag-icon" viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="20" fill="#fff"/><rect width="30" height="6" fill="#000"/><rect y="14" width="30" height="6" fill="#006600"/><rect y="7" width="30" height="6" fill="#bb0000"/></svg>Kenya Site</a></li>
   </ul>
 </nav>
 
