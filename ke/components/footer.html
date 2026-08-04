@@ -1,0 +1,172 @@
+<style>
+  .cn-footer {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 100px 40px 60px;
+    font-family: var(--sans);
+  }
+
+  .footer-grid {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 60px;
+  }
+
+  .footer-brand .logo-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--accent);
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    margin-bottom: 20px;
+  }
+
+  .footer-brand h2 {
+    font-size: 24px;
+    color: var(--text);
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .footer-brand p {
+    font-family: var(--mono);
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 320px;
+  }
+
+  .footer-col h4 {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+    padding-bottom: 10px;
+    display: inline-block;
+  }
+
+  .footer-col ul { list-style: none; }
+
+  .footer-col ul li { margin-bottom: 16px; }
+
+  .footer-col ul li a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 16px;
+    font-family: var(--mono);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .footer-col ul li a::before {
+    content: '›';
+    color: var(--accent);
+    opacity: 0.5;
+  }
+
+  .footer-col ul li a:hover {
+    color: var(--text);
+    padding-left: 5px;
+  }
+
+  .footer-bottom {
+    max-width: 1300px;
+    margin: 80px auto 0;
+    padding-top: 40px;
+    border-top: 1px solid rgba(46, 80, 112, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: #5a8aaa;
+  }
+
+  .status-tag {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--green);
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--green);
+    border-radius: 50%;
+    box-shadow: 0 0 12px var(--green);
+  }
+
+  @media (max-width: 992px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  }
+
+  @media (max-width: 600px) {
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
+  }
+</style>
+
+<footer class="cn-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-icon"></div>
+      <h2>CYBER-<span>NODE</span> KE</h2>
+      <p>Security intelligence and compliance automation for Kenyan and East African businesses — from mobile-money API security to Data Protection Act readiness.</p>
+      <div class="status-tag" style="margin-top: 25px;">
+        <div class="status-dot"></div>
+        NOW SERVING NAIROBI & EAST AFRICA
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Platform</h4>
+      <ul>
+        <li><a href="/ke/pricing.html">Plans & Pricing</a></li>
+        <li><a href="/tools/security-scan.html">Free Security Scan</a></li>
+        <li><a href="/">🇺🇸 US Site</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="/ke/services.html">Security Assessments</a></li>
+        <li><a href="/ke/services.html">Fintech & Mobile Money Security</a></li>
+        <li><a href="/ke/services.html">ODPC Compliance Consulting</a></li>
+        <li><a href="/ke/about.html">About Us</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul style="font-family: var(--mono); font-size: 15px; color: var(--muted);">
+        <li style="margin-bottom: 20px;">
+          <span style="color: var(--accent); font-size: 12px; display: block; letter-spacing: 2px;">EMAIL</span>
+          <a href="mailto:sales@cyber-node.com" style="display:inline; padding:0; color:var(--text);">sales@cyber-node.com</a>
+        </li>
+        <li style="margin-bottom: 20px;">
+          <span style="color: var(--accent); font-size: 12px; display: block; letter-spacing: 2px;">CONSULTATION</span>
+          <a href="/ke/contact.html" style="display:inline; padding:0; color:var(--text);">Book a free call →</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div>CYBER-NODE © 2026 — ALL RIGHTS RESERVED</div>
+    <div style="display: flex; gap: 20px;">
+      <span style="border: 1px solid var(--border); padding: 4px 8px; border-radius: 4px;">SSL SECURED</span>
+      <span style="border: 1px solid var(--border); padding: 4px 8px; border-radius: 4px;">ODPC AWARE</span>
+    </div>
+  </div>
+</footer>

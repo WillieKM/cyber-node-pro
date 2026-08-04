@@ -1,4 +1,4 @@
-<!-- components/navbar.html -->
+<!-- ke/components/navbar.html -->
 <style>
   .navbar {
     position: fixed;
@@ -49,6 +49,13 @@
 
   .nav-links a:hover { color: #00d4ff; }
 
+  .nav-region {
+    font-size: 11px !important;
+    opacity: 0.8;
+    border-left: 1px solid rgba(46, 80, 112, 0.6);
+    padding-left: 20px !important;
+  }
+
   .nav-cta {
     background: #00d4ff;
     color: #0e1f38 !important;
@@ -58,13 +65,6 @@
   }
 
   .nav-cta:hover { box-shadow: 0 0 15px rgba(0, 212, 255, 0.4); }
-
-  .nav-region {
-    font-size: 11px !important;
-    opacity: 0.8;
-    border-left: 1px solid rgba(46, 80, 112, 0.6);
-    padding-left: 20px !important;
-  }
 
   /* Hamburger toggle */
   .nav-toggle {
@@ -90,9 +90,6 @@
   .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .nav-toggle.open span:nth-child(2) { opacity: 0; }
   .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-  /* Vercel + Plausible Analytics */
-  /* ─────────────────────────────────────────────── */
 
   @media (max-width: 700px) {
     .navbar { padding: 0 20px; }
@@ -126,7 +123,7 @@
 </style>
 
 <nav class="navbar">
-  <a href="/" class="nav-logo">CYBER<span>-NODE</span></a>
+  <a href="/ke/" class="nav-logo">CYBER<span>-NODE</span> <span style="font-size:11px; color:#90bcd8;">KE</span></a>
 
   <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
     <span></span>
@@ -135,13 +132,11 @@
   </button>
 
   <ul class="nav-links" id="navLinks">
-    <li><a href="/services.html">Services</a></li>
-    <li><a href="/solutions/">Solutions</a></li>
-    <li><a href="/tools/security-scan.html">Scanner</a></li>
-    <li><a href="/pricing.html">Pricing</a></li>
-    <li><a href="/about.html">About</a></li>
-    <li><a href="/contact.html" class="nav-cta">Contact</a></li>
-    <li><a href="/ke/" class="nav-region">🇰🇪 Kenya Site</a></li>
+    <li><a href="/ke/services.html">Services</a></li>
+    <li><a href="/ke/pricing.html">Pricing</a></li>
+    <li><a href="/ke/about.html">About</a></li>
+    <li><a href="/ke/contact.html" class="nav-cta">Contact</a></li>
+    <li><a href="/" class="nav-region">🇺🇸 US Site</a></li>
   </ul>
 </nav>
 
